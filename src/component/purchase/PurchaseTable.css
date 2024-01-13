@@ -1,0 +1,61 @@
+.table {
+    width: 100%; 
+    margin-left: auto; 
+    margin-right: auto;
+    float: left;
+  }
+  
+  .outer {
+    width: 100%;
+    margin-left: 30px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  @media (min-width: 768px) {
+    .outer {
+      width: 60%;   
+    }
+  }
+  
+  .table thead th {
+    background-color: #121212; /* Background color for the header */
+    color: white; /* Text color for the header */
+    text-align: left; /* Aligns text to the left */
+    padding: 10px; /* Padding for the header cells */
+  }
+  
+  .table tbody td {
+    padding: 10px; /* Padding for the body cells */
+    vertical-align: middle; /* Aligns content vertically in the middle */
+  }
+  
+  .icons {
+    display: flex;
+  }
+  
+  .icon-screenshot,
+  .icon-edit,
+  .icon-delete {
+    width: 24px; /* Example width for the icons */
+    height: 24px; /* Example height for the icons */
+    margin-top: 11px;
+    margin-right: 10px; /* Space after each icon */
+    cursor: pointer; /* Changes cursor to pointer on hover */
+    object-fit: contain;
+  }
+  
+  .return-button {
+    background-color: #ff69b4; /* Pink background color */
+    color: white; /* White text color */
+    border: none; /* No border */
+    padding: 5px 10px; /* Padding inside the button */
+    border-radius: 5px; /* Rounded corners for the button */
+    cursor: pointer; /* Changes cursor to pointer on hover */
+    margin-left: auto; /* Aligns the button to the right */
+  }
+  
+  /* Add additional CSS for hover effects, transitions, or other interactive elements as needed */
+  
+  
+  
