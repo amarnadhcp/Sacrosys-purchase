@@ -1,7 +1,6 @@
 import { BrowserRouter, Route,Routes } from "react-router-dom";
 import Purchase from "../src/pages/purchaseEntry/PurchaseEntry.jsx"
 import Layout from "./pages/Layout.jsx";
-
 function App() {
   return (
     <BrowserRouter>

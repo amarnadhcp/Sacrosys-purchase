@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import "./PurchaseForm.css";
 import PlusIcon from '../../assests/images/AddNew.svg';
+import SupplierCreation from "./SupplierCreation";
 function PurchaseForm() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+
   return (
     <div className="form-container">
       <form className="transaction-form">
@@ -14,7 +21,8 @@ function PurchaseForm() {
           defaultValue="26855285278"
           className="smaller-input"
         />
-           <img src={PlusIcon} alt="Add new" className="plus-icon" />
+           <img src={PlusIcon} alt="Add new" className="plus-icon"  onClick={toggleModal} />
+           {isModalOpen && <SupplierCreation />}
           </div>
 
         <label htmlFor="date">Date</label>
