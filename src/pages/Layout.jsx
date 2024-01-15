@@ -7,7 +7,7 @@ function Layout() {
   return (
     <div className="flex flex-col">
       <div className="flex flex-grow">
-        <Navbar />
+        <Navbar />  
       </div>
       <div className="flex flex-col">
         <SearchBar/>

@@ -1,14 +1,14 @@
 // PurchaseEntry.js
 import React from "react";
 import "./purchaseEntry.css";
-import PurchaseTable from "../../component/purchase/PurchaseTable";
-import PurchaseForm from "../../component/purchase/PurchaseForm"
+import EntryTable from "../../component/Entry/EntryTable";
+import EntryForm from "../../component/Entry/EntryForm";
 function PurchaseEntry() {
   return (
     <>
     <div className="flex">
-    <PurchaseTable/>
-    <PurchaseForm/>
+    <EntryTable/>
+    <EntryForm/>
     </div>
     </>
   );
