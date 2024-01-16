@@ -6,12 +6,12 @@ import EntryForm from "../../component/Entry/EntryForm";
 function PurchaseEntry() {
   return (
     <>
-    <div className="flex">
-    <EntryTable/>
-    <EntryForm/>
-    </div>
+      <div className="flex flex-wrap-reverse max-w-7xl mx-auto">
+        <EntryTable />
+        <EntryForm />
+      </div>
     </>
   );
 }
 
-export default PurchaseEntry;
+export default PurchaseEntry;
