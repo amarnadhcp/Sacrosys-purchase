@@ -28,13 +28,13 @@ function SearchBar() {
           </div>
           <div className="flex items-center flex-wrap gap-4 p-3 justify-center w-full md:w-auto">
             <Link
-              to="supplier"
+              to="/supplier"
               className="text-purple-600 underline text-sm font-Poppins"
             >
               View Supplier List
             </Link>
             <Link
-              to="return"
+              to="/return"
               className="text-purple-600 underline text-sm font-Poppins"
             >
               View Return List
