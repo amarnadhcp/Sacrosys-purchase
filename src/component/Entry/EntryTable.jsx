@@ -63,9 +63,7 @@ function EntryTable() {
               <tr>
                 <th className="bg-black text-white px-4 py-3">Date</th>
                 <th className="bg-black text-white px-4 py-3">Supplier</th>
-                <th className="bg-black text-white px-4 py-3">
-                  Invoice Number
-                </th>
+                <th className="bg-black text-white px-4 py-3">Invoice Number</th>
                 <th className="bg-black text-white px-4 py-3">Amount</th>
                 <th className="bg-black text-white px-4 py-3">VAT</th>
                 <th className="bg-black text-white px-4 py-3">Cash/Credit</th>
@@ -83,19 +81,20 @@ function EntryTable() {
                   <td className="px-4 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     {item.date}
                   </td>
-                  <td className="px-4 py-4">{item.supplier}</td>
-                  <td className="px-4 py-4">{item.invoiceNumber}</td>
-                  <td className="px-4 py-4">{item.amount.toFixed(2)}</td>
-                  <td className="px-4 py-4">{item.vat.toFixed(2)}</td>
-                  <td className="px-4 py-4">{item.paymentType}</td>
-                  <td className="px-4 py-4">
+                  <td className="px-4 py-2">{item.supplier}</td>
+                  <td className="px-4 py-2">{item.invoiceNumber}</td>
+                  <td className="px-4 py-2">{item.amount.toFixed(2)}</td>
+                  <td className="px-4 py-2">{item.vat.toFixed(2)}</td>
+                  <td className="px-4 py-2">{item.paymentType}</td>
+                  <td className="px-4 py-2">
                     <img
                       src={screenshotIcon}
                       alt="Screenshot"
                       className="w-10 h-8 mt-2 mr-2 cursor-pointer"
                     />
                   </td>
-                  <td className="px-4 py-4 flex">
+                  
+                  <td className="px-4 py-2 flex">
                     <img
                       src={editIcon}
                       alt="Edit"
