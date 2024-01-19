@@ -59,33 +59,33 @@ function EntryTable() {
         <SearchBar />
         <div className="overflow-x-auto min-w-full">
           <table className="w-full text-xs text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <thead className="text-xs text-white font-inter bg-custom-black text-center ">
               <tr>
-                <th className="bg-black text-white px-4 py-3">Date</th>
-                <th className="bg-black text-white px-4 py-3">Supplier</th>
-                <th className="bg-black text-white px-4 py-3">Invoice Number</th>
-                <th className="bg-black text-white px-4 py-3">Amount</th>
-                <th className="bg-black text-white px-4 py-3">VAT</th>
-                <th className="bg-black text-white px-4 py-3">Cash/Credit</th>
-                <th className="bg-black text-white px-4 py-3"></th>
-                <th className="bg-black text-white px-4 py-3"></th>
-                <th className="bg-black text-white px-4 py-3"></th>
+                <th className="  px-4 py-4 border-b border-r border-solid border-white/20">Date</th>
+                <th className="  px-4 py-4 border-b border-r border-solid border-white/20">Supplier</th>
+                <th className="  px-4 py-4 border-b border-r border-solid border-white/20">Invoice Number</th>
+                <th className="  px-4 py-4 border-b border-r border-solid border-white/20">Amount</th>
+                <th className="  px-4 py-4 border-b border-r border-solid border-white/20">VAT</th>
+                <th className="  px-4 py-4">Cash/Credit</th>
+                <th className="  px-4 py-4"></th>
+                <th className="  px-4 py-4"></th>
+                <th className="  px-4 py-4  "></th>
               </tr>
             </thead>
             <tbody>
               {data.map((item) => (
                 <tr
                   key={item.id}
-                  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                  className="even:bg-default odd:bg-oddcolor text-center font-inter"
                 >
-                  <td className="px-4 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                  <td className="px-4 py-4 whitespace-nowrap text-black ">
                     {item.date}
                   </td>
-                  <td className="px-4 py-2">{item.supplier}</td>
-                  <td className="px-4 py-2">{item.invoiceNumber}</td>
-                  <td className="px-4 py-2">{item.amount.toFixed(2)}</td>
-                  <td className="px-4 py-2">{item.vat.toFixed(2)}</td>
-                  <td className="px-4 py-2">{item.paymentType}</td>
+                  <td className="px-4 py-2 text-black">{item.supplier}</td>
+                  <td className="px-4 py-2 text-black">{item.invoiceNumber}</td>
+                  <td className="px-4 py-2 text-black">{item.amount.toFixed(2)}</td>
+                  <td className="px-4 py-2 text-black">{item.vat.toFixed(2)}</td>
+                  <td className="px-4 py-2 text-black">{item.paymentType}</td>
                   <td className="px-4 py-2">
                     <img
                       src={screenshotIcon}

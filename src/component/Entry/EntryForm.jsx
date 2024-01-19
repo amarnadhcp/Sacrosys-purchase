@@ -6,30 +6,30 @@ function EntryForm() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleModal = () => {
-    setIsModalOpen(!isModalOpen);
+    setIsModalOpen(!isModalOpen); 
   };
   return (
-    <div className="my-4 mx-auto flex flex-col items-center  px-8 text-xs md:text-base overflow-auto">
-      <div className="flex justify-end items-center gap-2.5 my-8">
+    <div className="my-4 mx-auto flex flex-col items-end  px-8 text-xs md:text-base overflow-auto mt-0 ">
+      <div className="flex justify-end items-center gap-2.5 my-7">
         <button className="flex justify-center items-center gap-2.5 px-2.5 py-2 rounded-lg bg-purple-600 text-white">
           Entry
         </button>
-        <a href="#" className="text-purple-700 text-sm font-normal">
+        <a href="/sdkfl" className="text-purple-700 text-sm font-normal">
           Outstanding
         </a>
       </div>
 
-      <form className="transaction-form w-full text-sm md:text-base">
+      <form className="transaction-form w-full text-md md:text-base font-inter">
         <div className="flex items-center justify-between mb-4">
           <label className="flex gap-2 w-1/4 text-left">Supplier</label>
           <div className="flex justify-between">
             <input
-              style={{ width: "80%" }}
+              style={{ width: "80%", }}
               type="text"
               id="supplier"
               name="supplier"
               defaultValue="26855285278"
-              className="p-2 border border-gray-300 rounded-lg bg-gray-200"
+              className="p-2 border border-gray-300 rounded-lg bg-inputColor "
             />
             <img
               src={PlusIcon}
@@ -50,7 +50,7 @@ function EntryForm() {
             id="date"
             name="date"
             defaultValue="2023-08-09"
-            className="w-3/4 p-2 border border-gray-300 rounded-lg bg-gray-200"
+            className="w-3/4 p-2 border border-gray-300 rounded-lg bg-inputColor"
           />
         </div>
 
@@ -66,7 +66,7 @@ function EntryForm() {
             id="invoice-number"
             name="invoice-number"
             defaultValue="26855285278"
-            className="w-3/4 p-2 border border-gray-300 rounded-lg bg-gray-200"
+            className="w-3/4 p-2 border border-gray-300 rounded-lg bg-inputColor"
           />
         </div>
 
@@ -79,7 +79,7 @@ function EntryForm() {
             id="amount"
             name="amount"
             defaultValue="1000"
-            className="w-3/4 p-2 border border-gray-300 rounded-lg bg-gray-200"
+            className="w-3/4 p-2 border border-gray-300 rounded-lg bg-inputColor"
           />
         </div>
 
@@ -92,7 +92,7 @@ function EntryForm() {
             id="vat"
             name="vat"
             defaultValue="100"
-            className="w-3/4 p-2 border border-gray-300 rounded-lg bg-gray-200"
+            className="w-3/4 p-2 border border-gray-300 rounded-lg bg-inputColor"
           />
         </div>
 
@@ -107,7 +107,7 @@ function EntryForm() {
             id="payment-type"
             name="payment-type"
             defaultValue="cash"
-            className="w-3/4 p-2 border border-gray-300 rounded-lg bg-gray-200"
+            className="w-3/4 p-2 border border-gray-300 rounded-lg bg-inputColor"
           >
             <option value="cash">Cash</option>
             <option value="credit">Credit</option>
