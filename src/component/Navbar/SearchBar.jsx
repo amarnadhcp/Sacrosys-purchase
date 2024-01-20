@@ -2,6 +2,7 @@ import React from "react";
 import SearchIcon from "../../assests/images/search.svg";
 import { Link } from "react-router-dom";
 
+
 function SearchBar() {
   return (
     <div className="flex flex-wrap overflow-hidden justify-between items-center bg-default my-4 ">
@@ -43,7 +44,7 @@ function SearchBar() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default SearchBar;
+export default SearchBar

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import PlusIcon from "../../assests/images/AddNew.svg";
 import SupplierCreation from "./SupplierCreation";
+import NavigationBar from "../Navbar/NavigationBar";
+
 
 function EntryForm() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -9,16 +11,8 @@ function EntryForm() {
     setIsModalOpen(!isModalOpen); 
   };
   return (
-    <div className="my-4 mx-auto flex flex-col items-end  px-8 text-xs md:text-base overflow-auto mt-0 ">
-      <div className="flex justify-end items-center gap-2.5 my-7">
-        <button className="flex justify-center items-center gap-2.5 px-2.5 py-2 rounded-lg bg-purple-600 text-white">
-          Entry
-        </button>
-        <a href="/sdkfl" className="text-purple-700 text-sm font-normal">
-          Outstanding
-        </a>
-      </div>
-
+    <div className="my-4 mx-auto flex flex-col items-end  px-8 text-xs md:text-base overflow-auto mt-0">
+    <NavigationBar/>
       <form className="transaction-form w-full text-md md:text-base font-inter">
         <div className="flex items-center justify-between mb-4">
           <label className="flex gap-2 w-1/4 text-left">Supplier</label>

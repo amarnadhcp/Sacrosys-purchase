@@ -1,5 +1,5 @@
 import React from 'react'
-import SearchBar from "../../component/SearchBar/SearchBar";  
+import SearchBar from '../Navbar/SearchBar';
 import foodIcon from "../../assests/images/food.svg";  
 
 

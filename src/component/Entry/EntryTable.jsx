@@ -2,7 +2,7 @@ import React from "react";
 import editIcon from "../../assests/images/Edit.svg";
 import EmptyIcon from "../../assests/images/Empty.svg";
 import screenshotIcon from "../../assests/images/screenShot.png";
-import SearchBar from "../SearchBar/SearchBar";
+import SearchBar from "../Navbar/SearchBar";
 
 function EntryTable() {
   const data = [

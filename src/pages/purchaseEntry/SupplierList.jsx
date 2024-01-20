@@ -1,5 +1,5 @@
 import React from 'react'
-import SearchBar from "../../component/SearchBar/SearchBar";
+import SearchBar from "../../component/Navbar/SearchBar";
 function SupplierList() {
 
   return (
