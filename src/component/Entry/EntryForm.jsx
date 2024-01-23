@@ -11,7 +11,7 @@ function EntryForm() {
     setIsModalOpen(!isModalOpen); 
   };
   return (
-    <div className="my-4 mx-auto flex flex-col items-end  px-8 text-xs md:text-base overflow-auto mt-0">
+    <div className="my-4 mx-auto flex flex-col items-end  text-xs md:text-base overflow-auto mt-0">
     <NavigationBar/>
       <form className="transaction-form w-full text-md md:text-base font-inter">
         <div className="flex items-center justify-between mb-4">

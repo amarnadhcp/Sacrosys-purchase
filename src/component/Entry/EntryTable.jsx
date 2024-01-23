@@ -66,10 +66,10 @@ function EntryTable() {
                 <th className="  px-4 py-4 border-b border-r border-solid border-white/20">Invoice Number</th>
                 <th className="  px-4 py-4 border-b border-r border-solid border-white/20">Amount</th>
                 <th className="  px-4 py-4 border-b border-r border-solid border-white/20">VAT</th>
-                <th className="  px-4 py-4">Cash/Credit</th>
-                <th className="  px-4 py-4"></th>
-                <th className="  px-4 py-4"></th>
-                <th className="  px-4 py-4  "></th>
+                <th className="  px-4 py-4 border-b border-r border-solid border-white/20">Cash/Credit</th>
+                <th className="  px-4 py-4 border-b border-r border-solid border-white/20">Image</th>
+                <th className="  px-4 py-4 border-b border-r border-solid border-white/20">Action</th>
+                <th className="  px-4 py-4 border-b border-r border-solid border-white/20 ">button</th>
               </tr>
             </thead>
             <tbody>
