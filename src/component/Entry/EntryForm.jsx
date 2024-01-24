@@ -3,27 +3,27 @@ import PlusIcon from "../../assests/images/AddNew.svg";
 import SupplierCreation from "./SupplierCreation";
 import NavigationBar from "../Navbar/NavigationBar";
 
-
 function EntryForm() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleModal = () => {
-    setIsModalOpen(!isModalOpen); 
+    setIsModalOpen(!isModalOpen);
   };
+
   return (
-    <div className="my-4 mx-auto flex flex-col items-end  text-xs md:text-base overflow-auto mt-0">
-    <NavigationBar/>
+    <div className="my-0 mx-auto flex flex-col items-end text-xs md:text-base overflow-auto mt-0 ">
+      <NavigationBar />
       <form className="transaction-form w-full text-md md:text-base font-inter">
         <div className="flex items-center justify-between mb-4">
           <label className="flex gap-2 w-1/4 text-left">Supplier</label>
-          <div className="flex justify-between">
+          <div className="flex justify-between w-3/4">
             <input
-              style={{ width: "80%", }}
+              style={{ width: "80%" }}
               type="text"
               id="supplier"
               name="supplier"
               defaultValue="26855285278"
-              className="p-2 border border-gray-300 rounded-lg bg-inputColor "
+              className="p-2 rounded-lg bg-inputColor border focus:outline-none focus:border-purple-700"
             />
             <img
               src={PlusIcon}
@@ -44,15 +44,12 @@ function EntryForm() {
             id="date"
             name="date"
             defaultValue="2023-08-09"
-            className="w-3/4 p-2 border border-gray-300 rounded-lg bg-inputColor"
+            className="w-3/4 p-2 cursor-text rounded-lg bg-inputColor border focus:outline-none focus:border-purple-700 cursor: pointer;"
           />
         </div>
 
         <div className="flex items-center mb-4">
-          <label
-            htmlFor="invoice-number"
-            className="inline-block w-1/4 text-left"
-          >
+          <label htmlFor="invoice-number" className="inline-block w-1/4 text-left">
             Invoice number
           </label>
           <input
@@ -60,7 +57,7 @@ function EntryForm() {
             id="invoice-number"
             name="invoice-number"
             defaultValue="26855285278"
-            className="w-3/4 p-2 border border-gray-300 rounded-lg bg-inputColor"
+            className="w-3/4 p-2 rounded-lg bg-inputColor border focus:outline-none focus:border-purple-700"
           />
         </div>
 
@@ -73,7 +70,7 @@ function EntryForm() {
             id="amount"
             name="amount"
             defaultValue="1000"
-            className="w-3/4 p-2 border border-gray-300 rounded-lg bg-inputColor"
+            className="w-3/4 p-2 rounded-lg bg-inputColor border focus:outline-none focus:border-purple-700"
           />
         </div>
 
@@ -86,22 +83,17 @@ function EntryForm() {
             id="vat"
             name="vat"
             defaultValue="100"
-            className="w-3/4 p-2 border border-gray-300 rounded-lg bg-inputColor"
+            className="w-3/4 p-2 rounded-lg bg-inputColor border focus:outline-none focus:border-purple-700"
           />
         </div>
 
         <div className="flex items-center">
-          <label
-            htmlFor="payment-type"
-            className="inline-block w-1/4 text-left"
-          >
-            Cash / Credit
-          </label>
+          <label className="inline-block w-1/4 text-left">Cash / Credit</label>
           <select
             id="payment-type"
             name="payment-type"
             defaultValue="cash"
-            className="w-3/4 p-2 border border-gray-300 rounded-lg bg-inputColor"
+            className="w-3/4 p-2 rounded-lg bg-inputColor border focus:outline-none focus:border-purple-700"
           >
             <option value="cash">Cash</option>
             <option value="credit">Credit</option>
