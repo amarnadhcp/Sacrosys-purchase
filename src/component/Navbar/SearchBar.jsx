@@ -1,9 +1,53 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SearchIcon from "../../assests/images/search.svg";
 import { Link } from "react-router-dom";
-
+import {  AutoComplete } from "antd";
+import { fetchDataFromApi } from "../../services/Api";
 
 function SearchBar() {
+    /// auto complete state
+    const [options, setOptions] = useState([]);
+    const [loading, setLoading] = useState(false);
+  
+    // function Debound reduce api calingg
+    const debounce = (func, delay) => {
+      let timeout;
+      return function (...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func(...args), delay);
+      };
+    };
+  
+    // Api calling with Debouncing
+    const getPanelValue = debounce(async (searchText) => {
+      try {
+        setLoading(true);
+        !searchText.trim()
+          ? setOptions([])
+          : setOptions(
+              await fetchDataFromApi(searchText).then((results) =>
+                results.map((result) => ({ value: result.name }))
+              )
+            );
+      } catch (error) {
+        console.error("Error :", error);
+        setOptions([]);
+      } finally {
+        setLoading(false);
+      }
+    }, 300);
+    
+    //form submition function 
+    const handleSubmit=(e)=>{
+      e.preventDefault();
+    console.log("save");
+    }
+  
+    //for unmounting the sate
+    useEffect(() => {
+      return () => setOptions([]);
+    }, []);
+
   return (
     <div className="flex flex-wrap overflow-hidden justify-between items-center bg-default my-4 ">
       <div className="flex">
@@ -15,11 +59,15 @@ function SearchBar() {
         </label>
         <div className="flex flex-wrap">
           <div className="relative flex items-center mr-4 w-full md:w-auto">
-            <input
-              id="search-input"
-              className="w-full py-2 pl-2 pr-10 border-2 bg-inputColor  rounded-lg focus:outline-none focus:border-purple-400"
-              type="text"
-              placeholder="268585225278"
+          <AutoComplete
+              options={options}
+              type={"primary"}
+              size="large"
+              style={{ width: "100%",minWidth: "200px" }}
+              placeholder="Search for a supplier"
+              variant="filled"
+              onSearch={(text) => getPanelValue(text)}
+              onSelect={(value) => console.log("Selected:", value)}
             />
             <img
               src={SearchIcon}

@@ -1,30 +1,79 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PlusIcon from "../../assests/images/AddNew.svg";
 import SupplierCreation from "./SupplierCreation";
 import NavigationBar from "../Navbar/NavigationBar";
+import { Select, AutoComplete, Spin } from "antd";
+import { fetchDataFromApi } from "../../services/Api";
 
 
 function EntryForm() {
+  // modal opeing state management
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const toggleModal = () => {
-    setIsModalOpen(!isModalOpen); 
+    setIsModalOpen(!isModalOpen);
   };
+  /// auto complete state
+  const [options, setOptions] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  // function Debound reduce api calingg
+  const debounce = (func, delay) => {
+    let timeout;
+    return function (...args) {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func(...args), delay);
+    };
+  };
+
+  // Api calling with Debouncing
+  const getPanelValue = debounce(async (searchText) => {
+    try {
+      setLoading(true);
+      !searchText.trim()
+        ? setOptions([])
+        : setOptions(
+            await fetchDataFromApi(searchText).then((results) =>
+              results.map((result) => ({ value: result.name }))
+            )
+          );
+    } catch (error) {
+      console.error("Error :", error);
+      setOptions([]);
+    } finally {
+      setLoading(false);
+    }
+  }, 300);
+  
+  //form submition function 
+  const handleSubmit=(e)=>{
+    e.preventDefault();
+  console.log("save");
+  }
+
+  //for unmounting the sate
+  useEffect(() => {
+    return () => setOptions([]);
+  }, []);
+
   return (
-    <div className="my-4 mx-auto flex flex-col items-end  text-xs md:text-base overflow-auto mt-0">
-    <NavigationBar/>
-      <form className="transaction-form w-full text-md md:text-base font-inter">
+    <div className="my-0 mx-auto flex flex-col items-end text-xs md:text-base overflow-auto mt-0 ">
+      <NavigationBar />
+      <form onSubmit={handleSubmit} className="transaction-form w-full text-md md:text-base font-inter">
         <div className="flex items-center justify-between mb-4">
           <label className="flex gap-2 w-1/4 text-left">Supplier</label>
-          <div className="flex justify-between">
-            <input
-              style={{ width: "80%", }}
-              type="text"
-              id="supplier"
-              name="supplier"
-              defaultValue="26855285278"
-              className="p-2 border border-gray-300 rounded-lg bg-inputColor "
+          <div className="flex justify-between w-3/4">
+            
+            <AutoComplete
+              options={options}
+              type={"primary"}
+              size="large"
+              style={{ width: "80%" }}
+              placeholder="Search for a supplier"
+              variant="filled"
+              onSearch={(text) => getPanelValue(text)}
+              onSelect={(value) => console.log("Selected:", value)}
             />
+
             <img
               src={PlusIcon}
               alt="Add new"
@@ -32,6 +81,7 @@ function EntryForm() {
               onClick={toggleModal}
             />
           </div>
+          {loading && <Spin size="large" style={{ marginLeft: "8px" }} />}
           {isModalOpen && <SupplierCreation />}
         </div>
 
@@ -44,7 +94,7 @@ function EntryForm() {
             id="date"
             name="date"
             defaultValue="2023-08-09"
-            className="w-3/4 p-2 border border-gray-300 rounded-lg bg-inputColor"
+            className="w-3/4 p-2 cursor-text rounded-lg bg-inputColor border focus:outline-none focus:border-purple-700 cursor: pointer;"
           />
         </div>
 
@@ -60,7 +110,7 @@ function EntryForm() {
             id="invoice-number"
             name="invoice-number"
             defaultValue="26855285278"
-            className="w-3/4 p-2 border border-gray-300 rounded-lg bg-inputColor"
+            className="w-3/4 p-2 rounded-lg bg-inputColor border focus:outline-none focus:border-purple-700"
           />
         </div>
 
@@ -73,7 +123,7 @@ function EntryForm() {
             id="amount"
             name="amount"
             defaultValue="1000"
-            className="w-3/4 p-2 border border-gray-300 rounded-lg bg-inputColor"
+            className="w-3/4 p-2 rounded-lg bg-inputColor border focus:outline-none focus:border-purple-700"
           />
         </div>
 
@@ -86,26 +136,22 @@ function EntryForm() {
             id="vat"
             name="vat"
             defaultValue="100"
-            className="w-3/4 p-2 border border-gray-300 rounded-lg bg-inputColor"
+            className="w-3/4 p-2 rounded-lg bg-inputColor border focus:outline-none focus:border-purple-700"
           />
         </div>
 
         <div className="flex items-center">
-          <label
-            htmlFor="payment-type"
-            className="inline-block w-1/4 text-left"
-          >
-            Cash / Credit
-          </label>
-          <select
-            id="payment-type"
-            name="payment-type"
-            defaultValue="cash"
-            className="w-3/4 p-2 border border-gray-300 rounded-lg bg-inputColor"
-          >
-            <option value="cash">Cash</option>
-            <option value="credit">Credit</option>
-          </select>
+          <label className="inline-block w-1/4 text-left">Cash / Credit</label>
+          <Select
+            defaultValue="Cash"
+            size={"large"}
+            className="w-3/4   rounded-lg bg-red   focus:border-purple-700"
+            onChange={(value) => console.log("Selected - ", value)}
+            options={[
+              { value: "Cash", label: "Cash" },
+              { value: "Credit", label: "Credit" },
+            ]}
+          />
         </div>
 
         <div className="flex justify-end items-center my-2">

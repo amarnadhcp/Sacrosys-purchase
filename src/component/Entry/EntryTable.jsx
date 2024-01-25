@@ -3,55 +3,7 @@ import editIcon from "../../assests/images/Edit.svg";
 import EmptyIcon from "../../assests/images/Empty.svg";
 import screenshotIcon from "../../assests/images/screenShot.png";
 import SearchBar from "../Navbar/SearchBar";
-
 function EntryTable() {
-  const data = [
-    {
-      id: 1,
-      date: "09/08/23",
-      supplier: "3486348378",
-      invoiceNumber: "3486348378",
-      amount: 1000,
-      vat: 100,
-      paymentType: "cash",
-    },
-    {
-      id: 2,
-      date: "10/08/23",
-      supplier: "4527834523",
-      invoiceNumber: "4527834523",
-      amount: 1500,
-      vat: 150,
-      paymentType: "credit",
-    },
-    {
-      id: 3,
-      date: "11/08/23",
-      supplier: "5728394723",
-      invoiceNumber: "5728394723",
-      amount: 750,
-      vat: 75,
-      paymentType: "cash",
-    },
-    {
-      id: 4,
-      date: "12/08/23",
-      supplier: "4829304832",
-      invoiceNumber: "4829304832",
-      amount: 1200,
-      vat: 120,
-      paymentType: "credit",
-    },
-    {
-      id: 5,
-      date: "13/08/23",
-      supplier: "5839205832",
-      invoiceNumber: "5839205832",
-      amount: 900,
-      vat: 90,
-      paymentType: "cash",
-    },
-  ];
 
   return (
     <>
@@ -122,3 +74,55 @@ function EntryTable() {
 }
 
 export default EntryTable;
+
+
+
+
+const data = [
+  {
+    
+    id: 1,
+    date: "09/08/23",
+    supplier: "3486348378",
+    invoiceNumber: "3486348378",
+    amount: 1000,
+    vat: 100,
+    paymentType: "cash",
+  },
+  {
+    id: 2,
+    date: "10/08/23",
+    supplier: "4527834523",
+    invoiceNumber: "4527834523",
+    amount: 1500,
+    vat: 150,
+    paymentType: "credit",
+  },
+  {
+    id: 3,
+    date: "11/08/23",
+    supplier: "5728394723",
+    invoiceNumber: "5728394723",
+    amount: 750,
+    vat: 75,
+    paymentType: "cash",
+  },
+  {
+    id: 4,
+    date: "12/08/23",
+    supplier: "4829304832",
+    invoiceNumber: "4829304832",
+    amount: 1200,
+    vat: 120,
+    paymentType: "credit",
+  },
+  {
+    id: 5,
+    date: "13/08/23",
+    supplier: "5839205832",
+    invoiceNumber: "5839205832",
+    amount: 900,
+    vat: 90,
+    paymentType: "cash",
+  },
+];
