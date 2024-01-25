@@ -2,9 +2,14 @@ import React, { useState } from "react";
 import PlusIcon from "../../assests/images/AddNew.svg";
 import SupplierCreation from "./SupplierCreation";
 import NavigationBar from "../Navbar/NavigationBar";
+import { Select } from "antd";
 
 function EntryForm() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleChange = (value) => {
+    console.log(`selected ${value}`);
+  };
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -49,7 +54,10 @@ function EntryForm() {
         </div>
 
         <div className="flex items-center mb-4">
-          <label htmlFor="invoice-number" className="inline-block w-1/4 text-left">
+          <label
+            htmlFor="invoice-number"
+            className="inline-block w-1/4 text-left"
+          >
             Invoice number
           </label>
           <input
@@ -89,15 +97,16 @@ function EntryForm() {
 
         <div className="flex items-center">
           <label className="inline-block w-1/4 text-left">Cash / Credit</label>
-          <select
-            id="payment-type"
-            name="payment-type"
-            defaultValue="cash"
-            className="w-3/4 p-2 rounded-lg bg-inputColor border focus:outline-none focus:border-purple-700"
-          >
-            <option value="cash">Cash</option>
-            <option value="credit">Credit</option>
-          </select>
+          <Select
+            defaultValue="Cash"
+            size={"large"}
+            className="w-3/4   rounded-lg bg-red   focus:border-purple-700"
+            onChange={handleChange}
+            options={[
+              { value: "Cash", label: "Cash" },
+              { value: "Credit", label: "Credit" },
+            ]}
+          />
         </div>
 
         <div className="flex justify-end items-center my-2">

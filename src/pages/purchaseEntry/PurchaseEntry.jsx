@@ -6,7 +6,7 @@ function PurchaseEntry() {
   return (
     <>
       <div className="flex flex-wrap-reverse xl:gap-x-40  max-w-8xl bg-default xl:flex-nowrap">
-        <EntryTable />
+        <EntryTable  />
         <EntryForm />
       </div>
     </>

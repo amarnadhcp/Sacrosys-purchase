@@ -3,12 +3,11 @@ import editIcon from "../../assests/images/Edit.svg";
 import EmptyIcon from "../../assests/images/Empty.svg";
 import screenshotIcon from "../../assests/images/screenShot.png";
 import SearchBar from "../Navbar/SearchBar";
-
 function EntryTable() {
 
   return (
     <>
-      <div className="mx-auto px-2 overflow-auto my-4  ">
+      <div className="mx-auto px-2 overflow-auto my-4 ">
         <SearchBar />
         <div className="overflow-x-auto min-w-full">
           <table className="w-full text-xs text-left rtl:text-right text-gray-500 dark:text-gray-400">
