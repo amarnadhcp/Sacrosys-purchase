@@ -5,3 +5,8 @@
 body {
     background-color:#F8F8F8 ; 
   }
+
+  fieldset {
+    border: none !important;
+    outline: none !important;
+  }
