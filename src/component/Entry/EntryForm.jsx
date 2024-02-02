@@ -70,7 +70,7 @@ function EntryForm() {
       >
         <div className="flex items-center justify-between mb-4">
           <label className="flex gap-2 w-1/4 text-left">Supplier</label>
-          <div className="flex justify-between w-3/4">
+          <div className="flex justify-between w-3/4 ">
             <Autocomplete 
               suggestions={[
                 "Alabama",
