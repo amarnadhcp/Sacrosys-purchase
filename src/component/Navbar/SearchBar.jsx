@@ -7,7 +7,6 @@ import { fetchDataFromApi } from "../../services/Api";
 function SearchBar() {
     /// auto complete state
     const [options, setOptions] = useState([]);
-    const [loading, setLoading] = useState(false);
   
     // function Debound reduce api calingg
     const debounce = (func, delay) => {
@@ -21,7 +20,6 @@ function SearchBar() {
     // Api calling with Debouncing
     const getPanelValue = debounce(async (searchText) => {
       try {
-        setLoading(true);
         !searchText.trim()
           ? setOptions([])
           : setOptions(
@@ -33,16 +31,9 @@ function SearchBar() {
         console.error("Error :", error);
         setOptions([]);
       } finally {
-        setLoading(false);
       }
     }, 300);
     
-    //form submition function 
-    const handleSubmit=(e)=>{
-      e.preventDefault();
-    console.log("save");
-    }
-  
     //for unmounting the sate
     useEffect(() => {
       return () => setOptions([]);
