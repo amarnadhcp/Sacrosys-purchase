@@ -3,6 +3,7 @@ import PlusIcon from "../../assests/images/AddNew.svg";
 import SupplierCreation from "./SupplierCreation";
 import NavigationBar from "../Navbar/NavigationBar";
 import { AutoComplete, Spin } from "antd";
+import Autocomplete from "../AutoComplete/Autocomplete";
 import { fetchDataFromApi } from "../../services/Api";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
@@ -70,21 +71,74 @@ function EntryForm() {
         <div className="flex items-center justify-between mb-4">
           <label className="flex gap-2 w-1/4 text-left">Supplier</label>
           <div className="flex justify-between w-3/4">
-            <AutoComplete
-              options={options}
-              type={"primary"}
-              size="large"
-              style={{ width: "80%" }}
-              placeholder="Search for a supplier"
-              variant="filled"
-              onSearch={(text) => getPanelValue(text)}
-              onSelect={(value) => console.log("Selected:", value)}
+            <Autocomplete 
+              suggestions={[
+                "Alabama",
+                "Alaska",
+                "American Samoa",
+                "Arizona",
+                "Arkansas",
+                "California",
+                "Colorado",
+                "Connecticut",
+                "Delaware",
+                "District Of Columbia",
+                "Federated States Of Micronesia",
+                "Florida",
+                "Georgia",
+                "Guam",
+                "Hawaii",
+                "Idaho",
+                "Illinois",
+                "Indiana",
+                "Iowa",
+                "Kansas",
+                "Kentucky",
+                "Louisiana",
+                "Maine",
+                "Marshall Islands",
+                "Maryland",
+                "Massachusetts",
+                "Michigan",
+                "Minnesota",
+                "Mississippi",
+                "Missouri",
+                "Montana",
+                "Nebraska",
+                "Nevada",
+                "New Hampshire",
+                "New Jersey",
+                "New Mexico",
+                "New York",
+                "North Carolina",
+                "North Dakota",
+                "Northern Mariana Islands",
+                "Ohio",
+                "Oklahoma",
+                "Oregon",
+                "Palau",
+                "Pennsylvania",
+                "Puerto Rico",
+                "Rhode Island",
+                "South Carolina",
+                "South Dakota",
+                "Tennessee",
+                "Texas",
+                "Utah",
+                "Vermont",
+                "Virgin Islands",
+                "Virginia",
+                "Washington",
+                "West Virginia",
+                "Wisconsin",
+                "Wyoming",
+              ]}
             />
 
             <img
               src={PlusIcon}
               alt="Add new"
-              className="cursor-pointer"
+              className="cursor-pointer"  
               onClick={toggleModal}
             />
           </div>
@@ -164,7 +218,7 @@ function EntryForm() {
               outline: "none",
               "&:hover": {
                 outline: "none",
-                    border: "1px solid purple", 
+                border: "1px solid purple",
               },
             }}
             MenuProps={{
@@ -181,7 +235,7 @@ function EntryForm() {
                 backgroundColor: mode === "dark" ? "#232323" : "#E9E9E9",
                 color: mode === "dark" ? "white" : "black",
                 "&:hover": {
-                  backgroundColor: mode === "dark" ? "#121212" : "#CCCCCC", 
+                  backgroundColor: mode === "dark" ? "#121212" : "#CCCCCC",
                 },
               }}
             >
@@ -193,7 +247,7 @@ function EntryForm() {
                 backgroundColor: mode === "dark" ? "#232323" : "#E9E9E9",
                 color: mode === "dark" ? "white" : "black",
                 "&:hover": {
-                  backgroundColor: mode === "dark" ? "#121212" : "#CCCCCC", 
+                  backgroundColor: mode === "dark" ? "#121212" : "#CCCCCC",
                 },
               }}
             >
