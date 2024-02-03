@@ -9,23 +9,25 @@ import Select from "@mui/material/Select";
 function EntryForm() {
   const [mode, setMode] = useState("dar");
 
+  const [autocompleteInput, setAutocompleteInput] = useState("");
+  console.log(autocompleteInput);
+  const handleAutocompleteInput = (input) => {
+    setAutocompleteInput(input);
+  };
+
   // modal opeing state management
   const [isModalOpen, setIsModalOpen] = useState(false);
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
-  /// cash or credit selection 
+  /// cash or credit selection
   const [paymentType, setPayment] = useState(10);
-
-;
 
   //form submition function
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("save");
   };
-
-
 
   return (
     <div className="my-0 mx-auto flex flex-col items-end text-xs md:text-base overflow-auto mt-0 ">
@@ -37,14 +39,12 @@ function EntryForm() {
         <div className="flex items-center justify-between mb-4">
           <label className="flex gap-2 w-1/4 text-left">Supplier</label>
           <div className="flex justify-between w-3/4 ">
-            <Autocomplete 
-              suggestions={data}
-            />
+            <Autocomplete suggestions={data} width="50" heigh="10" onInputChange={handleAutocompleteInput}/>
 
             <img
               src={PlusIcon}
               alt="Add new"
-              className="cursor-pointer"  
+              className="cursor-pointer"
               onClick={toggleModal}
             />
           </div>
@@ -189,9 +189,7 @@ function EntryForm() {
 
 export default EntryForm;
 
-
-
-let data =[
+let data = [
   "Alabama",
   "Alaska",
   "American Samoa",
@@ -251,4 +249,4 @@ let data =[
   "West Virginia",
   "Wisconsin",
   "Wyoming",
-]
+];
