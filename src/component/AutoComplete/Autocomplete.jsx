@@ -55,7 +55,7 @@ const Autocomplete = ({ suggestions }) => {
     <AnimatePresence>
       {isShow && input && (
         <motion.ul
-          className="bg-gray-100 border border-gray-300 max-h-40 overflow-auto p-0 w-56 rounded-md mt-2 text-sm absolute top-full left-0 z-10"
+          className="bg-gray-100 border border-gray-300 max-h-44 overflow-auto p-0 w-56px  rounded-md mt-2 text-sm absolute top-full left-0 z-10"
           initial="hidden"
           animate="visible"
           exit="hidden"
@@ -66,7 +66,7 @@ const Autocomplete = ({ suggestions }) => {
               <motion.li
                 key={suggestion}
                 className={`${
-                  index === active ? "active" : ""
+                  index === active ? "active bg-gray-200 " : ""
                 } px-3 py-2 cursor-pointer transition duration-300 flex justify-between items-center hover:bg-gray-200 font-inter text-xs`}
                 variants={listItemVariants}
                 initial="hidden"
@@ -96,7 +96,7 @@ const Autocomplete = ({ suggestions }) => {
         onChange={onChange}
         onKeyDown={onKeyDown}
         value={input}
-        className="bg-inputColor rounded p-2 w-56 text-sm mb-1 outline-none h-10"
+        className="bg-inputColor rounded p-2 w-56  text-sm mb-1 outline-none h-10"
       />
       {renderAutocomplete()}
     </div>
