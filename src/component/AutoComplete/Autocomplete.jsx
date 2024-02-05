@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const Autocomplete = ({ suggestions, width, height, onInputChange }) => {
+const Autocomplete = ({ suggestions, width, height, onInputChange,onSelect  }) => {
   const [active, setActive] = useState(0);
   const [filtered, setFiltered] = useState([]);
   const [isShow, setIsShow] = useState(false);
@@ -29,6 +29,7 @@ const Autocomplete = ({ suggestions, width, height, onInputChange }) => {
     setFiltered([]);
     setIsShow(false);
     setInput(suggestion);
+    onSelect(suggestion);
   };
 
   const onKeyDown = (e) => {

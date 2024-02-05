@@ -12,7 +12,6 @@ function EntryForm() {
   const [mode, setMode] = useState("dar");
 
   const [autocompleteInput, setAutocompleteInput] = useState("");
-  console.log(autocompleteInput);
   const handleAutocompleteInput = (input) => {
     setAutocompleteInput(input);
   };
@@ -58,6 +57,7 @@ function EntryForm() {
               width="50"
               heigh="10"
               onInputChange={handleAutocompleteInput}
+              onSelect={(value) => setAutocompleteInput(value)}
             />
 
             <img
