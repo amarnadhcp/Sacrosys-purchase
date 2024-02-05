@@ -1,10 +1,14 @@
 import React from 'react'
 import SearchBar from "../../component/Navbar/SearchBar";
+import NavigationBar from "../../component/Navbar/NavigationBar";
 function SupplierList() {
 
   return (
-    <div className="mx-auto  px-2 overflow-auto my-4 ">
-      <SearchBar/>
+    <div className="mx-auto px-2 overflow-auto my-1 ">
+      <div className="flex flex-col md:flex-row-reverse justify-between items-center bg-default">
+        <NavigationBar  />
+        <SearchBar  />
+      </div>
     <div className="overflow-x-auto min-w-full">
       <table className="w-full text-xs text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-stone-50 font-light  bg-gray-50 dark:bg-gray-900">
