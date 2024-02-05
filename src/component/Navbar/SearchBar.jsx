@@ -1,44 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import SearchIcon from "../../assests/images/search.svg";
 import { Link } from "react-router-dom";
-import {  AutoComplete } from "antd";
-import { fetchDataFromApi } from "../../services/Api";
+import Autocomplete from "../AutoComplete/Autocomplete"
+
 
 function SearchBar() {
-    /// auto complete state
-    const [options, setOptions] = useState([]);
-  
-    // function Debound reduce api calingg
-    const debounce = (func, delay) => {
-      let timeout;
-      return function (...args) {
-        clearTimeout(timeout);
-        timeout = setTimeout(() => func(...args), delay);
-      };
-    };
-  
-    // Api calling with Debouncing
-    const getPanelValue = debounce(async (searchText) => {
-      try {
-        !searchText.trim()
-          ? setOptions([])
-          : setOptions(
-              await fetchDataFromApi(searchText).then((results) =>
-                results.map((result) => ({ value: result.name }))
-              )
-            );
-      } catch (error) {
-        console.error("Error :", error);
-        setOptions([]);
-      } finally {
-      }
-    }, 300);
-    
-    //for unmounting the sate
-    useEffect(() => {
-      return () => setOptions([]);
-    }, []);
-
+  const [autocompleteInput, setAutocompleteInput] = useState("");
+  const handleAutocompleteInput = (input) => {
+    setAutocompleteInput(input);
+  };
   return (
     <div className="flex flex-wrap overflow-hidden justify-between items-center bg-default my-4 ">
       <div className="flex">
@@ -50,16 +20,7 @@ function SearchBar() {
         </label>
         <div className="flex flex-wrap">
           <div className="relative flex items-center mr-4 w-full md:w-auto">
-          <AutoComplete
-              options={options}
-              type={"primary"}
-              size="large"
-              style={{ width: "100%",minWidth: "200px" }}
-              placeholder="Search for a supplier"
-              variant="filled"
-              onSearch={(text) => getPanelValue(text)}
-              onSelect={(value) => console.log("Selected:", value)}
-            />
+          <Autocomplete suggestions={data} width="40"   height="10" onInputChange={handleAutocompleteInput} />
             <img
               src={SearchIcon}
               alt="Search Icon"
@@ -83,7 +44,70 @@ function SearchBar() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default SearchBar
+export default SearchBar;
+
+
+let data = [
+  "Alabama",
+  "Alaska",
+  "American Samoa",
+  "Arizona",
+  "Arkansas",
+  "California",
+  "Colorado",
+  "Connecticut",
+  "Delaware",
+  "District Of Columbia",
+  "Federated States Of Micronesia",
+  "Florida",
+  "Georgia",
+  "Guam",
+  "Hawaii",
+  "Idaho",
+  "Illinois",
+  "Indiana",
+  "Iowa",
+  "Kansas",
+  "Kentucky",
+  "Louisiana",
+  "Maine",
+  "Marshall Islands",
+  "Maryland",
+  "Massachusetts",
+  "Michigan",
+  "Minnesota",
+  "Mississippi",
+  "Missouri",
+  "Montana",
+  "Nebraska",
+  "Nevada",
+  "New Hampshire",
+  "New Jersey",
+  "New Mexico",
+  "New York",
+  "North Carolina",
+  "North Dakota",
+  "Northern Mariana Islands",
+  "Ohio",
+  "Oklahoma",
+  "Oregon",
+  "Palau",
+  "Pennsylvania",
+  "Puerto Rico",
+  "Rhode Island",
+  "South Carolina",
+  "South Dakota",
+  "Tennessee",
+  "Texas",
+  "Utah",
+  "Vermont",
+  "Virgin Islands",
+  "Virginia",
+  "Washington",
+  "West Virginia",
+  "Wisconsin",
+  "Wyoming",
+];

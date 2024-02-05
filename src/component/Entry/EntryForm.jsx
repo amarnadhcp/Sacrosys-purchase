@@ -1,65 +1,33 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import PlusIcon from "../../assests/images/AddNew.svg";
 import SupplierCreation from "./SupplierCreation";
 import NavigationBar from "../Navbar/NavigationBar";
-import { AutoComplete, Spin } from "antd";
 import Autocomplete from "../AutoComplete/Autocomplete";
-import { fetchDataFromApi } from "../../services/Api";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 
 function EntryForm() {
   const [mode, setMode] = useState("dar");
 
+  const [autocompleteInput, setAutocompleteInput] = useState("");
+  console.log(autocompleteInput);
+  const handleAutocompleteInput = (input) => {
+    setAutocompleteInput(input);
+  };
+
   // modal opeing state management
   const [isModalOpen, setIsModalOpen] = useState(false);
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
-  /// auto complete state
-  const [options, setOptions] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  // function Debound reduce api calingg
-  const debounce = (func, delay) => {
-    let timeout;
-    return function (...args) {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => func(...args), delay);
-    };
-  };
-
+  /// cash or credit selection
   const [paymentType, setPayment] = useState(10);
-
-  // Api calling with Debouncing
-  const getPanelValue = debounce(async (searchText) => {
-    try {
-      setLoading(true);
-      !searchText.trim()
-        ? setOptions([])
-        : setOptions(
-            await fetchDataFromApi(searchText).then((results) =>
-              results.map((result) => ({ value: result.name }))
-            )
-          );
-    } catch (error) {
-      console.error("Error :", error);
-      setOptions([]);
-    } finally {
-      setLoading(false);
-    }
-  }, 300);
 
   //form submition function
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("save");
   };
-
-  //for unmounting the sate
-  useEffect(() => {
-    return () => setOptions([]);
-  }, []);
 
   return (
     <div className="my-0 mx-auto flex flex-col items-end text-xs md:text-base overflow-auto mt-0 ">
@@ -71,78 +39,15 @@ function EntryForm() {
         <div className="flex items-center justify-between mb-4">
           <label className="flex gap-2 w-1/4 text-left">Supplier</label>
           <div className="flex justify-between w-3/4 ">
-            <Autocomplete 
-              suggestions={[
-                "Alabama",
-                "Alaska",
-                "American Samoa",
-                "Arizona",
-                "Arkansas",
-                "California",
-                "Colorado",
-                "Connecticut",
-                "Delaware",
-                "District Of Columbia",
-                "Federated States Of Micronesia",
-                "Florida",
-                "Georgia",
-                "Guam",
-                "Hawaii",
-                "Idaho",
-                "Illinois",
-                "Indiana",
-                "Iowa",
-                "Kansas",
-                "Kentucky",
-                "Louisiana",
-                "Maine",
-                "Marshall Islands",
-                "Maryland",
-                "Massachusetts",
-                "Michigan",
-                "Minnesota",
-                "Mississippi",
-                "Missouri",
-                "Montana",
-                "Nebraska",
-                "Nevada",
-                "New Hampshire",
-                "New Jersey",
-                "New Mexico",
-                "New York",
-                "North Carolina",
-                "North Dakota",
-                "Northern Mariana Islands",
-                "Ohio",
-                "Oklahoma",
-                "Oregon",
-                "Palau",
-                "Pennsylvania",
-                "Puerto Rico",
-                "Rhode Island",
-                "South Carolina",
-                "South Dakota",
-                "Tennessee",
-                "Texas",
-                "Utah",
-                "Vermont",
-                "Virgin Islands",
-                "Virginia",
-                "Washington",
-                "West Virginia",
-                "Wisconsin",
-                "Wyoming",
-              ]}
-            />
+            <Autocomplete suggestions={data} width="50" heigh="10" onInputChange={handleAutocompleteInput}/>
 
             <img
               src={PlusIcon}
               alt="Add new"
-              className="cursor-pointer"  
+              className="cursor-pointer"
               onClick={toggleModal}
             />
           </div>
-          {loading && <Spin size="large" style={{ marginLeft: "8px" }} />}
           {isModalOpen && <SupplierCreation />}
         </div>
 
@@ -283,3 +188,65 @@ function EntryForm() {
 }
 
 export default EntryForm;
+
+let data = [
+  "Alabama",
+  "Alaska",
+  "American Samoa",
+  "Arizona",
+  "Arkansas",
+  "California",
+  "Colorado",
+  "Connecticut",
+  "Delaware",
+  "District Of Columbia",
+  "Federated States Of Micronesia",
+  "Florida",
+  "Georgia",
+  "Guam",
+  "Hawaii",
+  "Idaho",
+  "Illinois",
+  "Indiana",
+  "Iowa",
+  "Kansas",
+  "Kentucky",
+  "Louisiana",
+  "Maine",
+  "Marshall Islands",
+  "Maryland",
+  "Massachusetts",
+  "Michigan",
+  "Minnesota",
+  "Mississippi",
+  "Missouri",
+  "Montana",
+  "Nebraska",
+  "Nevada",
+  "New Hampshire",
+  "New Jersey",
+  "New Mexico",
+  "New York",
+  "North Carolina",
+  "North Dakota",
+  "Northern Mariana Islands",
+  "Ohio",
+  "Oklahoma",
+  "Oregon",
+  "Palau",
+  "Pennsylvania",
+  "Puerto Rico",
+  "Rhode Island",
+  "South Carolina",
+  "South Dakota",
+  "Tennessee",
+  "Texas",
+  "Utah",
+  "Vermont",
+  "Virgin Islands",
+  "Virginia",
+  "Washington",
+  "West Virginia",
+  "Wisconsin",
+  "Wyoming",
+];
