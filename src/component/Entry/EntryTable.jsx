@@ -3,14 +3,14 @@ import editIcon from "../../assests/images/Edit.svg";
 import EmptyIcon from "../../assests/images/Empty.svg";
 import screenshotIcon from "../../assests/images/screenShot.png";
 import SearchBar from "../Navbar/SearchBar";
-function EntryTable() {
+function  EntryTable() {
 
   return (
     <>
-      <div className="mx-auto px-2 overflow-auto my-4  ">
+      <div className="mx-auto px-2 overflow-auto my-4">
         <SearchBar />
         <div className="overflow-x-auto min-w-full">
-          <table className="w-full text-xs text-left rtl:text-right text-gray-500 dark:text-gray-400">
+          <table className="w-full text-xs text-left rtl:text-right text-gray-500 dark:text-gray-400 z-0">
              <thead className="text-xs text-white font-inter bg-custom-black text-center ">
               <tr >
                 <th className="px-2 py-2 md:px-4 md:py-4 border-b border-r border-solid border-white/20">Date</th>
