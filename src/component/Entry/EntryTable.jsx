@@ -1,18 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import editIcon from "../../assests/images/Edit.svg";
 import EmptyIcon from "../../assests/images/Empty.svg";
 import screenshotIcon from "../../assests/images/screenShot.png";
 import SearchBar from "../Navbar/SearchBar";
-function  EntryTable() {
+import { DatePicker, Space } from 'antd';
+const { RangePicker } = DatePicker;
+
+function EntryTable() {
+  const [selectedDateRange, setSelectedDateRange] = useState([]);
+  
+  const handleDateRangeChange = (dates) => {
+    if (!dates) {
+      setSelectedDateRange([]);
+      return;
+    }
+    setSelectedDateRange(dates);
+  };
+
+  // Filter data based on selected date range
+  const filteredData = selectedDateRange.length === 0 ?
+    data :
+    data.filter(item => {
+      const itemDate = new Date(item.date);
+      return itemDate >= selectedDateRange[0] && itemDate <= selectedDateRange[1];
+    });
 
   return (
     <>
       <div className="mx-auto px-2 overflow-auto my-4">
         <SearchBar />
         <div className="overflow-x-auto min-w-full">
+          <div className="mb-1 mt-0 ">
+            <RangePicker onChange={handleDateRangeChange} />
+          </div>
           <table className="w-full text-xs text-left rtl:text-right text-gray-500 dark:text-gray-400 z-0">
-             <thead className="text-xs text-white font-inter bg-custom-black text-center ">
-              <tr >
+            <thead className="text-xs text-white font-inter bg-custom-black text-center ">
+              <tr>
                 <th className="px-2 py-2 md:px-4 md:py-4 border-b border-r border-solid border-white/20">Date</th>
                 <th className="px-2 py-2 md:px-4 md:py-4 border-b border-r border-solid border-white/20">Supplier</th>
                 <th className="px-2 py-2 md:px-4 md:py-4 border-b border-r border-solid border-white/20">Invoice Number</th>
@@ -25,12 +48,12 @@ function  EntryTable() {
               </tr>
             </thead>
             <tbody>
-              {data.map((item) => (
+              {filteredData.map((item) => (
                 <tr
                   key={item.id}
                   className="even:bg-default odd:bg-oddcolor text-center font-inter"
                 >
-                  <td className="px-4 py-4 whitespace-nowrap text-black ">
+                  <td className="px-4 py-4 whitespace-nowrap text-black">
                     {item.date}
                   </td>
                   <td className="px-4 py-2 text-black">{item.supplier}</td>
@@ -45,7 +68,6 @@ function  EntryTable() {
                       className="w-10 h-8 mt-2 mr-2 cursor-pointer"
                     />
                   </td>
-                  
                   <td className="px-4 py-2 flex">
                     <img
                       src={editIcon}
@@ -75,14 +97,10 @@ function  EntryTable() {
 
 export default EntryTable;
 
-
-
-
 const data = [
   {
-    
     id: 1,
-    date: "09/08/23",
+    date: "2023-08-09",
     supplier: "3486348378",
     invoiceNumber: "3486348378",
     amount: 1000,
@@ -91,7 +109,7 @@ const data = [
   },
   {
     id: 2,
-    date: "10/08/23",
+    date: "2023-08-10",
     supplier: "4527834523",
     invoiceNumber: "4527834523",
     amount: 1500,
@@ -100,7 +118,7 @@ const data = [
   },
   {
     id: 3,
-    date: "11/08/23",
+    date: "2023-08-11",
     supplier: "5728394723",
     invoiceNumber: "5728394723",
     amount: 750,
@@ -109,7 +127,7 @@ const data = [
   },
   {
     id: 4,
-    date: "12/08/23",
+    date: "2023-08-12",
     supplier: "4829304832",
     invoiceNumber: "4829304832",
     amount: 1200,
@@ -118,7 +136,7 @@ const data = [
   },
   {
     id: 5,
-    date: "13/08/23",
+    date: "2023-08-13",
     supplier: "5839205832",
     invoiceNumber: "5839205832",
     amount: 900,

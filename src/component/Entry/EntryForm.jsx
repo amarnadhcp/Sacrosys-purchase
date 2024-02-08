@@ -5,16 +5,25 @@ import NavigationBar from "../Navbar/NavigationBar";
 import Autocomplete from "../AutoComplete/Autocomplete";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
+import * as Yup from "yup";
+import { useFormik } from "formik";
 
 function EntryForm() {
   const [mode, setMode] = useState("dar");
 
   const [autocompleteInput, setAutocompleteInput] = useState("");
-  console.log(autocompleteInput);
   const handleAutocompleteInput = (input) => {
     setAutocompleteInput(input);
   };
 
+  const initialValues = {
+    invoiceNum: "26855285278",
+    date: new Date().toISOString().split("T")[0],
+    amount: "1000",
+    vat: "100",
+    paymentType: "cash",
+  };
+  console.log(initialValues.date);
   // modal opeing state management
   const [isModalOpen, setIsModalOpen] = useState(false);
   const toggleModal = () => {
@@ -23,11 +32,15 @@ function EntryForm() {
   /// cash or credit selection
   const [paymentType, setPayment] = useState(10);
 
-  //form submition function
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("save");
-  };
+  //form submition function and validation
+  const { values, errors, touched, handleBlur, handleSubmit, handleChange } =
+    useFormik({
+      initialValues: initialValues,
+      validationSchema: validationSchema,
+      onSubmit: async (values) => {
+        console.log(values);
+      },
+    });
 
   return (
     <div className="my-0 mx-auto flex flex-col items-end text-xs md:text-base overflow-auto mt-0 ">
@@ -39,7 +52,13 @@ function EntryForm() {
         <div className="flex items-center justify-between mb-4">
           <label className="flex gap-2 w-1/4 text-left">Supplier</label>
           <div className="flex justify-between w-3/4 ">
-            <Autocomplete suggestions={data} width="50" heigh="10" onInputChange={handleAutocompleteInput}/>
+            <Autocomplete
+              suggestions={data}
+              width="50"
+              heigh="10"
+              onInputChange={handleAutocompleteInput}
+              onSelect={(value) => setAutocompleteInput(value)}
+            />
 
             <img
               src={PlusIcon}
@@ -55,13 +74,22 @@ function EntryForm() {
           <label htmlFor="date" className="inline-block w-1/4 text-left ">
             Date
           </label>
-          <input
-            type="date"
-            id="date"
-            name="date"
-            defaultValue={new Date().toISOString().split("T")[0]}
-            className="w-3/4 p-2 cursor-text rounded-lg bg-inputColor border focus:outline-none focus:border-purple-700 cursor: pointer; "
-          />
+          <div className="w-3/4 flex flex-col">
+            <input
+              type="date"
+              id="date"
+              name="date"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.date}
+              className="w-full p-2 cursor-text rounded-lg bg-inputColor border focus:outline-none focus:border-purple-700 cursor: pointer; "
+            />
+            {touched.date && errors.date && (
+              <span className="text-red-500 text-xs mt-0 text-end mr-1">
+                {errors.date}
+              </span>
+            )}
+          </div>
         </div>
 
         <div className="flex items-center mb-4">
@@ -71,39 +99,65 @@ function EntryForm() {
           >
             Invoice number
           </label>
-          <input
-            type="text"
-            id="invoice-number"
-            name="invoice-number"
-            defaultValue="26855285278"
-            className="w-3/4 p-2 rounded-lg bg-inputColor border focus:outline-none focus:border-purple-700 font-inter"
-          />
+          <div className="w-3/4 flex flex-col">
+            <input
+              type="number"
+              name="invoiceNum"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.invoiceNum}
+              className="w-full p-2 rounded-lg bg-inputColor border focus:outline-none focus:border-purple-700 font-inter"
+            />
+            {touched.invoiceNum && errors.invoiceNum && (
+              <span className="text-red-500 text-xs mt-0.5 text-end mr-1  ">
+                {errors.invoiceNum}
+              </span>
+            )}
+          </div>
         </div>
 
         <div className="flex items-center mb-4">
           <label htmlFor="amount" className="inline-block w-1/4 text-left">
             Amount
           </label>
-          <input
-            type="number"
-            id="amount"
-            name="amount"
-            defaultValue="1000"
-            className="w-3/4 p-2 rounded-lg bg-inputColor border focus:outline-none focus:border-purple-700 font-inter"
-          />
+          <div className="w-3/4 flex flex-col">
+            <input
+              type="number"
+              id="amount"
+              name="amount"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.amount}
+              className="w-full p-2 rounded-lg bg-inputColor border focus:outline-none focus:border-purple-700 font-inter"
+            />
+            {touched.amount && errors.amount && (
+              <span className="text-red-500 text-xs mt-0 text-end mr-1">
+                {errors.amount}
+              </span>
+            )}
+          </div>
         </div>
 
         <div className="flex items-center mb-4">
           <label htmlFor="vat" className="inline-block w-1/4 text-left">
             VAT
           </label>
-          <input
-            type="number"
-            id="vat"
-            name="vat"
-            defaultValue="100"
-            className="w-3/4 p-2 rounded-lg bg-inputColor border focus:outline-none focus:border-purple-700 font-inter"
-          />
+          <div className="w-3/4 flex flex-col">
+            <input
+              type="number"
+              id="vat"
+              name="vat"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.vat}
+              className="w-full p-2 rounded-lg bg-inputColor border focus:outline-none focus:border-purple-700 font-inter"
+            />
+            {touched.vat && errors.vat && (
+              <span className="text-red-500 text-xs mt-0 text-end mr-1">
+                {errors.vat}
+              </span>
+            )}
+          </div>
         </div>
 
         <div className="flex items-center">
@@ -189,6 +243,26 @@ function EntryForm() {
 
 export default EntryForm;
 
+//validation schema
+const validationSchema = Yup.object().shape({
+  date: Yup.string()
+    .required("Date is required")
+    .matches(
+      /^(19|20)\d\d-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/,
+      "Invalid date format "
+    ),
+  invoiceNum: Yup.string().required("Invoice Number is required"),
+  amount: Yup.number()
+    .required("Amount is required")
+    .positive("Amount must be a positive number"),
+  vat: Yup.number()
+    .required("VAT is required")
+    .positive("VAT must be a positive number"),
+  cash: Yup.boolean().required("Cash is required"),
+  credit: Yup.boolean().required("Credit is required"),
+});
+
+//date to render
 let data = [
   "Alabama",
   "Alaska",

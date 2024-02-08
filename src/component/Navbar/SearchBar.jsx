@@ -10,7 +10,7 @@ function SearchBar() {
     setAutocompleteInput(input);
   };
   return (
-    <div className="flex flex-wrap overflow-hidden justify-between items-center bg-default my-4 ">
+    <div className="flex flex-wrap  justify-between items-center bg-default my-4">
       <div className="flex">
         <label
           htmlFor="search-input "
