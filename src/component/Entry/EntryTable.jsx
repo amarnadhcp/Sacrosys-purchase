@@ -30,11 +30,12 @@ function EntryTable() {
       <div className="mx-auto px-2 overflow-auto my-4">
         <SearchBar />
         <div className="overflow-x-auto min-w-full">
-          <div className="mb-1 mt-0 ">
+          <div className="mb-3 mt-0 ">
             <RangePicker onChange={handleDateRangeChange} />
           </div>
+          <div className="overflow-y-auto max-h-96">
           <table className="w-full text-xs text-left rtl:text-right text-gray-500 dark:text-gray-400 z-0">
-            <thead className="text-xs text-white font-inter bg-custom-black text-center ">
+            <thead className="sticky top-0 text-xs text-white font-inter bg-custom-black text-center ">
               <tr>
                 <th className="px-2 py-2 md:px-4 md:py-4 border-b border-r border-solid border-white/20">Date</th>
                 <th className="px-2 py-2 md:px-4 md:py-4 border-b border-r border-solid border-white/20">Supplier</th>
@@ -89,6 +90,7 @@ function EntryTable() {
               ))}
             </tbody>
           </table>
+          </div>
         </div>
       </div>
     </>
@@ -139,6 +141,33 @@ const data = [
     date: "2023-08-13",
     supplier: "5839205832",
     invoiceNumber: "5839205832",
+    amount: 900,
+    vat: 90,
+    paymentType: "cash",
+  },
+  {
+    id: 6,
+    date: "2023-08-13",
+    supplier: "5839276832",
+    invoiceNumber: "5839205532",
+    amount: 900,
+    vat: 90,
+    paymentType: "cash",
+  },
+  {
+    id: 7,
+    date: "2023-08-13",
+    supplier: "5834405832",
+    invoiceNumber: "5839275832",
+    amount: 900,
+    vat: 90,
+    paymentType: "cash",
+  },
+  {
+    id: 8,
+    date: "2023-08-13",
+    supplier: "5839205833",
+    invoiceNumber: "5899205832",
     amount: 900,
     vat: 90,
     paymentType: "cash",
