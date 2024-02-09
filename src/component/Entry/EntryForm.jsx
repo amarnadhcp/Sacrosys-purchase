@@ -10,20 +10,19 @@ import { useFormik } from "formik";
 
 function EntryForm() {
   const [mode, setMode] = useState("dar");
-
+   /// autcomplete seggestions
   const [autocompleteInput, setAutocompleteInput] = useState("");
   const handleAutocompleteInput = (input) => {
     setAutocompleteInput(input);
   };
-
+  // formik initialValues
   const initialValues = {
-    invoiceNum: "26855285278",
+    invoiceNum: "",
     date: new Date().toISOString().split("T")[0],
-    amount: "1000",
-    vat: "100",
-    paymentType: "cash",
+    amount: "",
+    vat: "",
+    paymentType: "",
   };
-  console.log(initialValues.date);
   // modal opeing state management
   const [isModalOpen, setIsModalOpen] = useState(false);
   const toggleModal = () => {
@@ -33,14 +32,31 @@ function EntryForm() {
   const [paymentType, setPayment] = useState(10);
 
   //form submition function and validation
-  const { values, errors, touched, handleBlur, handleSubmit, handleChange } =
+  const { values, errors, touched, handleBlur, handleSubmit, handleChange,setFieldValue ,isValid } =
     useFormik({
       initialValues: initialValues,
       validationSchema: validationSchema,
       onSubmit: async (values) => {
-        console.log(values);
+        if (isValid) {
+          console.log(values);
+        }
       },
     });
+
+    //   preview image statte
+    const [imagePreview, setImagePreview] = useState(null);
+
+    // function to  file  change
+    const handleFileChange = (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setImagePreview(reader.result);
+        };
+        reader.readAsDataURL(file);
+      }
+    };
 
   return (
     <div className="my-0 mx-auto flex flex-col items-end text-xs md:text-base overflow-auto mt-0 ">
@@ -101,7 +117,7 @@ function EntryForm() {
           </label>
           <div className="w-3/4 flex flex-col">
             <input
-              type="number"
+              type=""
               name="invoiceNum"
               onChange={handleChange}
               onBlur={handleBlur}
@@ -128,6 +144,7 @@ function EntryForm() {
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.amount}
+              
               className="w-full p-2 rounded-lg bg-inputColor border focus:outline-none focus:border-purple-700 font-inter"
             />
             {touched.amount && errors.amount && (
@@ -163,9 +180,10 @@ function EntryForm() {
         <div className="flex items-center">
           <label className="inline-block w-1/4 text-left">Cash / Credit</label>
           <Select
-            value={paymentType}
-            onChange={(event) => setPayment(event.target.value)}
-            displayEmpty
+            value={values.paymentType}
+            onChange={(event) => {
+              setFieldValue("paymentType", event.target.value);
+            }}
             inputProps={{ "aria-label": "Without label" }}
             sx={{
               width: "77%",
@@ -188,8 +206,9 @@ function EntryForm() {
               },
             }}
           >
+          
             <MenuItem
-              value={10}
+              value="cash"
               sx={{
                 backgroundColor: mode === "dark" ? "#232323" : "#E9E9E9",
                 color: mode === "dark" ? "white" : "black",
@@ -198,10 +217,10 @@ function EntryForm() {
                 },
               }}
             >
-              cash
+              Cash
             </MenuItem>
             <MenuItem
-              value={20}
+              value="credit"
               sx={{
                 backgroundColor: mode === "dark" ? "#232323" : "#E9E9E9",
                 color: mode === "dark" ? "white" : "black",
@@ -210,15 +229,28 @@ function EntryForm() {
                 },
               }}
             >
-              credit
+              Credit
             </MenuItem>
           </Select>
         </div>
+        {touched.paymentType && errors.paymentType && (
+          <span className="text-red-500 text-xs text-end mt-1 ml-2 block">
+            {errors.paymentType}
+          </span>
+        )}
+
+        
+
 
         <div className="flex justify-end items-center my-2">
+        {imagePreview && (
+          <div className="flex justify-start items-center mb-2">
+            <img src={imagePreview} alt="Preview" className="w-16 mb-2 h-auto mr-4" />
+          </div>
+        )}
           <label
             htmlFor="photo-upload"
-            className="text-purple-600 text-right  font-inter underline cursor-pointer text-sm "
+            className="text-purple-600 text-left mr-2 font-inter underline cursor-pointer text-sm"
           >
             Upload Photo
           </label>
@@ -227,8 +259,9 @@ function EntryForm() {
             id="photo-upload"
             name="photo-upload"
             className="hidden"
+            onChange={handleFileChange}
           />
-        </div>
+        </div> 
 
         <button
           type="submit"
@@ -258,8 +291,7 @@ const validationSchema = Yup.object().shape({
   vat: Yup.number()
     .required("VAT is required")
     .positive("VAT must be a positive number"),
-  cash: Yup.boolean().required("Cash is required"),
-  credit: Yup.boolean().required("Credit is required"),
+    paymentType: Yup.string().required("Payment Type is required")
 });
 
 //date to render
