@@ -19,24 +19,24 @@ function SearchBar() {
           Search
         </label>
         <div className="flex flex-wrap">
-          <div className="relative flex items-center mr-4 w-full md:w-auto">
-          <Autocomplete suggestions={data} width="40"   height="10" onInputChange={handleAutocompleteInput} />
+          <div className="relative flex items-center justify-center sm:justify-start  w-full md:w-auto">
+          <Autocomplete suggestions={data} width="40" MinWidth="80"  height="10" onInputChange={handleAutocompleteInput} />
             <img
               src={SearchIcon}
               alt="Search Icon"
-              className="absolute right-2 top-1/2 transform -translate-y-1/2"
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 hidden md:block "
             />
           </div>
           <div className="flex items-center flex-wrap gap-4 p-3 justify-center w-full md:w-auto">
             <Link
               to="/supplier"
-              className="text-purple-600 underline text-sm font-poppins"
+              className="text-purple-600 underline text-xs sm:text-sm font-poppins"
             >
               View Supplier List
             </Link>
             <Link
               to="/return"
-              className="text-purple-600 underline text-sm font-poppins"
+              className="text-purple-600 underline text-xs sm:text-sm font-poppins"
             >
               View Return List
             </Link>

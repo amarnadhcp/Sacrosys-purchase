@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const Autocomplete = ({ suggestions, width, height, onInputChange,onSelect  }) => {
+const Autocomplete = ({ suggestions, width, height,MinWidth, onInputChange,onSelect  }) => {
   const [active, setActive] = useState(0);
   const [filtered, setFiltered] = useState([]);
   const [isShow, setIsShow] = useState(false);
@@ -103,7 +103,7 @@ const Autocomplete = ({ suggestions, width, height, onInputChange,onSelect  }) =
         onKeyDown={onKeyDown}
         value={input}
         placeholder="Search for a supplier"
-        className={`bg-inputColor rounded-lg p-2 w-full sm:w-56 md:w-${
+        className={`bg-inputColor rounded-lg p-2 w-${MinWidth||40} sm:w-56 md:w-${
           width || "50"
         } text-sm mb-1 outline-none sm:h-10 md:h-${height || "10"}`}
       />

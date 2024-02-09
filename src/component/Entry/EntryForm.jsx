@@ -63,7 +63,7 @@ function EntryForm() {
       <NavigationBar />
       <form
         onSubmit={handleSubmit}
-        className="transaction-form w-full text-md md:text-base font-inter"
+        className="transaction-form w-full text-md md:text-base font-inter "
       >
         <div className="flex items-center justify-between mb-4">
           <label className="flex gap-2 w-1/4 text-left">Supplier</label>
@@ -213,7 +213,7 @@ function EntryForm() {
                 backgroundColor: mode === "dark" ? "#232323" : "#E9E9E9",
                 color: mode === "dark" ? "white" : "black",
                 "&:hover": {
-                  backgroundColor: mode === "dark" ? "#121212" : "#CCCCCC",
+                  backgroundColor: mode === "dark" ? "#121212" : "#999999",
                 },
               }}
             >
@@ -225,7 +225,7 @@ function EntryForm() {
                 backgroundColor: mode === "dark" ? "#232323" : "#E9E9E9",
                 color: mode === "dark" ? "white" : "black",
                 "&:hover": {
-                  backgroundColor: mode === "dark" ? "#121212" : "#CCCCCC",
+                  backgroundColor: mode === "dark" ? "#121212" : "#999999",
                 },
               }}
             >
