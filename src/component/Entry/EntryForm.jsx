@@ -70,7 +70,6 @@ function EntryForm() {
           <div className="flex justify-between w-3/4 ">
             <Autocomplete
               suggestions={data}
-              width="50"
               heigh="10"
               onInputChange={handleAutocompleteInput}
               onSelect={(value) => setAutocompleteInput(value)}

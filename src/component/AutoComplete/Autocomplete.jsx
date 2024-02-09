@@ -103,9 +103,8 @@ const Autocomplete = ({ suggestions, width, height,MinWidth, onInputChange,onSel
         onKeyDown={onKeyDown}
         value={input}
         placeholder="Search for a supplier"
-        className={`bg-inputColor rounded-lg p-2 w-${MinWidth||40} sm:w-56 md:w-${
-          width || "50"
-        } text-sm mb-1 outline-none sm:h-10 md:h-${height || "10"}`}
+        className={`bg-inputColor rounded-lg p-2  w-${MinWidth||40}  md:w-${width||56}
+        text-sm mb-1 outline-none h-9 md:h-${height || "10"}`}
       />
       {renderAutocomplete()}
     </div>
@@ -113,3 +112,8 @@ const Autocomplete = ({ suggestions, width, height,MinWidth, onInputChange,onSel
 };
 
 export default Autocomplete;
+
+
+// w-80  md:w-64 seacrch bar auto
+// w-40  md:w-56 form bar auto
+
