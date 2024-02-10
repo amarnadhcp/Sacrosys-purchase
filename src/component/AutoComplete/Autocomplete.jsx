@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const Autocomplete = ({ suggestions, width, height,MinWidth, onInputChange,onSelect  }) => {
@@ -6,6 +6,7 @@ const Autocomplete = ({ suggestions, width, height,MinWidth, onInputChange,onSel
   const [filtered, setFiltered] = useState([]);
   const [isShow, setIsShow] = useState(false);
   const [input, setInput] = useState("");
+  const autocompleteRef = useRef(null);
 
   useEffect(() => {
     setFiltered(
@@ -15,6 +16,19 @@ const Autocomplete = ({ suggestions, width, height,MinWidth, onInputChange,onSel
       )
     );
   }, [input, suggestions]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (autocompleteRef.current && !autocompleteRef.current.contains(event.target)) {
+        setIsShow(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const onChange = (e) => {
     const inputValue = e.currentTarget.value;
@@ -102,6 +116,7 @@ const Autocomplete = ({ suggestions, width, height,MinWidth, onInputChange,onSel
         onChange={onChange}
         onKeyDown={onKeyDown}
         value={input}
+        ref={autocompleteRef}
         placeholder="Search for a supplier"
         className={`bg-inputColor rounded-lg p-2  w-${MinWidth||40}  md:w-${width||56}
         text-sm mb-1 outline-none h-9 md:h-${height || "10"}`}
