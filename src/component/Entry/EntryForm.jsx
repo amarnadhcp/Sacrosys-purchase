@@ -10,7 +10,7 @@ import { useFormik } from "formik";
 
 function EntryForm() {
   const [mode, setMode] = useState("dar");
-   /// autcomplete seggestions
+  /// autcomplete seggestions
   const [autocompleteInput, setAutocompleteInput] = useState("");
   const handleAutocompleteInput = (input) => {
     setAutocompleteInput(input);
@@ -32,31 +32,39 @@ function EntryForm() {
   const [paymentType, setPayment] = useState(10);
 
   //form submition function and validation
-  const { values, errors, touched, handleBlur, handleSubmit, handleChange,setFieldValue ,isValid } =
-    useFormik({
-      initialValues: initialValues,
-      validationSchema: validationSchema,
-      onSubmit: async (values) => {
-        if (isValid) {
-          console.log(values);
-        }
-      },
-    });
-
-    //   preview image statte
-    const [imagePreview, setImagePreview] = useState(null);
-
-    // function to  file  change
-    const handleFileChange = (e) => {
-      const file = e.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          setImagePreview(reader.result);
-        };
-        reader.readAsDataURL(file);
+  const {
+    values,
+    errors,
+    touched,
+    handleBlur,
+    handleSubmit,
+    handleChange,
+    setFieldValue,
+    isValid,
+  } = useFormik({
+    initialValues: initialValues,
+    validationSchema: validationSchema,
+    onSubmit: async (values) => {
+      if (isValid) {
+        console.log(values);
       }
-    };
+    },
+  });
+
+  //   preview image statte
+  const [imagePreview, setImagePreview] = useState(null);
+
+  // function to  file  change
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   return (
     <div className="my-0 mx-auto flex flex-col items-end text-xs md:text-base overflow-auto mt-0 ">
@@ -143,7 +151,6 @@ function EntryForm() {
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.amount}
-              
               className="w-full p-2 rounded-lg bg-inputColor border focus:outline-none focus:border-purple-700 font-inter"
             />
             {touched.amount && errors.amount && (
@@ -205,7 +212,6 @@ function EntryForm() {
               },
             }}
           >
-          
             <MenuItem
               value="cash"
               sx={{
@@ -238,15 +244,33 @@ function EntryForm() {
           </span>
         )}
 
-        
-
-
-        <div className="flex justify-end items-center my-2">
-        {imagePreview && (
-          <div className="flex justify-start items-center mb-2">
-            <img src={imagePreview} alt="Preview" className="w-16 mb-2 h-auto mr-4" />
-          </div>
-        )}
+        <div className="flex justify-end items-center my-2 relative">
+          {imagePreview && (
+            <div className="flex justify-start items-center mb-2 relative">
+              <img
+                src={imagePreview}
+                alt="Preview"
+                className="w-16 mb-2 h-auto mr-4"
+              />
+              <button
+                className="absolute top-0 right-2 p-1 bg-red-500 text-white rounded-full hover:bg-red-600 focus:outline-none transition ease-in duration-200"
+                onClick={() => setImagePreview(null)}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-2 w-2"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 11.414l4.95 4.95a1 1 0 001.414-1.414L11.414 10l4.95-4.95a1 1 0 00-1.414-1.414L10 8.586 5.05 3.636a1 1 0 00-1.414 1.414L8.586 10l-4.95 4.95a1 1 0 001.414 1.414L10 11.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </button>
+            </div>
+          )}
           <label
             htmlFor="photo-upload"
             className="text-purple-600 text-left mr-2 font-inter underline cursor-pointer text-sm"
@@ -258,9 +282,10 @@ function EntryForm() {
             id="photo-upload"
             name="photo-upload"
             className="hidden"
+            accept="image/*"  
             onChange={handleFileChange}
           />
-        </div> 
+        </div>
 
         <button
           type="submit"
@@ -290,7 +315,7 @@ const validationSchema = Yup.object().shape({
   vat: Yup.number()
     .required("VAT is required")
     .positive("VAT must be a positive number"),
-    paymentType: Yup.string().required("Payment Type is required")
+  paymentType: Yup.string().required("Payment Type is required"),
 });
 
 //date to render
