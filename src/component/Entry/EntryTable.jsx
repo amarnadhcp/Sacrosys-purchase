@@ -85,10 +85,10 @@ function EntryTable() {
                   </td>
                   <td className="px-4 py-4">
                     <button className="bg-pink-500 text-white border-md rounded-lg p-1 px-4 cursor-pointer"
-                    onClick={()=>setIsModalOpen(true)}>
+                    onClick={()=>setIsModalOpen(item)}>
                       Return
                     </button>
-                    {isModalOpen && <ReturnModal closeModal={() => setIsModalOpen(false)} />}
+                    {isModalOpen && <ReturnModal closeModal={() => setIsModalOpen(false)} rowData={isModalOpen} />}
                   </td>
                 </tr>
               ))}
