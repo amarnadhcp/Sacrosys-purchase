@@ -37,7 +37,7 @@ function EntryTable() {
           </div>
           <div className="overflow-y-auto max-h-96">
           <table className="w-full text-xs text-left rtl:text-right text-gray-500 dark:text-gray-400 z-0 border-collapse">
-            <thead className="sticky z-30 top-0 text-xs text-white font-inter bg-custom-black text-center ">
+            <thead className="sticky  top-0 text-xs text-white font-inter bg-custom-black text-center ">
               <tr>
                 <th className="px-2 py-2 md:px-4 md:py-4 border-b-2 border-r-2 border-solid border-[#3A3A3A]">Date</th>
                 <th className="px-2 py-2 md:px-4 md:py-4 border-b-2 border-r-2 border-solid border-[#3A3A3A]">Supplier</th>

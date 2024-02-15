@@ -183,7 +183,7 @@ function EntryForm() {
           </div>
         </div>
 
-        <div className="flex items-center">
+        <div className="flex items-center" style={{ zIndex: "0" }}>
           <label className="inline-block w-1/4 text-left">Cash / Credit</label>
           <Select
             value={values.paymentType}
