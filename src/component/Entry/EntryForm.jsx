@@ -90,7 +90,7 @@ function EntryForm() {
               onClick={toggleModal}
             />
           </div>
-          {isModalOpen && <SupplierCreation />}
+          {isModalOpen && <SupplierCreation closeModal={() => setIsModalOpen(false)} />}
         </div>
 
         <div className="flex items-center mb-4">
