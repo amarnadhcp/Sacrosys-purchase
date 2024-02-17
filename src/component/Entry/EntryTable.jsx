@@ -4,11 +4,12 @@ import EmptyIcon from "../../assests/images/Empty.svg";
 import screenshotIcon from "../../assests/images/screenShot.png";
 import SearchBar from "../Navbar/SearchBar";
 import ReturnModal from "./ReturnModal";
-import { DatePicker, Space } from 'antd';
+import { DatePicker } from 'antd';
 const { RangePicker } = DatePicker;
 
 function EntryTable() {
   const [isModalOpen, setIsModalOpen] = useState(false);//modale opening
+  const [modalData, setModalData] = useState(null);
   const [selectedDateRange, setSelectedDateRange] = useState([]);
   
   const handleDateRangeChange = (dates) => {
@@ -85,10 +86,11 @@ function EntryTable() {
                   </td>
                   <td className="px-4 py-4">
                     <button className="bg-pink-500 text-white border-md rounded-lg p-1 px-4 cursor-pointer"
-                    onClick={()=>setIsModalOpen(item)}>
+                    onClick={()=>{setIsModalOpen(true);
+                     setModalData(item)}}>
                       Return
                     </button>
-                    {isModalOpen && <ReturnModal closeModal={() => setIsModalOpen(false)} rowData={isModalOpen} />}
+                    {isModalOpen && modalData === item && <ReturnModal closeModal={() => setIsModalOpen(false)} rowData={modalData} />}
                   </td>
                 </tr>
               ))}
