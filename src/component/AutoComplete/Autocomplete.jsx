@@ -118,7 +118,7 @@ const Autocomplete = ({ suggestions, width, height,MinWidth, onInputChange,onSel
         value={input}
         ref={autocompleteRef}
         placeholder="Search for a supplier"
-        className={`bg-inputColor rounded-lg p-2  w-${MinWidth||40}  md:w-${width||56}
+        className={`bg-inputColor rounded-lg p-2  w-${MinWidth||40}  md:w-${width||52}
         text-sm mb-1 outline-none h-9 md:h-${height || "10"}`}
       />
       {renderAutocomplete()}
