@@ -33,7 +33,7 @@ function EntryTable() {
       <div className="mx-auto px-2 overflow-auto my-4">
         <SearchBar />
         <div className="overflow-x-auto min-w-full">
-          <div className="mb-3 mt-0 ">
+          <div className="mb-3 mt-0 mx-1 ">
             <RangePicker onChange={handleDateRangeChange} />
           </div>
           <div className="overflow-y-auto max-h-96">

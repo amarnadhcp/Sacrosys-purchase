@@ -10,11 +10,11 @@ function SearchBar() {
     console.log(autocompleteInput);
   };
   return (
-    <div className="flex flex-wrap  justify-between items-center bg-default my-4">
+    <div className="flex flex-wrap  justify-between items-center bg-default mt-4 mb-2">
       <div className="flex">
         <label
           htmlFor="search-input "
-          className="mx-4 text-gray-800 text-sm mt-3 font-inter hidden md:block"
+          className="mx-1 text-gray-800 text-sm mt-3 font-inter hidden md:block"
         >
           Search
         </label>
