@@ -71,7 +71,7 @@ function EntryForm() {
       <NavigationBar />
       <form
         onSubmit={handleSubmit}
-        className="transaction-form w-full text-xs md:text-sm font-inter "
+        className="transaction-form w-full text-md md:text-base font-inter "
       >
         <div className="flex items-center  mb-4">
           <label className=" w-1/4 text-right pr-4">Supplier</label>
