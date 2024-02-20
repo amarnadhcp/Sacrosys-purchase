@@ -13,13 +13,9 @@ function EntryTable() {
   const [selectedDateRange, setSelectedDateRange] = useState([]);
   
   const handleDateRangeChange = (dates) => {
-    if (!dates) {
-      setSelectedDateRange([]);
-      return;
-    }
-    setSelectedDateRange(dates);
+    !dates ? setSelectedDateRange([]) : setSelectedDateRange(dates);
   };
-
+  
   // Filter data based on selected date range
   const filteredData = selectedDateRange.length === 0 ?
     data :
@@ -40,22 +36,22 @@ function EntryTable() {
           <table className="w-full text-xs text-left rtl:text-right text-gray-500 dark:text-gray-400 z-0 border-collapse">
             <thead className="sticky  top-0 text-xs text-white font-inter bg-custom-black text-center ">
               <tr>
-                <th className="px-2 py-2 md:px-4 md:py-4 border-b-2 border-r-2 border-solid border-[#3A3A3A]">Date</th>
-                <th className="px-2 py-2 md:px-4 md:py-4 border-b-2 border-r-2 border-solid border-[#3A3A3A]">Supplier</th>
-                <th className="px-2 py-2 md:px-4 md:py-4 border-b-2 border-r-2 border-solid border-[#3A3A3A]">Invoice Number</th>
-                <th className="px-2 py-2 md:px-4 md:py-4 border-b-2 border-r-2 border-solid border-[#3A3A3A]">Amount</th>
-                <th className="px-2 py-2 md:px-4 md:py-4 border-b-2 border-r-2 border-solid border-[#3A3A3A]">VAT</th>
-                <th className="px-2 py-2 md:px-4 md:py-4 border-b-2 border-r-2 border-solid border-[#3A3A3A]">Cash/Credit</th>
-                <th className="px-2 py-2 md:px-4 md:py-4 border-b-2 border-r-2 border-solid border-[#3A3A3A]">Image</th>
-                <th className="px-2 py-2 md:px-4 md:py-4 border-b-2 border-r-2 border-solid border-[#3A3A3A]">Action</th>
-                <th className="px-2 py-2 md:px-4 md:py-4 border-b-2 border-r-2 border-solid border-[#3A3A3A]">button</th>
+                <th className="px-2 py-2 md:px-4 md:py-4 ">Date</th>
+                <th className="px-2 py-2 md:px-4 md:py-4 ">Vendor</th>
+                <th className="px-2 py-2 md:px-4 md:py-4 ">Invoice Number</th>
+                <th className="px-2 py-2 md:px-4 md:py-4 ">Amount</th>
+                <th className="px-2 py-2 md:px-4 md:py-4 ">VAT</th>
+                <th className="px-2 py-2 md:px-4 md:py-4 ">Payment mode</th>
+                <th className="px-2 py-2 md:px-4 md:py-4 ">Image</th>
+                <th className="px-2 py-2 md:px-4 md:py-4 ">Action</th>
+                <th className="px-2 py-2 md:px-4 md:py-4 ">button</th>
               </tr>
             </thead>
             <tbody>
               {filteredData.map((item) => (
                 <tr
                   key={item.id}
-                  className="even:bg-default odd:bg-oddcolor text-center font-inter"
+                  className="even:bg-default odd:bg-[#E9E9E9]  text-center font-inter"
                 >
                   <td className="px-4 py-4 whitespace-nowrap text-black">
                     {item.date}
