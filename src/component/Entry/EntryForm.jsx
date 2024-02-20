@@ -67,11 +67,11 @@ function EntryForm() {
   };
 
   return (
-    <div className="my-0 mx-auto flex flex-col items-end text-xs md:text-base  mt-0 ">
+    <div className="my-0 mx-auto flex flex-col items-end text-xs md:text-base  mt-2 ">
       <NavigationBar />
       <form
         onSubmit={handleSubmit}
-        className="transaction-form w-full text-md md:text-base font-inter "
+        className="transaction-form w-full text-md md:text-base font-inter mt-6 "
       >
         <div className="flex items-center  mb-4">
           <label className=" w-1/4 text-right pr-4">Supplier</label>

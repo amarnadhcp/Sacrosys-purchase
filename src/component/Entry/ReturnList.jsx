@@ -1,80 +1,196 @@
-import React from 'react'
-import SearchBar from '../Navbar/SearchBar';
-import foodIcon from "../../assests/images/food.svg";  
-
+import React, { useState } from "react";
+import SearchBar from "../Navbar/SearchBar";
+import foodIcon from "../../assests/images/food.svg";
+import NavigationBar from "../Navbar/NavigationBar";
+import { DatePicker } from 'antd';
+const { RangePicker } = DatePicker;
 
 function ReturnList() {
+  const [selectedDateRange, setSelectedDateRange] = useState([]);
+  
+  const handleDateRangeChange = (dates) => {
+    !dates ? setSelectedDateRange([]) : setSelectedDateRange(dates);
+  };
+
+    // Filter data based on selected date range
+    const filteredData = selectedDateRange.length === 0 ?
+    data :
+    data.filter(item => {
+      const itemDate = new Date(item.date);
+      return itemDate >= selectedDateRange[0] && itemDate <= selectedDateRange[1];
+    });
+
   return (
-    <div className="mx-auto  px-2 overflow-auto my-4 ">
-    <SearchBar/>
-  <div className="overflow-x-auto min-w-full">
-    <table className="w-full text-xs text-left rtl:text-right text-gray-500 dark:text-gray-400">
-      <thead className="text-xs text-stone-50 font-light  bg-gray-50 dark:bg-gray-900">
-        <tr>
-          <th className="bg-neutral-900 text-white px-4 py-3 text-center border-b border-r border-solid border-white/20">Date</th>
-          <th className="bg-neutral-900 text-white px-4 py-3 text-center border-b border-r border-solid border-white/20">Supplier</th>
-          <th className="bg-neutral-900 text-white px-4 py-3 text-center border-b border-r border-solid border-white/20">Invoice number</th>
-          <th className="bg-neutral-900 text-white px-4 py-3 text-center border-b border-r border-solid border-white/20">Return Amount</th>
-          <th className="bg-neutral-900 text-white px-4 py-3 text-center border-b border-r border-solid border-white/20">VAT</th>
-          <th className="bg-neutral-900 text-white px-4 py-3 text-center border-b border-r border-solid border-white/20">Remarks</th>
-          <th className="bg-neutral-900 text-white px-4 py-3 text-center border-b border-r border-solid border-white/20">Photo</th>
-         
-        </tr>
-      </thead>
-      <tbody>
-        {tableData.map((item) => (
-          <tr
-            key={item.id}
-            className="even:bg-gray-50 odd:bg-white dark:even:bg-gray-800 dark:odd:bg-gray-700  dark:border-gray-700"
-          >
-          
-            <td className="px-4 py-2 text-center">{item.date}</td>
-            <td className="px-4 py-2 text-center">{item.supplier}</td>
-            <td className="px-4 py-2 text-center">{item.invoiceNumber}</td>
-            <td className="px-4 py-2 text-center">{item.returnAmount}</td>
-            <td className="px-4 py-2 text-center">{item.vat}</td>
-            <td className="px-4 py-2 text-center">{item.remarks}</td>   
-            <td className='px-4 py-2 text-center'> <img className='h-11 w-22' src={foodIcon} alt="food icon" /> </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-</div>
-  )
+    <div className="mx-auto  px-2 overflow-auto my-0 ">
+      <div className="flex flex-col md:flex-row-reverse justify-between items-center bg-default mb-0">
+        <NavigationBar />
+        <SearchBar />
+      </div>
+      <div className="overflow-x-auto min-w-full">
+          <div className="mb-3 mt-0 mx-1 ">
+            <RangePicker onChange={handleDateRangeChange} />
+          </div>
+      <div className="overflow-y-auto h-[480px]">
+        <table className="w-full text-xs text-left rtl:text-right text-gray-500 dark:text-gray-400 z-0 border-collapse">
+          <thead className="sticky  top-0 text-xs text-white font-inter bg-custom-black text-center z-10">
+            <tr>
+              <th className="px-2 py-2 md:px-4 md:py-4">Date</th>
+              <th className="px-2 py-2 md:px-4 md:py-4">Vendor</th>
+              <th className="px-2 py-2 md:px-4 md:py-4">Invoice number</th>
+              <th className="px-2 py-2 md:px-4 md:py-4">Return Amount</th>
+              <th className="px-2 py-2 md:px-4 md:py-4">VAT</th>
+              <th className="px-2 py-2 md:px-4 md:py-4">Remarks</th>
+              <th className="px-2 py-2 md:px-4 md:py-4">Photo</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredData.map((item) => (
+              <tr
+                key={item.id}
+                className="even:bg-default odd:bg-[#E9E9E9]  text-center font-inter"
+              >
+                <td className="px-4 py-2 text-black">{item.date}</td>
+                <td className="px-4 py-2 text-black">{item.supplier}</td>
+                <td className="px-4 py-2 text-black">{item.invoiceNumber}</td>
+                <td className="px-4 py-2 text-black">{item.returnAmount}</td>
+                <td className="px-4 py-2 text-black">{item.vat}</td>
+                <td className="px-4 py-2 text-black">{item.remarks}</td>
+                <td className="px-4 py-2 text-black flex justify-center items-center">
+                <img
+                className="h-8 w-16 object-contain"
+                src={foodIcon}
+                alt="food icon"
+                 />
+                 </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    </div>
+  );
 }
 
-export default ReturnList
+export default ReturnList;
 
-
-
-
-
-
-
-
-
-
-
-const tableData = [
-    {
-      id: 1,
-      date: "09/08/23",
-      supplier: "343434234",
-      invoiceNumber: "3432343342",
-      returnAmount: "1000.000",
-      vat: "100.000",
-      remarks: "fhsdlcs;lckdklkjlkljkljljjdf;of fj efjoejwf ioejwfoef ij ewfooe jjofjio feojiof ofejojefj   ",
-      active: true
-    },
-    {
-      id: 2,
-      date: "09/08/23",
-      supplier: "342323442",
-      invoiceNumber: "3423234424",
-      returnAmount: "1000.000",
-      vat: "100.000",
-      remarks: "Main kitchen",
-    }
-  ];
-  
+const data = [
+  {
+    id: 1,
+    date: "02/01/24",
+    supplier: "343434234",
+    invoiceNumber: "3432343342",
+    returnAmount: "1000.000",
+    vat: "100.000",
+    remarks: "fhsdlcs;lckdklkjlkljkljljjdf  ",
+    active: true,
+  },
+  {
+    id: 2,
+    date: "02/01/24",
+    supplier: "342323442",
+    invoiceNumber: "3423234424",
+    returnAmount: "1000.000",
+    vat: "100.000",
+    remarks: "Main kitchen",
+  },
+  {
+    id: 2,
+    date:"02/01/24",
+    supplier: "342323442",
+    invoiceNumber: "3423234424",
+    returnAmount: "1000.000",
+    vat: "100.000",
+    remarks: "Main kitchen",
+  },
+  {
+    id: 2,
+    date: "02/01/24",
+    supplier: "342323442",
+    invoiceNumber: "3423234424",
+    returnAmount: "1000.000",
+    vat: "100.000",
+    remarks: "Main kitchen",
+  },
+  {
+    id: 2,
+    date: "02/01/24",
+    supplier: "342323442",
+    invoiceNumber: "3423234424",
+    returnAmount: "1000.000",
+    vat: "100.000",
+    remarks: "Main kitchen",
+  },
+  {
+    id: 2,
+    date: "10/01/24",
+    supplier: "342323442",
+    invoiceNumber: "3423234424",
+    returnAmount: "1000.000",
+    vat: "100.000",
+    remarks: "Main kitchen",
+  },
+  {
+    id: 2,
+    date: "12/01/24",
+    supplier: "342323442",
+    invoiceNumber: "3423234424",
+    returnAmount: "1000.000",
+    vat: "100.000",
+    remarks: "Main kitchen",
+  },
+  {
+    id: 2,
+    date: "01/01/24",
+    supplier: "342323442",
+    invoiceNumber: "3423234424",
+    returnAmount: "1000.000",
+    vat: "100.000",
+    remarks: "Main kitchen",
+  },
+  {
+    id: 2,
+    date: "02/01/24",
+    supplier: "342323442",
+    invoiceNumber: "3423234424",
+    returnAmount: "1000.000",
+    vat: "100.000",
+    remarks: "Main kitchen",
+  },
+  {
+    id: 2,
+    date: "04/01/24",
+    supplier: "342323442",
+    invoiceNumber: "3423234424",
+    returnAmount: "1000.000",
+    vat: "100.000",
+    remarks: "Main kitchen",
+  },
+  {
+    id: 2,
+    date: "06/01/24",
+    supplier: "342323442",
+    invoiceNumber: "3423234424",
+    returnAmount: "1000.000",
+    vat: "100.000",
+    remarks: "Main kitchen",
+  },
+  {
+    id: 2,
+    date: "09/01/24",
+    supplier: "342323442",
+    invoiceNumber: "3423234424",
+    returnAmount: "1000.000",
+    vat: "100.000",
+    remarks: "Main kitchen",
+  },
+  {
+    id: 2,
+    date: "08/01/24",
+    supplier: "342323442",
+    invoiceNumber: "3423234424",
+    returnAmount: "1000.000",
+    vat: "100.000",
+    remarks: "Main kitchen",
+  },
+];

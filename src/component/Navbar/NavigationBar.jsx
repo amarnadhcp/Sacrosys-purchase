@@ -6,7 +6,7 @@ function NavigationBar({ showEntry }) {
   const outstandingButtonClass = showEntry ? "bg-purple-600 text-white":"text-purple-700";
 
   return (
-    <div className="flex justify-end items-center gap-2.5 my-7 text-sm">
+    <div className="flex justify-end items-center gap-2.5 my-7 text-sm mb-3 mt-4">
       <Link to="/purchase" className={`px-2.5 py-2 rounded-lg ${entryButtonClass}`}>
         Entry
       </Link>
