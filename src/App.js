@@ -3,6 +3,7 @@ import Purchase from "../src/pages/purchaseEntry/PurchaseEntry.jsx"
 import Layout from "./pages/Layout.jsx";
 import SupplierList from "./pages/purchaseEntry/SupplierList.jsx";
 import ReturnList from "./component/Entry/ReturnList.jsx";
+import OutstandinTable from "./component/Outstanding/OutstandinTable.jsx";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Route path="/purchase" element={<Purchase />} />
       <Route path="/supplier" element={<SupplierList />} />
       <Route path="/return" element={<ReturnList />} />
+      <Route path="/outstanding" element={<OutstandinTable />} />
       </Route>
       </Routes>
     </BrowserRouter>

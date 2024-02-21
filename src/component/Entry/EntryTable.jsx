@@ -32,7 +32,7 @@ function EntryTable() {
           <div className="mb-3 mt-0 mx-1 ">
             <RangePicker onChange={handleDateRangeChange} />
           </div>
-          <div className="overflow-y-auto max-h-96">
+          <div className="overflow-y-auto h-[435px]">
           <table className="w-full text-xs text-left rtl:text-right text-gray-500 dark:text-gray-400 z-0 border-collapse">
             <thead className="sticky  top-0 text-xs text-white font-inter bg-custom-black text-center ">
               <tr>
