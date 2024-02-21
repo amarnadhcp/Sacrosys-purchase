@@ -17,12 +17,13 @@ function ReturnList() {
     data :
     data.filter(item => {
       const itemDate = new Date(item.date);
+      console.log(itemDate);
       return itemDate >= selectedDateRange[0] && itemDate <= selectedDateRange[1];
     });
 
   return (
     <div className="mx-auto  px-2 overflow-auto my-0 ">
-      <div className="flex flex-col md:flex-row-reverse justify-between items-center bg-default mb-0">
+      <div className="flex flex-col md:flex-row-reverse justify-between items-center bg-default mb-0 mt-1">
         <NavigationBar />
         <SearchBar />
       </div>
@@ -77,7 +78,7 @@ export default ReturnList;
 const data = [
   {
     id: 1,
-    date: "02/01/24",
+    date: "02/01/29",
     supplier: "343434234",
     invoiceNumber: "3432343342",
     returnAmount: "1000.000",

@@ -1,7 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import SearchBar from "../../component/Navbar/SearchBar";
 import NavigationBar from "../../component/Navbar/NavigationBar";
+import { DatePicker } from 'antd';
+const { RangePicker } = DatePicker;
+
 function SupplierList() {
+
+  const [selectedDateRange, setSelectedDateRange] = useState([]);
+  
+  const handleDateRangeChange = (dates) => {
+    !dates ? setSelectedDateRange([]) : setSelectedDateRange(dates);
+  };
+
+    // Filter data based on selected date range
+    const filteredData = selectedDateRange.length === 0 ?
+    data :
+    data.filter(item => {
+      const itemDate = new Date(item.date);
+      console.log(itemDate);
+      return itemDate >= selectedDateRange[0] && itemDate <= selectedDateRange[1];
+    });
 
   return (
     <div className="mx-auto px-2 overflow-auto my-1 ">
@@ -9,6 +27,10 @@ function SupplierList() {
         <NavigationBar  />
         <SearchBar  />
       </div>
+      <div className="overflow-x-auto min-w-full">
+          <div className="mb-3 mt-0 mx-1 ">
+            <RangePicker onChange={handleDateRangeChange} />
+          </div>
     <div className="overflow-y-auto h-[480px]">
       <table className="w-full text-xs text-left rtl:text-right text-gray-500 dark:text-gray-400 z-0 border-collapse">
         <thead className="sticky  top-0 text-xs text-white font-inter bg-custom-black text-center z-10">
@@ -26,7 +48,7 @@ function SupplierList() {
           </tr>
         </thead>
         <tbody>
-          {tableData.map((item) => (
+          {filteredData.map((item) => (
             <tr
               key={item.id}
               className="even:bg-default odd:bg-[#E9E9E9]  text-center font-inter"
@@ -60,6 +82,7 @@ function SupplierList() {
       </table>
     </div>
   </div>
+  </div>
   )
 }
 
@@ -70,7 +93,7 @@ export default SupplierList
 
 
 
-const tableData = [
+const data = [
   {
     id: 1,
     code: "26",
