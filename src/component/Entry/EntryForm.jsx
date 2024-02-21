@@ -67,14 +67,14 @@ function EntryForm() {
   };
 
   return (
-    <div className="my-0 mx-auto flex flex-col items-end text-xs md:text-base overflow-auto mt-0 ">
+    <div className="my-0 mx-auto flex flex-col items-end text-xs md:text-base  mt-2 ">
       <NavigationBar />
       <form
         onSubmit={handleSubmit}
-        className="transaction-form w-full text-md md:text-base font-inter "
+        className="transaction-form w-full text-md md:text-base font-inter mt-6 "
       >
-        <div className="flex items-center justify-between mb-4">
-          <label className="flex gap-2 w-1/4 text-left">Supplier</label>
+        <div className="flex items-center  mb-4">
+          <label className=" w-1/4 text-right pr-4">Supplier</label>
           <div className="flex justify-between w-3/4 ">
             <Autocomplete
               suggestions={data}
@@ -94,7 +94,7 @@ function EntryForm() {
         </div>
 
         <div className="flex items-center mb-4">
-          <label htmlFor="date" className="inline-block w-1/4 text-left ">
+          <label htmlFor="date" className="inline-block w-1/4 text-right pr-4 ">
             Date
           </label>
           <div className="w-3/4 flex flex-col">
@@ -108,7 +108,7 @@ function EntryForm() {
               className="w-full p-2 cursor-text rounded-lg bg-inputColor border focus:outline-none focus:border-purple-700 cursor: pointer; "
             />
             {touched.date && errors.date && (
-              <span className="text-red-500 text-xs mt-0 text-end mr-1">
+              <span className="text-red-500 text-[10px] mt-0 text-end mr-1">
                 {errors.date}
               </span>
             )}
@@ -118,7 +118,7 @@ function EntryForm() {
         <div className="flex items-center mb-4">
           <label
             htmlFor="invoice-number"
-            className="inline-block w-1/4 text-left"
+            className="inline-block w-1/4 text-right pr-4 "
           >
             Invoice number
           </label>
@@ -132,7 +132,7 @@ function EntryForm() {
               className="w-full p-2 rounded-lg bg-inputColor border focus:outline-none focus:border-purple-700 font-inter"
             />
             {touched.invoiceNum && errors.invoiceNum && (
-              <span className="text-red-500 text-xs mt-0.5 text-end mr-1  ">
+              <span className="text-red-500 text-[10px] mt-0.5 text-end mr-1  ">
                 {errors.invoiceNum}
               </span>
             )}
@@ -140,7 +140,7 @@ function EntryForm() {
         </div>
 
         <div className="flex items-center mb-4">
-          <label htmlFor="amount" className="inline-block w-1/4 text-left">
+          <label htmlFor="amount" className="inline-block w-1/4 text-right pr-4">
             Amount
           </label>
           <div className="w-3/4 flex flex-col">
@@ -154,7 +154,7 @@ function EntryForm() {
               className="w-full p-2 rounded-lg bg-inputColor border focus:outline-none focus:border-purple-700 font-inter"
             />
             {touched.amount && errors.amount && (
-              <span className="text-red-500 text-xs mt-0 text-end mr-1">
+              <span className="text-red-500 text-[10px] mt-0 text-end mr-1">
                 {errors.amount}
               </span>
             )}
@@ -162,7 +162,7 @@ function EntryForm() {
         </div>
 
         <div className="flex items-center mb-4">
-          <label htmlFor="vat" className="inline-block w-1/4 text-left">
+          <label htmlFor="vat" className="inline-block w-1/4 text-right pr-4">
             VAT
           </label>
           <div className="w-3/4 flex flex-col">
@@ -176,7 +176,7 @@ function EntryForm() {
               className="w-full p-2 rounded-lg bg-inputColor border focus:outline-none focus:border-purple-700 font-inter"
             />
             {touched.vat && errors.vat && (
-              <span className="text-red-500 text-xs mt-0 text-end mr-1">
+              <span className="text-red-500 text-[10px] mt-0 text-end mr-1">
                 {errors.vat}
               </span>
             )}
@@ -184,7 +184,7 @@ function EntryForm() {
         </div>
 
         <div className="flex items-center" style={{ zIndex: "0" }}>
-          <label className="inline-block w-1/4 text-left">Cash / Credit</label>
+          <label className="inline-block w-1/4 text-right pr-4">Payment mode</label>
           <Select
             value={values.paymentType}
             onChange={(event) => {
@@ -236,10 +236,22 @@ function EntryForm() {
             >
               Credit
             </MenuItem>
+            <MenuItem
+              value="upi"
+              sx={{
+                backgroundColor: mode === "dark" ? "#232323" : "#E9E9E9",
+                color: mode === "dark" ? "white" : "black",
+                "&:hover": {
+                  backgroundColor: mode === "dark" ? "#121212" : "#999999",
+                },
+              }}
+            >
+              UPI
+            </MenuItem>
           </Select>
         </div>
         {touched.paymentType && errors.paymentType && (
-          <span className="text-red-500 text-xs text-end mt-1 ml-2 block">
+          <span className="text-red-500 text-[10px] text-end mt-1 ml-2 block">
             {errors.paymentType}
           </span>
         )}

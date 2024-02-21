@@ -46,17 +46,16 @@ export const Suppliervalidation = Yup.object().shape({
     .required("Account Number is required")
     .matches(/^\d+$/, "Invalid Account Number"),
   upi: Yup.string().required("UPI ID is required"),
-  iban: Yup.date()
-    .typeError("you must enter a valid date")
-    .max(new Date(), "the date cannot be in the future")
-    .nullable(),
+  iban: Yup.number()
+  .typeError("IBAN must be a number")
+  .required("IBAN is required"),
   openingBalance: Yup.number()
-    .positive("Must be positive")
-    .integer("Must be an integer"),
-  balanceType: Yup.mixed().oneOf(
-    ["Credit", "Debit"],
-    "Must select either Credit or Debit"
-  ),
+  .positive("Must be positive")
+  .integer("Must be an integer")
+  .required("Opening balance is required"),
+  balanceType: Yup.mixed()
+  .oneOf(["Credit", "Debit"], "Must select either Credit or Debit")
+  .nullable(),
   creditedDate: Yup.string() // added this line
   .required("Credited Date is required")
   .matches(

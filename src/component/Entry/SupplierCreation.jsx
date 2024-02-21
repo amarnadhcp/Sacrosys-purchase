@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { motion } from "framer-motion";
 import { useFormik } from "formik";
 import { Suppliervalidation } from "../../Validation/Yup";
 
@@ -36,8 +37,8 @@ function SupplierCreation({ closeModal }) {
   });
 
   return (
-    <div className="fixed inset-0 bg-default bg-opacity-80 flex justify-center items-center px-4 z-50 overflow-auto">
-      <div className="bg-custom-cream w-full max-w-4xl rounded-lg shadow-lg p-4 md:p-6 overflow-y-auto max-h-screen mt-10 md:mt-24 mb-10 md:mb-20 ">
+    <motion.div className="fixed inset-0 bg-default bg-opacity-80 flex justify-center items-center px-4 z-50 overflow-auto"{...modalBackgroundAnimation}>
+      <motion.div className="bg-custom-cream w-full max-w-4xl rounded-lg shadow-lg p-4 md:p-6 overflow-y-auto max-h-screen mt-10 md:mt-24 mb-10 md:mb-20"{...modalContentAnimation}>
         <div className="flex flex-col md:flex-row justify-between gap-3 overflow-y-auto">
           {/* LEFT */}
           <div className="w-full md:w-1/2 md:pr-4 ">
@@ -394,8 +395,8 @@ function SupplierCreation({ closeModal }) {
                 <label className="w-1/3 text-right pr-4">Opening balance</label>
                 <div className="w-2/3 flex flex-col">
                   <input
-                    type="text"
-                    name="landPhone"
+                    type="number"
+                    name="openingBalance"
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.openingBalance}
@@ -414,15 +415,15 @@ function SupplierCreation({ closeModal }) {
                 <div className="w-2/3 flex flex-col">
                   <input
                     type="text"
-                    name="landPhone"
+                    name="balanceType"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.landPhone}
+                    value={values.balanceType}
                     className="p-1.5 flex-grow bg-inputColor rounded-lg text-sm focus:outline-none ml-2"
                   />
-                  {touched.landPhone && errors.landPhone && (
+                  {touched.balanceType && errors.balanceType && (
                     <span className="text-red-500 text-[10px] mt-0 text-end mr-1">
-                      {errors.landPhone}
+                      {errors.balanceType}
                     </span>
                   )}
                 </div>
@@ -465,8 +466,8 @@ function SupplierCreation({ closeModal }) {
             Save
           </button>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
 
@@ -492,6 +493,19 @@ const initialValues = {
   upi: "",
   iban: "",
   openingBalance: "",
-  balanceType: "Credit",
+  balanceType: "",
   creditedDate: new Date().toISOString().split("T")[0], // added this line
+};
+
+
+const modalBackgroundAnimation = { //animation design
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  transition: { duration: 0.1 },
+};
+
+const modalContentAnimation = {
+  initial: { scale: 0.8, opacity: 0, y: 20 },
+  animate: { scale: 1, opacity: 1, y: 0 },
+  transition: { duration: 0.3, ease: "easeInOut" },
 };
