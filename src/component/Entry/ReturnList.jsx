@@ -3,6 +3,7 @@ import SearchBar from "../Navbar/SearchBar";
 import foodIcon from "../../assests/images/food.svg";
 import NavigationBar from "../Navbar/NavigationBar";
 import { useReactToPrint } from "react-to-print";
+import { useDownloadExcel } from 'react-export-table-to-excel';
 import { DatePicker } from "antd";
 const { RangePicker } = DatePicker;
 
@@ -18,6 +19,12 @@ function ReturnList() {
     documentTitle: "Supplier List Report",
     pageStyle: "@page { margin: 8mm; }",
   });
+
+  const { onDownload } = useDownloadExcel({
+    currentTableRef: componentRef.current,
+    filename: 'Users table',
+    sheet: 'Users'
+})
 
   // Filter data based on selected date range
   const filteredData =
@@ -40,17 +47,25 @@ function ReturnList() {
       <div className="overflow-x-auto min-w-full">
         <div className="mb-3 mt-0 mx-1 flex justify-between">
           <RangePicker onChange={handleDateRangeChange} />
+          <div className="align-end">
           <button
             onClick={handlePrint}
             className="bg-lime-500 text-white border-md rounded-lg p-1 px-2 py-1 cursor-pointer text-xs mx-1"
           >
-            Print
+            Pdf
           </button>
+          <button
+            onClick={onDownload}
+            className="bg-lime-500 text-white border-md rounded-lg p-1 px-2 py-1 cursor-pointer text-xs mx-1"
+          >
+            excel
+          </button>
+          </div>
         </div>
         <div className="overflow-y-auto h-[480px]">
           <table
             className="w-full text-xs text-left rtl:text-right text-gray-500 dark:text-gray-400 z-0 border-collapse"
-            ref={componentRef}
+            ref={componentRef} 
           >
             <thead className="sticky top-0 text-xs text-white font-inter bg-custom-black text-center z-10">
               <tr>
