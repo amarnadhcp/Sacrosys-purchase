@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import SearchBar from "../Navbar/SearchBar";
 import NavigationBar from "../Navbar/NavigationBar";
+import OutStandModal from "./OutStandModal";
 import { DatePicker } from "antd";
 const { RangePicker } = DatePicker;
 
 function OutstandinTable() {
+  const [isModalOpen, setIsModalOpen] = useState(false);//modale opening
+  const [modalData, setModalData] = useState(null);
   const [selectedDateRange, setSelectedDateRange] = useState([]);
 
   const handleDateRangeChange = (dates) => {
@@ -26,7 +29,7 @@ function OutstandinTable() {
   return (
     <div className="mx-auto  px-2 overflow-auto my-0 ">
       <div className="flex flex-col md:flex-row-reverse justify-between items-center bg-default mb-0 mt-1">
-        <NavigationBar />
+        <NavigationBar showEntry="true" />
         <SearchBar />
       </div>
       <div className="overflow-x-auto min-w-full">
@@ -65,15 +68,17 @@ function OutstandinTable() {
                   <td className="px-4 py-4 text-black">{item.amountPaid}</td>
                   <td className="px-4 py-4 text-black">{item.balance}</td>
                   <td>
-                    <button
-                      className={`border-md rounded-lg p-1 px-4 cursor-pointer ${
+                    <button disabled={item.status}
+                      className={`border-md rounded-lg p-1 px-4  ${
                         item.status
-                          ? "bg-green-600 text-white"
-                          : "bg-purple-700 text-white"
+                          ? "bg-[#48BC00] text-white"
+                          : "bg-[#AE45C6] text-white cursor-pointer"
                       }`}
-                    >
+                      onClick={()=>{setIsModalOpen(true);
+                        setModalData(item)}}>
                       {item.status ? "Paid" : "Pay"}
                     </button>
+                    {isModalOpen && modalData === item && <OutStandModal closeModal={() => setIsModalOpen(false)} rowData={modalData} />}
                   </td>
                 </tr>
               ))}
