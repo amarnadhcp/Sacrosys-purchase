@@ -2,9 +2,10 @@ import React, { useRef, useState } from "react";
 import SearchBar from "../Navbar/SearchBar";
 import foodIcon from "../../assests/images/food.svg";
 import NavigationBar from "../Navbar/NavigationBar";
-import { useReactToPrint } from "react-to-print";
+import { DatePicker } from 'antd';
+import { jsPDF } from 'jspdf';
 import { useDownloadExcel } from 'react-export-table-to-excel';
-import { DatePicker } from "antd";
+import 'jspdf-autotable';
 const { RangePicker } = DatePicker;
 
 function ReturnList() {
@@ -14,28 +15,40 @@ function ReturnList() {
   const handleDateRangeChange = (dates) => {
     !dates ? setSelectedDateRange([]) : setSelectedDateRange(dates);
   };
-  const handlePrint = useReactToPrint({
-    content: () => componentRef.current,
-    documentTitle: "Supplier List Report",
-    pageStyle: "@page { margin: 8mm; }",
-  });
+
+  const handlePrint = () => {
+    const input = componentRef.current;
+    const pdf = new jsPDF(); // Creating jsPDF instance
+    pdf.setFontSize(15);
+    pdf.text("Supplier List Report", 105, 10, null, null, "center");
+    const table = input.cloneNode(true);    // Clone the table node
+
+    const thToRemove = table.querySelector("th:nth-child(7)");
+    const tdToRemove = table.querySelectorAll("td:nth-child(7)");
+    thToRemove?.remove();
+    tdToRemove.forEach(td => td.remove());
+
+      pdf.autoTable({ html: table,
+      styles: { halign: 'center', valign: 'middle' }
+    });
+  
+    pdf.save('Supplier_List_Report.pdf');
+  };
 
   const { onDownload } = useDownloadExcel({
     currentTableRef: componentRef.current,
-    filename: 'Users table',
+    filename: 'Users table.xlsx',
     sheet: 'Users'
 })
+  
 
   // Filter data based on selected date range
-  const filteredData =
-    selectedDateRange.length === 0
-      ? data
-      : data.filter((item) => {
-          const itemDate = new Date(item.date);
-          return (
-            itemDate >= selectedDateRange[0] && itemDate <= selectedDateRange[1]
-          );
-        });
+  const filteredData = selectedDateRange.length === 0 ?
+    data :
+    data.filter(item => {
+      const itemDate = new Date(item.date);
+      return itemDate >= selectedDateRange[0] && itemDate <= selectedDateRange[1];
+    });
 
   return (
     <div className="mx-auto px-2 overflow-auto my-0">
@@ -48,25 +61,12 @@ function ReturnList() {
         <div className="mb-3 mt-0 mx-1 flex justify-between">
           <RangePicker onChange={handleDateRangeChange} />
           <div className="align-end">
-          <button
-            onClick={handlePrint}
-            className="bg-lime-500 text-white border-md rounded-lg p-1 px-2 py-1 cursor-pointer text-xs mx-1"
-          >
-            Pdf
-          </button>
-          <button
-            onClick={onDownload}
-            className="bg-lime-500 text-white border-md rounded-lg p-1 px-2 py-1 cursor-pointer text-xs mx-1"
-          >
-            excel
-          </button>
+          <button onClick={handlePrint} className="bg-lime-500 text-white border-md rounded-lg p-1 px-2 py-1 cursor-pointer text-xs mx-1">Print</button>
+          <button onClick={onDownload} className="bg-lime-500 text-white border-md rounded-lg p-1 px-2 py-1 cursor-pointer text-xs mx-1">excel</button>
           </div>
         </div>
-        <div className="overflow-y-auto h-[480px]">
-          <table
-            className="w-full text-xs text-left rtl:text-right text-gray-500 dark:text-gray-400 z-0 border-collapse"
-            ref={componentRef} 
-          >
+        <div className="overflow-y-auto h-[480px]" >
+          <table className="w-full text-xs text-left rtl:text-right text-gray-500 dark:text-gray-400 z-0 border-collapse" ref={componentRef}>
             <thead className="sticky top-0 text-xs text-white font-inter bg-custom-black text-center z-10">
               <tr>
                 <th className="px-2 py-2 md:px-4 md:py-4">Date</th>
