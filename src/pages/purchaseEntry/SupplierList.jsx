@@ -26,8 +26,8 @@ function SupplierList() {
   return (
     <div className="mx-auto px-2 overflow-auto my-1 ">
       <div className="flex flex-col md:flex-row-reverse justify-between items-center bg-default">
-        <NavigationBar />
-        <SearchBar />
+        <NavigationBar  />
+        <SearchBar show="Vendor" />
       </div>
       <div className="overflow-x-auto min-w-full">
         <div className="mb-3 mt-0 mx-1 ">

@@ -3,23 +3,27 @@ import SearchIcon from "../../assests/images/search.svg";
 import { Link } from "react-router-dom";
 import Autocomplete from "../AutoComplete/Autocomplete";
 
-function SearchBar() {
+function SearchBar({ show }) {
+  const VendorButtonClass = show === "Vendor" ? "bg-purple-600 text-white" : "text-purple-600";
+  const ReturnButtonClass = show === "Return" ? "bg-purple-600 text-white" : "text-purple-600";
   const [autocompleteInput, setAutocompleteInput] = useState("");
+
   const handleAutocompleteInput = (input) => {
     setAutocompleteInput(input);
     console.log(autocompleteInput);
   };
+
   return (
-    <div className="flex flex-wrap  justify-between items-center bg-default mt-2 mb-2">
+    <div className="flex flex-wrap justify-between items-center bg-default  mb-2">
       <div className="flex">
-        <label
+      <label
           htmlFor="search-input "
-          className="mx-1 text-gray-800 text-sm mt-3 font-inter hidden md:block"
+          className="mx-1 text-gray-800 text-sm mt-3 font-inter hidden md:block px-2.5 py-2"
         >
           Search
         </label>
         <div className="flex flex-wrap">
-          <div className="relative flex items-center justify-center sm:justify-center  w-full  md:w-auto">
+          <div className="relative flex items-center justify-center sm:justify-center w-full md:w-auto">
             <Autocomplete
               suggestions={data}
               width="64"
@@ -33,16 +37,16 @@ function SearchBar() {
               className="absolute right-2 top-1/2 transform -translate-y-1/2 pointer-events-none w-4 h-auto hidden sm:block"
             />
           </div>
-          <div className="flex items-center flex-wrap gap-4 md:p-3 justify-center w-full md:w-auto">
+          <div className="flex items-center flex-wrap gap-2 md:p-3 justify-center w-full md:w-auto">
             <Link
               to="/supplier"
-              className="text-purple-600 underline text-xs sm:text-sm font-poppins"
+              className={` rounded-lg px-2.5 py-2 text-xs sm:text-sm  ${VendorButtonClass}`}
             >
-              View Supplier List
+              View Vendor List
             </Link>
             <Link
               to="/return"
-              className="text-purple-600 underline text-xs sm:text-sm font-poppins"
+              className={`rounded-lg px-2.5 py-2 text-xs sm:text-sm  ${ReturnButtonClass}`}
             >
               View Return List
             </Link>
@@ -54,6 +58,7 @@ function SearchBar() {
 }
 
 export default SearchBar;
+
 
 let data = [
   "Alabama",
