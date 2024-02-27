@@ -13,7 +13,7 @@ const detailsCountData = filteredData.reduce((acc, item) => {
   return (
     <div className="flex flex-col font-inter font-medium md:flex-row md:items-center mt-6 mx-7 gap-10">
       <div className="flex md:w-1/4 items-center justify-end md:pr-4">
-        <label className="w-full  md:w-auto text-xs text-right md:text-left mb-2 md:mb-0 mr-3">No of Purchase Bills</label>
+        <label className="w-full  md:w-auto text-xs text-right md:text-left mb-2 md:mb-0 mr-3">No of Purchase</label>
         <input
           readOnly
           value={detailsCountData.numberOfBills}

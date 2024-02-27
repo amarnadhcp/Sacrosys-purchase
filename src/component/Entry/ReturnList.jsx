@@ -4,7 +4,7 @@ import foodIcon from "../../assests/images/food.svg";
 import NavigationBar from "../Navbar/NavigationBar";
 import { DatePicker } from 'antd';
 import { jsPDF } from 'jspdf';
-import { useDownloadExcel } from 'react-export-table-to-excel';
+import { downloadExcel } from 'react-export-table-to-excel';
 import 'jspdf-autotable';
 const { RangePicker } = DatePicker;
 
@@ -35,11 +35,21 @@ function ReturnList() {
     pdf.save('Supplier_List_Report.pdf');
   };
 
-  const { onDownload } = useDownloadExcel({
-    currentTableRef: componentRef.current,
-    filename: 'Users table.xlsx',
-    sheet: 'Users'
-})
+  const handleDownloadExcel = () => {
+    const header = ["Date", "Vendor", "Invoice number", "Return Amount", "VAT", "Remarks"];
+    const bodyWithoutImages = filteredData.map(({ date, supplier, invoiceNumber, returnAmount, vat, remarks }) => 
+      [date, supplier, invoiceNumber, returnAmount, vat, remarks]
+    );
+
+    downloadExcel({
+      fileName: "Supplier_List_Report",
+      sheet: "Supplier List",
+      tablePayload: {
+        header,
+        body: bodyWithoutImages,
+      },
+    });
+  };
   
 
   // Filter data based on selected date range
@@ -61,8 +71,8 @@ function ReturnList() {
         <div className="mb-3 mt-0 mx-1 flex justify-between">
           <RangePicker onChange={handleDateRangeChange} />
           <div className="align-end">
-          <button onClick={handlePrint} className="bg-lime-500 text-white border-md rounded-lg p-1 px-2 py-1 cursor-pointer text-xs mx-1">Print</button>
-          <button onClick={onDownload} className="bg-lime-500 text-white border-md rounded-lg p-1 px-2 py-1 cursor-pointer text-xs mx-1">excel</button>
+          <button onClick={handlePrint} className="bg-lime-500 text-white border-md rounded-lg p-1 px-3 py-1.5 cursor-pointer text-xs mx-1">Print</button>
+          <button onClick={handleDownloadExcel} className="bg-lime-500 text-white border-md rounded-lg p-1 px-3 py-1.5 cursor-pointer text-xs mx-1">excel</button>
           </div>
         </div>
         <div className="overflow-y-auto h-[480px]" >
@@ -109,6 +119,10 @@ function ReturnList() {
 
 export default ReturnList;
 
+
+
+
+
 const data = [
   {
     id: 1,
@@ -118,7 +132,6 @@ const data = [
     returnAmount: "1000.000",
     vat: "100.000",
     remarks: "Main kitchen",
-    active: true,
     image:"https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=600"
   },
   {
