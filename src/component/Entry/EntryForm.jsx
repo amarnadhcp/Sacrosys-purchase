@@ -68,7 +68,7 @@ function EntryForm() {
 
   return (
     <div className="my-0 mx-auto flex flex-col items-end text-xs md:text-base  mt-2 ">
-      <NavigationBar />
+      <NavigationBar show="entry"/>
       <form
         onSubmit={handleSubmit}
         className="transaction-form w-full text-md md:text-base font-inter mt-6 "
