@@ -4,11 +4,13 @@ import EmptyIcon from "../../assests/images/Empty.svg";
 import screenshotIcon from "../../assests/images/screenShot.png";
 import SearchBar from "../Navbar/SearchBar";
 import ReturnModal from "./ReturnModal";
+import EditModal from "./EditModal";
 import { DatePicker } from 'antd';
 const { RangePicker } = DatePicker;
 
 function EntryTable() {
   const [isModalOpen, setIsModalOpen] = useState(false);//modale opening
+  const [EditModalOpen, setModalOpen] = useState(false);//modale opening
   const [modalData, setModalData] = useState(null);
   const [selectedDateRange, setSelectedDateRange] = useState([]);
   
@@ -73,7 +75,10 @@ function EntryTable() {
                       src={editIcon}
                       alt="Edit"
                       className="w-7 h-5 mt-3 cursor-pointer"
+                      onClick={()=>{setModalOpen(true);
+                        setModalData(item)}}
                     />
+                      {EditModalOpen && modalData === item && <EditModal closeModal={() => setModalOpen(false)} rowData={modalData} />}
                     <img
                       src={EmptyIcon}
                       alt="Delete"
@@ -110,6 +115,7 @@ const data = [
     amount: 1000,
     vat: 100,
     paymentType: "cash",
+    image:"https://asset.cloudinary.com/dvprhxg7x/db8776dd88b08b791a4841a2d30f7b23"
   },
   {
     id: 2,
@@ -119,6 +125,7 @@ const data = [
     amount: 1500,
     vat: 150,
     paymentType: "credit",
+    image:"https://asset.cloudinary.com/dvprhxg7x/db8776dd88b08b791a4841a2d30f7b23"
   },
   {
     id: 3,
@@ -128,6 +135,7 @@ const data = [
     amount: 750,
     vat: 75,
     paymentType: "cash",
+    image:"https://asset.cloudinary.com/dvprhxg7x/db8776dd88b08b791a4841a2d30f7b23"
   },
   {
     id: 4,
@@ -137,6 +145,7 @@ const data = [
     amount: 1200,
     vat: 120,
     paymentType: "credit",
+    image:"https://asset.cloudinary.com/dvprhxg7x/db8776dd88b08b791a4841a2d30f7b23"
   },
   {
     id: 5,
@@ -146,6 +155,7 @@ const data = [
     amount: 900,
     vat: 90,
     paymentType: "cash",
+    image:"https://asset.cloudinary.com/dvprhxg7x/db8776dd88b08b791a4841a2d30f7b23"
   },
   {
     id: 6,
@@ -155,6 +165,7 @@ const data = [
     amount: 900,
     vat: 90,
     paymentType: "cash",
+    image:"https://asset.cloudinary.com/dvprhxg7x/db8776dd88b08b791a4841a2d30f7b23"
   },
   {
     id: 7,
@@ -164,6 +175,7 @@ const data = [
     amount: 900,
     vat: 90,
     paymentType: "cash",
+    image:"https://asset.cloudinary.com/dvprhxg7x/db8776dd88b08b791a4841a2d30f7b23"
   },
   {
     id: 8,
@@ -173,5 +185,6 @@ const data = [
     amount: 900,
     vat: 90,
     paymentType: "cash",
+    image:"https://asset.cloudinary.com/dvprhxg7x/db8776dd88b08b791a4841a2d30f7b23"
   },
 ];
