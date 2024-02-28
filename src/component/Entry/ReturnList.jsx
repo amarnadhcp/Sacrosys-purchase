@@ -1,11 +1,13 @@
 import React, { useRef, useState } from "react";
 import SearchBar from "../Navbar/SearchBar";
-import foodIcon from "../../assests/images/food.svg";
+// import foodIcon from "../../assests/images/food.svg";
 import NavigationBar from "../Navbar/NavigationBar";
 import { DatePicker } from 'antd';
 import { jsPDF } from 'jspdf';
-import { downloadExcel } from 'react-export-table-to-excel';
+// import { downloadExcel } from 'react-export-table-to-excel';
 import 'jspdf-autotable';
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
 const { RangePicker } = DatePicker;
 
 function ReturnList() {
@@ -35,21 +37,32 @@ function ReturnList() {
     pdf.save('Supplier_List_Report.pdf');
   };
 
-  const handleDownloadExcel = () => {
-    const header = ["Date", "Vendor", "Invoice number", "Return Amount", "VAT", "Remarks"];
-    const bodyWithoutImages = filteredData.map(({ date, supplier, invoiceNumber, returnAmount, vat, remarks }) => 
-      [date, supplier, invoiceNumber, returnAmount, vat, remarks]
-    );
-
-    downloadExcel({
-      fileName: "Supplier_List_Report",
-      sheet: "Supplier List",
-      tablePayload: {
-        header,
-        body: bodyWithoutImages,
-      },
-    });
+  const exportToExcel = () => {
+    // Clone the table to manipulate it without affecting the UI
+    const tableClone = document.getElementById('your-table-id').cloneNode(true);
+  
+    // Remove the last column (Photo column)
+    const thToRemove = tableClone.querySelector("th:nth-child(7)");
+    const tdToRemove = tableClone.querySelectorAll("td:nth-child(7)");
+  
+    thToRemove?.remove();
+    tdToRemove.forEach(td => td.remove());
+  
+    // Convert the modified table to a worksheet
+    const worksheet = XLSX.utils.table_to_sheet(tableClone);
+  
+    // Create a new workbook and append the worksheet
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+  
+    // Convert the workbook to an Excel file
+    const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+  
+    // Create a Blob from the Excel buffer and save it
+    const data = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8' });
+    saveAs(data, 'your-file-name.xlsx');
   };
+  
   
 
   // Filter data based on selected date range
@@ -72,11 +85,11 @@ function ReturnList() {
           <RangePicker onChange={handleDateRangeChange} />
           <div className="align-end">
           <button onClick={handlePrint} className="bg-lime-500 text-white border-md rounded-lg p-1 px-3 py-1.5 cursor-pointer text-xs mx-1">Print</button>
-          <button onClick={handleDownloadExcel} className="bg-lime-500 text-white border-md rounded-lg p-1 px-3 py-1.5 cursor-pointer text-xs mx-1">excel</button>
+          <button onClick={exportToExcel}  className="bg-lime-500 text-white border-md rounded-lg p-1 px-3 py-1.5 cursor-pointer text-xs mx-1">excel</button>
           </div>
         </div>
         <div className="overflow-y-auto h-[480px]" >
-          <table className="w-full text-xs text-left rtl:text-right text-gray-500 dark:text-gray-400 z-0 border-collapse" ref={componentRef}>
+          <table className="w-full text-xs text-left rtl:text-right text-gray-500 dark:text-gray-400 z-0 border-collapse"  id="your-table-id" ref={componentRef}>
             <thead className="sticky top-0 text-xs text-white font-inter bg-custom-black text-center z-10">
               <tr>
                 <th className="px-2 py-2 md:px-4 md:py-4">Date</th>
