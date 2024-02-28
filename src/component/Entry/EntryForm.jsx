@@ -74,7 +74,7 @@ function EntryForm() {
         className="transaction-form w-full text-md md:text-base font-inter mt-6 "
       >
         <div className="flex items-center  mb-4">
-          <label className=" w-1/4 text-right pr-4">Supplier</label>
+          <label className=" w-1/4 text-right pr-4">Vendor</label>
           <div className="flex justify-between w-3/4 ">
             <Autocomplete
               suggestions={data}
@@ -105,7 +105,7 @@ function EntryForm() {
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.date}
-              className="w-full p-2 cursor-text rounded-lg bg-inputColor border focus:outline-none focus:border-purple-700 cursor: pointer; "
+              className="w-full p-1.5 cursor-text rounded-lg bg-inputColor border focus:outline-none focus:border-purple-700 cursor: pointer; "
             />
             {touched.date && errors.date && (
               <span className="text-red-500 text-[10px] mt-0 text-end mr-1">

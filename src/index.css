@@ -32,7 +32,12 @@ body {
   }
 
 
-
+/* date range picker css */
+.ant-picker-range {
+  @media (max-width: 767px) {
+    width: 250px; /* Adjust width for smaller screens */
+  }
+}
 /* date range picker css */
   .ant-picker-panel {
     &:last-child {

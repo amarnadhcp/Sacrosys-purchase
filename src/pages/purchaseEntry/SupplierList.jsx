@@ -38,7 +38,7 @@ function SupplierList() {
             <thead className="sticky  top-0 text-xs text-white font-inter bg-custom-black text-center z-10">
               <tr>
                 <th className="px-2 py-2 md:px-4 md:py-4">Code</th>
-                <th className="px-2 py-2 md:px-4 md:py-4 ">Supplier name</th>
+                <th className="px-2 py-2 md:px-4 md:py-4 ">Vendor name</th>
                 <th className="px-2 py-2 md:px-4 md:py-4 ">Country</th>
                 <th className="px-2 py-2 md:px-4 md:py-4">FSSAI No</th>
                 <th className="px-2 py-2 md:px-4 md:py-4">PAN Card No</th>

@@ -45,7 +45,7 @@ function SupplierCreation({ closeModal }) {
             <div className="font-poppins text-black text-xs  md:mb-4">
               {/* inputs */}
               <div className="flex items-center mb-2 ">
-                <label className="w-1/3 text-right pr-4">supplierCode</label>
+                <label className="w-1/3 text-right pr-4">Vendor Code</label>
                 <div className="w-2/3 flex flex-col">
                   <input
                     type="text"
@@ -64,7 +64,7 @@ function SupplierCreation({ closeModal }) {
               </div>
               {/* inputs */}
               <div className="flex items-center mb-2 ">
-                <label className="w-1/3 text-right pr-4">Supplier name</label>
+                <label className="w-1/3 text-right pr-4">Vendor name</label>
                 <div className="w-2/3 flex flex-col">
                   <input
                     type="text"
@@ -83,7 +83,7 @@ function SupplierCreation({ closeModal }) {
               </div>
               {/* inputs */}
               <div className="flex items-center mb-2 ">
-                <label className="w-1/3 text-right pr-4">Supplier type</label>
+                <label className="w-1/3 text-right pr-4">Vendor type</label>
                 <div className="w-2/3 flex flex-col">
                   <input
                     type="text"
@@ -454,7 +454,7 @@ function SupplierCreation({ closeModal }) {
 
         <div className="flex justify-end mt-2">
           <button
-            className="py-1 px-6 ml-2 mr-2 rounded-md border-2 border-red-500 bg-white text-black font-poppins"
+            className="py-1 px-6 ml-2 mr-2 rounded-md border-2 border-gray-300 bg-white text-black font-poppins"
             onClick={closeModal}
           >
             Cancel
