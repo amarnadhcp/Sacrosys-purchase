@@ -1,74 +1,24 @@
 import React, { useRef, useState } from "react";
 import SearchBar from "../Navbar/SearchBar";
-// import foodIcon from "../../assests/images/food.svg";
 import NavigationBar from "../Navbar/NavigationBar";
+import useExcelExport from "../../utils/Excel";
+import usePDFGenerator from "../../utils/Pdf";
 import { DatePicker } from 'antd';
-import { jsPDF } from 'jspdf';
-// import { downloadExcel } from 'react-export-table-to-excel';
-import 'jspdf-autotable';
-import * as XLSX from 'xlsx';
-import { saveAs } from 'file-saver';
 const { RangePicker } = DatePicker;
 
 function ReturnList() {
   const componentRef = useRef();
   const [selectedDateRange, setSelectedDateRange] = useState([]);
+  const exportToExcel = useExcelExport(componentRef, 'Return_List', [7]);
+  const generatePDF = usePDFGenerator(componentRef, 'Return_List', [7]);
 
   const handleDateRangeChange = (dates) => {
     !dates ? setSelectedDateRange([]) : setSelectedDateRange(dates);
   };
 
-  const handlePrint = () => {
-    const input = componentRef.current;
-    const pdf = new jsPDF(); // Creating jsPDF instance
-    pdf.setFontSize(15);
-    pdf.text("Supplier List Report", 105, 10, null, null, "center");
-    const table = input.cloneNode(true);    // Clone the table node
-
-    const thToRemove = table.querySelector("th:nth-child(7)");
-    const tdToRemove = table.querySelectorAll("td:nth-child(7)");
-    thToRemove?.remove();
-    tdToRemove.forEach(td => td.remove());
-
-      pdf.autoTable({ html: table,
-      styles: { halign: 'center', valign: 'middle' }
-    });
-  
-    pdf.save('Supplier_List_Report.pdf');
-  };
-
-  const exportToExcel = () => {
-    // Clone the table to manipulate it without affecting the UI
-    const tableClone = document.getElementById('your-table-id').cloneNode(true);
-  
-    // Remove the last column (Photo column)
-    const thToRemove = tableClone.querySelector("th:nth-child(7)");
-    const tdToRemove = tableClone.querySelectorAll("td:nth-child(7)");
-  
-    thToRemove?.remove();
-    tdToRemove.forEach(td => td.remove());
-  
-    // Convert the modified table to a worksheet
-    const worksheet = XLSX.utils.table_to_sheet(tableClone);
-  
-    // Create a new workbook and append the worksheet
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
-  
-    // Convert the workbook to an Excel file
-    const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-  
-    // Create a Blob from the Excel buffer and save it
-    const data = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8' });
-    saveAs(data, 'your-file-name.xlsx');
-  };
-  
-  
-
   // Filter data based on selected date range
   const filteredData = selectedDateRange.length === 0 ?
-    data :
-    data.filter(item => {
+    data : data.filter(item => {
       const itemDate = new Date(item.date);
       return itemDate >= selectedDateRange[0] && itemDate <= selectedDateRange[1];
     });
@@ -84,8 +34,8 @@ function ReturnList() {
         <div className="mb-3 mt-0 mx-1 flex justify-between">
           <RangePicker onChange={handleDateRangeChange} />
           <div className="align-end">
-          <button onClick={handlePrint} className="bg-lime-500 text-white border-md rounded-lg p-1 px-3 py-1.5 cursor-pointer text-xs mx-1">Print</button>
-          <button onClick={exportToExcel}  className="bg-lime-500 text-white border-md rounded-lg p-1 px-3 py-1.5 cursor-pointer text-xs mx-1">excel</button>
+          <button onClick={generatePDF} className="bg-lime-500 text-white border-md rounded-lg p-1 px-3 py-1.5 cursor-pointer text-xs mx-1">Pdf</button>
+          <button onClick={exportToExcel}  className="bg-lime-500 text-white border-md rounded-lg p-1 px-3 py-1.5 cursor-pointer text-xs mx-1">Excel</button>
           </div>
         </div>
         <div className="overflow-y-auto h-[480px]" >
