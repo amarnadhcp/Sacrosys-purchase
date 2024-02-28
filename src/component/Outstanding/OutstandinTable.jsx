@@ -3,10 +3,11 @@ import SearchBar from "../Navbar/SearchBar";
 import NavigationBar from "../Navbar/NavigationBar";
 import OutStandModal from "./OutStandModal";
 import { DatePicker } from "antd";
+import DetailsCount from "./DetailsCount";
 const { RangePicker } = DatePicker;
 
 function OutstandinTable() {
-  const [isModalOpen, setIsModalOpen] = useState(false);//modale opening
+  const [isModalOpen, setIsModalOpen] = useState(false); //modale opening
   const [modalData, setModalData] = useState(null);
   const [selectedDateRange, setSelectedDateRange] = useState([]);
 
@@ -29,14 +30,14 @@ function OutstandinTable() {
   return (
     <div className="mx-auto  px-2 overflow-auto my-0 ">
       <div className="flex flex-col md:flex-row-reverse justify-between items-center bg-default mb-0 mt-1">
-        <NavigationBar showEntry="true" />
+        <NavigationBar show="out" />
         <SearchBar />
       </div>
       <div className="overflow-x-auto min-w-full">
         <div className="mb-3 mt-0 mx-1 ">
           <RangePicker onChange={handleDateRangeChange} />
         </div>
-        <div className="overflow-y-auto h-[480px]">
+        <div className="overflow-y-auto h-[420px]">
           <table className="w-full text-xs text-left rtl:text-right text-gray-500 dark:text-gray-400 z-0 border-collapse">
             <thead className="sticky  top-0 text-xs text-white font-inter bg-custom-black text-center z-10">
               <tr>
@@ -68,17 +69,26 @@ function OutstandinTable() {
                   <td className="px-4 py-4 text-black">{item.amountPaid}</td>
                   <td className="px-4 py-4 text-black">{item.balance}</td>
                   <td>
-                    <button disabled={item.status}
+                    <button
+                      disabled={item.status}
                       className={`border-md rounded-lg p-1 px-4  ${
                         item.status
                           ? "bg-[#48BC00] text-white"
                           : "bg-[#AE45C6] text-white cursor-pointer"
                       }`}
-                      onClick={()=>{setIsModalOpen(true);
-                        setModalData(item)}}>
+                      onClick={() => {
+                        setIsModalOpen(true);
+                        setModalData(item);
+                      }}
+                    >
                       {item.status ? "Paid" : "Pay"}
                     </button>
-                    {isModalOpen && modalData === item && <OutStandModal closeModal={() => setIsModalOpen(false)} rowData={modalData} />}
+                    {isModalOpen && modalData === item && (
+                      <OutStandModal
+                        closeModal={() => setIsModalOpen(false)}
+                        rowData={modalData}
+                      />
+                    )}
                   </td>
                 </tr>
               ))}
@@ -86,6 +96,7 @@ function OutstandinTable() {
           </table>
         </div>
       </div>
+      <DetailsCount filteredData={filteredData} />
     </div>
   );
 }
@@ -100,9 +111,9 @@ const data = [
     supplier: "3468346378",
     purchaseNumber: "3468346378",
     invoiceNumber: "3468346378",
-    amount: "1000",
-    amountPaid: "1000",
-    balance: "1000",
+    amount: 1000,
+    amountPaid: 1000,
+    balance: 1000,
     status: "Payment in progress",
   },
   {
@@ -112,9 +123,9 @@ const data = [
     supplier: "3468346378",
     purchaseNumber: "3468346378",
     invoiceNumber: "3468346378",
-    amount: "1000",
-    amountPaid: "1000",
-    balance: "1000",
+    amount: 1000,
+    amountPaid: 1000,
+    balance: 1000,
     status: false,
   },
   {
@@ -124,9 +135,9 @@ const data = [
     supplier: "3468346378",
     purchaseNumber: "3468346378",
     invoiceNumber: "3468346378",
-    amount: "1000",
-    amountPaid: "1000",
-    balance: "1000",
+    amount: 1000,
+    amountPaid: 1000,
+    balance: 1000,
     status: false,
   },
   {
@@ -136,9 +147,9 @@ const data = [
     supplier: "3468346378",
     purchaseNumber: "3468346378",
     invoiceNumber: "3468346378",
-    amount: "1000",
-    amountPaid: "1000",
-    balance: "1000",
+    amount: 1000,
+    amountPaid: 1000,
+    balance: 1000,
     status: false,
   },
   {
@@ -148,9 +159,9 @@ const data = [
     supplier: "3468346378",
     purchaseNumber: "3468346378",
     invoiceNumber: "3468346378",
-    amount: "1000",
-    amountPaid: "1000",
-    balance: "1000",
+    amount: 1000,
+    amountPaid: 1000,
+    balance: 1000,
     status: false,
   },
   {
@@ -160,9 +171,9 @@ const data = [
     supplier: "3468346378",
     purchaseNumber: "3468346378",
     invoiceNumber: "3468346378",
-    amount: "1000",
-    amountPaid: "1000",
-    balance: "1000",
+    amount: 1000,
+    amountPaid: 1000,
+    balance: 1000,
     status: true,
   },
   {
@@ -172,9 +183,9 @@ const data = [
     supplier: "3468346378",
     purchaseNumber: "3468346378",
     invoiceNumber: "3468346378",
-    amount: "1000",
-    amountPaid: "1000",
-    balance: "1000",
+    amount: 1000,
+    amountPaid: 1000,
+    balance: 1000,
     status: true,
   },
   {
@@ -184,9 +195,9 @@ const data = [
     supplier: "3468346378",
     purchaseNumber: "3468346378",
     invoiceNumber: "3468346378",
-    amount: "1000",
-    amountPaid: "1000",
-    balance: "1000",
+    amount: 1000,
+    amountPaid: 1000,
+    balance: 1000,
     status: true,
   },
   {
@@ -196,9 +207,9 @@ const data = [
     supplier: "3468346378",
     purchaseNumber: "3468346378",
     invoiceNumber: "3468346378",
-    amount: "1000",
-    amountPaid: "1000",
-    balance: "1000",
+    amount: 1000,
+    amountPaid: 1000,
+    balance: 1000,
     status: true,
   },
   {
@@ -208,9 +219,9 @@ const data = [
     supplier: "3468346378",
     purchaseNumber: "3468346378",
     invoiceNumber: "3468346378",
-    amount: "1000",
-    amountPaid: "1000",
-    balance: "1000",
+    amount: 1000,
+    amountPaid: 1000,
+    balance: 1000,
     status: true,
   },
   {
@@ -220,9 +231,9 @@ const data = [
     supplier: "3468346378",
     purchaseNumber: "3468346378",
     invoiceNumber: "3468346378",
-    amount: "1000",
-    amountPaid: "1000",
-    balance: "1000",
+    amount: 1000,
+    amountPaid: 1000,
+    balance: 1000,
     status: true,
   },
 ];

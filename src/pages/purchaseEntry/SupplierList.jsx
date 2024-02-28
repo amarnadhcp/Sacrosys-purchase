@@ -1,44 +1,73 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import SearchBar from "../../component/Navbar/SearchBar";
 import NavigationBar from "../../component/Navbar/NavigationBar";
 import { DatePicker } from "antd";
+import { fetchvendorData } from "../../services/Api";
+import { Button, Popover } from 'antd';
+import useExcelExport from "../../utils/Excel";
+import usePDFGenerator from "../../utils/Pdf";
 const { RangePicker } = DatePicker;
 
 function SupplierList() {
+  const componentRef = useRef();
   const [selectedDateRange, setSelectedDateRange] = useState([]);
+  const [data, SetData] = useState([]);
+  const exportToExcel = useExcelExport(componentRef, 'Return_List', []);
+  const generatePDF = usePDFGenerator(componentRef, 'Return_List', []);
+
+  useEffect(() => {
+    SetData(fetchvendorData());
+  }, []);
 
   const handleDateRangeChange = (dates) => {
     !dates ? setSelectedDateRange([]) : setSelectedDateRange(dates);
   };
 
+  const handleCheckboxToggle = (itemId) => {
+    // Toggle the state of the item with the given itemId
+    const updatedData = data.map((item) =>
+      item.id === itemId ? { ...item, state: !item.state } : item
+    );
+    SetData(updatedData);
+  };
+
   // Filter data based on selected date range
-  const filteredData =
-    selectedDateRange.length === 0
-      ? data
-      : data.filter((item) => {
+  const filteredData = selectedDateRange.length === 0
+      ? data : data.filter((item) => {
           const itemDate = new Date(item.date);
-          console.log(itemDate);
           return (
             itemDate >= selectedDateRange[0] && itemDate <= selectedDateRange[1]
           );
         });
 
+   const content = (
+      <div>
+        <Button onClick={generatePDF} className="bg-[#AE45C6] text-white border-md rounded-lg p-1 px-3 py-1.5 cursor-pointer text-xs mx-1">Pdf</Button>
+        <Button onClick={exportToExcel} className="bg-[#AE45C6] text-white border-md rounded-lg p-1 px-3 py-1.5 cursor-pointer text-xs mx-1">Excel</Button>
+      </div>
+    );      
+
   return (
     <div className="mx-auto px-2 overflow-auto my-1 ">
       <div className="flex flex-col md:flex-row-reverse justify-between items-center bg-default">
         <NavigationBar />
-        <SearchBar />
+        <SearchBar show="Vendor" />
       </div>
       <div className="overflow-x-auto min-w-full">
-        <div className="mb-3 mt-0 mx-1 ">
+        <div className="mb-3 mt-0 mx-1 flex justify-between">
           <RangePicker onChange={handleDateRangeChange} />
+          <div className="align-end">
+          <Popover content={content}trigger="hover">
+              <Button>Print out</Button>
+          </Popover>
+          </div>
         </div>
-        <div className="overflow-y-auto h-[480px]">
-          <table className="w-full text-xs text-left rtl:text-right text-gray-500 dark:text-gray-400 z-0 border-collapse">
+        <div className="overflow-y-auto h-[464px]">
+          <table className="w-full text-xs text-left rtl:text-right text-gray-500 dark:text-gray-400 z-0 border-collapse"  ref={componentRef}>
             <thead className="sticky  top-0 text-xs text-white font-inter bg-custom-black text-center z-10">
               <tr>
                 <th className="px-2 py-2 md:px-4 md:py-4">Code</th>
-                <th className="px-2 py-2 md:px-4 md:py-4 ">Supplier name</th>
+                <th className="px-2 py-2 md:px-4 md:py-4 ">Vendor name</th>
                 <th className="px-2 py-2 md:px-4 md:py-4 ">Country</th>
                 <th className="px-2 py-2 md:px-4 md:py-4">FSSAI No</th>
                 <th className="px-2 py-2 md:px-4 md:py-4">PAN Card No</th>
@@ -70,10 +99,11 @@ function SupplierList() {
                       <input
                         type="checkbox"
                         id="checkbox1"
-                        checked={item.state}  
+                        checked={item.state}
                         className="peer relative h-5 w-5 appearance-none rounded-sm border border-black  focus:outline-none"
+                        onChange={() => handleCheckboxToggle(item.id)}
                       />
-                      {item.state && ( 
+                      {item.state && (
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="absolute left-0 top-0 h-full w-full pointer-events-none"
@@ -83,6 +113,7 @@ function SupplierList() {
                           strokeWidth="2"
                           strokeLinecap="round"
                           strokeLinejoin="round"
+                          onClick={() => handleCheckboxToggle(item.id)} 
                         >
                           <path d="M5 13l4 4L19 7" />
                         </svg>
@@ -100,227 +131,3 @@ function SupplierList() {
 }
 
 export default SupplierList;
-
-const data = [
-  {
-    id: 1,
-    code: "26",
-    supplierName: "John",
-    country: "Qatar",
-    fbsmNo: "1000",
-    ribCardNo: "ex1234567890a",
-    bankName: " bank of qatar",
-    accountNo: "ex1234567890a",
-    balanceType: "Credit",
-    creditDate: "01/06/2023",
-    state: true,
-  },
-  {
-    id: 2,
-    code: "28",
-    supplierName: "James Cooper",
-    country: "Qatar",
-    fbsmNo: "2000",
-    ribCardNo: "ex9876543210b",
-    bankName: " bank of qatar",
-    accountNo: "ex9876543210b",
-    balanceType: "Debit",
-    creditDate: "02/06/2023",
-    state: true,
-  },
-  {
-    id: 3,
-    code: "29",
-    supplierName: "Esther Vincent",
-    country: "Qatar",
-    fbsmNo: "3000",
-    ribCardNo: "ex1234987650c",
-    bankName: " bank of qatar",
-    accountNo: "ex1234987650c",
-    balanceType: "Credit",
-    creditDate: "03/06/2023",
-    state: true,
-  },
-  {
-    id: 4,
-    code: "30",
-    supplierName: "Waldo Warner",
-    country: "Qatar",
-    fbsmNo: "4000",
-    ribCardNo: "ex8765432109d",
-    bankName: " bank of qatar",
-    accountNo: "ex8765432109d",
-    balanceType: "Debit",
-    creditDate: "04/06/2023",
-    state: false,
-  },
-  {
-    id: 4,
-    code: "30",
-    supplierName: "Waldo Warner",
-    country: "Qatar",
-    fbsmNo: "4000",
-    ribCardNo: "ex8765432109d",
-    bankName: " bank of qatar",
-    accountNo: "ex8765432109d",
-    balanceType: "Debit",
-    creditDate: "04/06/2023",
-    state: false,
-  },
-  {
-    id: 4,
-    code: "30",
-    supplierName: "Waldo Warner",
-    country: "Qatar",
-    fbsmNo: "4000",
-    ribCardNo: "ex8765432109d",
-    bankName: " bank of qatar",
-    accountNo: "ex8765432109d",
-    balanceType: "Debit",
-    creditDate: "04/06/2023",
-    state: false,
-  },
-  {
-    id: 4,
-    code: "30",
-    supplierName: "Waldo Warner",
-    country: "Qatar",
-    fbsmNo: "4000",
-    ribCardNo: "ex8765432109d",
-    bankName: " bank of qatar",
-    accountNo: "ex8765432109d",
-    balanceType: "Debit",
-    creditDate: "04/06/2023",
-    state: false,
-  },
-  {
-    id: 4,
-    code: "30",
-    supplierName: "Waldo Warner",
-    country: "Qatar",
-    fbsmNo: "4000",
-    ribCardNo: "ex8765432109d",
-    bankName: " bank of qatar",
-    accountNo: "ex8765432109d",
-    balanceType: "Debit",
-    creditDate: "04/06/2023",
-    state: false,
-  },
-  {
-    id: 4,
-    code: "30",
-    supplierName: "Waldo Warner",
-    country: "Qatar",
-    fbsmNo: "4000",
-    ribCardNo: "ex8765432109d",
-    bankName: " bank of qatar",
-    accountNo: "ex8765432109d",
-    balanceType: "Debit",
-    creditDate: "04/06/2023",
-    state: false,
-  },
-  {
-    id: 4,
-    code: "30",
-    supplierName: "Waldo Warner",
-    country: "Qatar",
-    fbsmNo: "4000",
-    ribCardNo: "ex8765432109d",
-    bankName: " bank of qatar",
-    accountNo: "ex8765432109d",
-    balanceType: "Debit",
-    creditDate: "04/06/2023",
-    state: false,
-  },
-  {
-    id: 4,
-    code: "30",
-    supplierName: "Waldo Warner",
-    country: "Qatar",
-    fbsmNo: "4000",
-    ribCardNo: "ex8765432109d",
-    bankName: " bank of qatar",
-    accountNo: "ex8765432109d",
-    balanceType: "Debit",
-    creditDate: "04/06/2023",
-    state: false,
-  },
-  {
-    id: 4,
-    code: "30",
-    supplierName: "Waldo Warner",
-    country: "Qatar",
-    fbsmNo: "4000",
-    ribCardNo: "ex8765432109d",
-    bankName: " bank of qatar",
-    accountNo: "ex8765432109d",
-    balanceType: "Debit",
-    creditDate: "04/06/2023",
-    state: false,
-  },
-  {
-    id: 4,
-    code: "30",
-    supplierName: "Waldo Warner",
-    country: "Qatar",
-    fbsmNo: "4000",
-    ribCardNo: "ex8765432109d",
-    bankName: " bank of qatar",
-    accountNo: "ex8765432109d",
-    balanceType: "Debit",
-    creditDate: "04/06/2023",
-    state: false,
-  },
-  {
-    id: 4,
-    code: "30",
-    supplierName: "Waldo Warner",
-    country: "Qatar",
-    fbsmNo: "4000",
-    ribCardNo: "ex8765432109d",
-    bankName: " bank of qatar",
-    accountNo: "ex8765432109d",
-    balanceType: "Debit",
-    creditDate: "04/06/2023",
-    state: false,
-  },
-  {
-    id: 4,
-    code: "30",
-    supplierName: "Waldo Warner",
-    country: "Qatar",
-    fbsmNo: "4000",
-    ribCardNo: "ex8765432109d",
-    bankName: " bank of qatar",
-    accountNo: "ex8765432109d",
-    balanceType: "Debit",
-    creditDate: "04/06/2023",
-    state: false,
-  },
-  {
-    id: 4,
-    code: "30",
-    supplierName: "Waldo Warner",
-    country: "Qatar",
-    fbsmNo: "4000",
-    ribCardNo: "ex8765432109d",
-    bankName: " bank of qatar",
-    accountNo: "ex8765432109d",
-    balanceType: "Debit",
-    creditDate: "04/06/2023",
-    state: false,
-  },
-  {
-    id: 4,
-    code: "30",
-    supplierName: "Waldo Warner",
-    country: "Qatar",
-    fbsmNo: "4000",
-    ribCardNo: "ex8765432109d",
-    bankName: " bank of qatar",
-    accountNo: "ex8765432109d",
-    balanceType: "Debit",
-    creditDate: "04/06/2023",
-    state: false,
-  },
-];

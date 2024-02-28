@@ -3,10 +3,11 @@ import { motion } from "framer-motion";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-function ReturnModal({ closeModal, rowData }) {
+function EditModal({ closeModal, rowData }) {
   const [imagePreview, setImagePreview] = useState(null); // preview image state
-
-  useEffect(() => { // Close modal when clicked outside
+console.log(rowData);
+  useEffect(() => {
+    // Close modal when clicked outside
     const handleOutsideClick = (e) => {
       if (e.target.classList.contains("bg-default")) {
         closeModal();
@@ -16,7 +17,8 @@ function ReturnModal({ closeModal, rowData }) {
     return () => document.removeEventListener("mousedown", handleOutsideClick);
   }, [closeModal]);
 
-  const handleFileChange = (e) => {// function to handle file change
+  const handleFileChange = (e) => {
+    // function to handle file change
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
@@ -29,10 +31,11 @@ function ReturnModal({ closeModal, rowData }) {
   };
 
   const initialValues = {
+    vendor:rowData.vendor,
+    date: rowData.date,
     invoiceNum: rowData.invoiceNumber,
     amount: rowData.amount,
     vat: rowData.vat,
-    remarks: "",
   };
 
   //form submition function and validation
@@ -50,13 +53,54 @@ function ReturnModal({ closeModal, rowData }) {
   return (
     <motion.div className="fixed inset-0 bg-default bg-opacity-80 flex justify-center items-center px-4 z-30"{...modalBackgroundAnimation}>
       <motion.div className="bg-custom-cream w-full md:w-1/2 lg:w-1/3 rounded-lg shadow-lg p-4 md:p-8" {...modalContentAnimation}>
+        {/* inputs */}
         <div className="flex flex-col font-inter text-black text-xs">
-          {/* inputs */}
-          <div className="flex flex-col">
+          <div className="flex items-center">
+            <label className="w-1/4 text-right pr-4  text-black text-xs ">
+              Vendor
+            </label>
+            <input
+              readOnly
+              type="number"
+              name="vendor"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.vendor}
+              className="p-2 flex-grow bg-inputColor  rounded-lg text-sm focus:outline-none ml-2"
+            />
+          </div>
+          {touched.vendor && errors.vendor && (
+            <span className="text-red-500 text-[10px] mt-0 text-end mr-1">
+              {errors.vendor}
+            </span>
+          )}
+        </div>
+        <div className="flex flex-col font-inter text-black text-xs">
+          <div className="flex flex-col mt-2">
             <div className="flex items-center">
-              <label className="w-1/4 text-right pr-4 text-xs  ">Invoice number</label>
+              <label className="w-1/4 text-right pr-4 text-xs  ">Date</label>
               <input
-                readOnly
+                type="date"
+                name="date"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.date}
+                className="p-2 flex-grow bg-inputColor  rounded-lg text-sm focus:outline-none ml-2"
+              />
+            </div>
+            {touched.date && errors.date && (
+              <span className="text-red-500 text-[10px] mt-0 text-end mr-1">
+                {errors.date}
+              </span>
+            )}
+          </div>
+          {/* inputs */}
+          <div className="flex flex-col mt-2">
+            <div className="flex items-center">
+              <label className="w-1/4 text-right pr-4 text-xs  ">
+                Invoice number
+              </label>
+              <input
                 type="text"
                 name="invoiceNum"
                 onChange={handleChange}
@@ -76,7 +120,6 @@ function ReturnModal({ closeModal, rowData }) {
             <div className="flex items-center">
               <label className="w-1/4 text-right pr-4 text-xs  ">Amount</label>
               <input
-                readOnly
                 type="number"
                 name="amount"
                 onChange={handleChange}
@@ -96,7 +139,6 @@ function ReturnModal({ closeModal, rowData }) {
             <div className="flex items-center">
               <label className="w-1/4 text-right pr-4 text-xs  ">Vat</label>
               <input
-                readOnly
                 type="number"
                 name="vat"
                 onChange={handleChange}
@@ -112,23 +154,7 @@ function ReturnModal({ closeModal, rowData }) {
             )}
           </div>
           {/* inputs */}
-          <div className="flex flex-col mt-2">
-            <div className="flex items-center">
-              <label className="w-1/4 text-right pr-4 text-xs">Remarks</label>
-              <textarea
-                name="remarks"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.remarks}
-                className="p-2 flex-grow bg-inputColor rounded-lg text-sm focus:outline-none h-20 ml-2"
-              />
-            </div>
-            {touched.remarks && errors.remarks && (
-              <span className="text-red-500 text-[10px] mt-0 text-end mr-1">
-                {errors.remarks}
-              </span>
-            )}
-          </div>
+
           <div className="flex items-center mt-2 justify-end">
             {imagePreview && (
               <div className="flex justify-start items-center mb-2 relative">
@@ -139,7 +165,10 @@ function ReturnModal({ closeModal, rowData }) {
                 />
                 <button
                   className="absolute top-0 right-2 p-1 bg-red-500 text-white rounded-full hover:bg-red-600 focus:outline-none transition ease-in duration-200"
-                  onClick={() =>{ setImagePreview(null); setFieldValue("imageUrl", "")}}
+                  onClick={() => {
+                    setImagePreview(null);
+                    setFieldValue("imageUrl", "");
+                  }}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -180,7 +209,8 @@ function ReturnModal({ closeModal, rowData }) {
           >
             Cancel
           </button>
-          <button type="button"
+          <button
+            type="button"
             className="py-2 px-12 rounded-lg bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 hover:bg-purple-700 text-white font-poppins"
             onClick={handleSubmit}
           >
@@ -192,10 +222,10 @@ function ReturnModal({ closeModal, rowData }) {
   );
 }
 
-export default ReturnModal;
+export default EditModal;
 
-//yup validation
 const validationSchema = Yup.object().shape({
+  date: Yup.date().required("Date is required"),
   invoiceNum: Yup.string().required("Invoice Number is required"),
   amount: Yup.number()
     .required("Amount is required")
@@ -203,10 +233,11 @@ const validationSchema = Yup.object().shape({
   vat: Yup.number()
     .required("VAT is required")
     .positive("VAT must be a positive number"),
-  remarks: Yup.string().required("Remarks are required"),
 });
 
-const modalBackgroundAnimation = { //animation design
+
+const modalBackgroundAnimation = {
+  //animation design
   initial: { opacity: 0 },
   animate: { opacity: 1 },
   transition: { duration: 0.1 },
