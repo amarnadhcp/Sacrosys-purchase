@@ -5,7 +5,7 @@ import * as Yup from "yup";
 
 function EditModal({ closeModal, rowData }) {
   const [imagePreview, setImagePreview] = useState(null); // preview image state
-
+console.log(rowData);
   useEffect(() => {
     // Close modal when clicked outside
     const handleOutsideClick = (e) => {
@@ -31,6 +31,7 @@ function EditModal({ closeModal, rowData }) {
   };
 
   const initialValues = {
+    vendor:rowData.vendor,
     date: rowData.date,
     invoiceNum: rowData.invoiceNumber,
     amount: rowData.amount,
@@ -50,16 +51,10 @@ function EditModal({ closeModal, rowData }) {
   });
 
   return (
-    <motion.div
-      className="fixed inset-0 bg-default bg-opacity-80 flex justify-center items-center px-4 z-30"
-      {...modalBackgroundAnimation}
-    >
-      <motion.div
-        className="bg-custom-cream w-full md:w-1/2 lg:w-1/3 rounded-lg shadow-lg p-4 md:p-8"
-        {...modalContentAnimation}
-      >
+    <motion.div className="fixed inset-0 bg-default bg-opacity-80 flex justify-center items-center px-4 z-30"{...modalBackgroundAnimation}>
+      <motion.div className="bg-custom-cream w-full md:w-1/2 lg:w-1/3 rounded-lg shadow-lg p-4 md:p-8" {...modalContentAnimation}>
         {/* inputs */}
-        <div className="flex flex-col">
+        <div className="flex flex-col font-inter text-black text-xs">
           <div className="flex items-center">
             <label className="w-1/4 text-right pr-4  text-black text-xs ">
               Vendor
@@ -197,6 +192,7 @@ function EditModal({ closeModal, rowData }) {
               Upload Photo
             </label>
             <input
+              key={Math.random()} 
               type="file"
               id="photo-upload"
               name="photo-upload"

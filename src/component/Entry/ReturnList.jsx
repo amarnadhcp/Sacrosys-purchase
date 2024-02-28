@@ -3,6 +3,7 @@ import SearchBar from "../Navbar/SearchBar";
 import NavigationBar from "../Navbar/NavigationBar";
 import useExcelExport from "../../utils/Excel";
 import usePDFGenerator from "../../utils/Pdf";
+import { Button, Popover } from 'antd';
 import { DatePicker } from 'antd';
 const { RangePicker } = DatePicker;
 
@@ -23,6 +24,13 @@ function ReturnList() {
       return itemDate >= selectedDateRange[0] && itemDate <= selectedDateRange[1];
     });
 
+  const content = (
+    <div>
+      <Button onClick={generatePDF} className="bg-[#AE45C6] text-white border-md rounded-lg p-1 px-3 py-1.5 cursor-pointer text-xs mx-1">Pdf</Button>
+      <Button onClick={exportToExcel} className="bg-[#AE45C6] text-white border-md rounded-lg p-1 px-3 py-1.5 cursor-pointer text-xs mx-1">Excel</Button>
+    </div>
+  );
+
   return (
     <div className="mx-auto px-2 overflow-auto my-0">
       <div className="flex flex-col md:flex-row-reverse justify-between items-center bg-default mb-0 mt-1">
@@ -34,12 +42,13 @@ function ReturnList() {
         <div className="mb-3 mt-0 mx-1 flex justify-between">
           <RangePicker onChange={handleDateRangeChange} />
           <div className="align-end">
-          <button onClick={generatePDF} className="bg-lime-500 text-white border-md rounded-lg p-1 px-3 py-1.5 cursor-pointer text-xs mx-1">Pdf</button>
-          <button onClick={exportToExcel}  className="bg-lime-500 text-white border-md rounded-lg p-1 px-3 py-1.5 cursor-pointer text-xs mx-1">Excel</button>
+          <Popover content={content}trigger="hover">
+              <Button>Print out</Button>
+          </Popover>
           </div>
         </div>
         <div className="overflow-y-auto h-[480px]" >
-          <table className="w-full text-xs text-left rtl:text-right text-gray-500 dark:text-gray-400 z-0 border-collapse"  id="your-table-id" ref={componentRef}>
+          <table className="w-full text-xs text-left rtl:text-right text-gray-500 dark:text-gray-400 z-0 border-collapse"   ref={componentRef}>
             <thead className="sticky top-0 text-xs text-white font-inter bg-custom-black text-center z-10">
               <tr>
                 <th className="px-2 py-2 md:px-4 md:py-4">Date</th>

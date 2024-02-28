@@ -163,6 +163,7 @@ function ReturnModal({ closeModal, rowData }) {
               Upload Photo
             </label>
             <input
+              key={Math.random()} 
               type="file"
               id="photo-upload"
               name="photo-upload"

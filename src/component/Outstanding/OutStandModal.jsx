@@ -199,7 +199,7 @@ function OutStandModal({ closeModal, rowData }) {
               Upload Photo
             </label>
             <input
-            key={Math.random()} 
+              key={Math.random()} 
               type="file"
               id="photo-upload"
               name="photo-upload"

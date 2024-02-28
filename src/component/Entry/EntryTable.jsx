@@ -58,7 +58,7 @@ function EntryTable() {
                   <td className="px-4 py-4 whitespace-nowrap text-black">
                     {item.date}
                   </td>
-                  <td className="px-4 py-2 text-black">{item.supplier}</td>
+                  <td className="px-4 py-2 text-black">{item.vendor}</td>
                   <td className="px-4 py-2 text-black">{item.invoiceNumber}</td>
                   <td className="px-4 py-2 text-black">{item.amount.toFixed(2)}</td>
                   <td className="px-4 py-2 text-black">{item.vat.toFixed(2)}</td>
@@ -110,7 +110,7 @@ const data = [
   {
     id: 1,
     date: "2023-08-09",
-    supplier: "3486348378",
+    vendor: "3486348378",
     invoiceNumber: "3486348378",
     amount: 1000,
     vat: 100,
@@ -120,7 +120,7 @@ const data = [
   {
     id: 2,
     date: "2023-08-10",
-    supplier: "4527834523",
+    vendor: "4527834523",
     invoiceNumber: "4527834523",
     amount: 1500,
     vat: 150,
@@ -130,7 +130,7 @@ const data = [
   {
     id: 3,
     date: "2023-08-11",
-    supplier: "5728394723",
+    vendor: "5728394723",
     invoiceNumber: "5728394723",
     amount: 750,
     vat: 75,
@@ -140,7 +140,7 @@ const data = [
   {
     id: 4,
     date: "2023-08-12",
-    supplier: "4829304832",
+    vendor: "4829304832",
     invoiceNumber: "4829304832",
     amount: 1200,
     vat: 120,
@@ -150,7 +150,7 @@ const data = [
   {
     id: 5,
     date: "2023-08-13",
-    supplier: "5839205832",
+    vendor: "5839205832",
     invoiceNumber: "5839205832",
     amount: 900,
     vat: 90,
@@ -160,7 +160,7 @@ const data = [
   {
     id: 6,
     date: "2023-08-13",
-    supplier: "5839276832",
+    vendor: "5839276832",
     invoiceNumber: "5839205532",
     amount: 900,
     vat: 90,
@@ -170,7 +170,7 @@ const data = [
   {
     id: 7,
     date: "2023-08-13",
-    supplier: "5834405832",
+    vendor: "5834405832",
     invoiceNumber: "5839275832",
     amount: 900,
     vat: 90,
@@ -180,7 +180,7 @@ const data = [
   {
     id: 8,
     date: "2023-08-13",
-    supplier: "5839205833",
+    vendor: "5839205833",
     invoiceNumber: "5899205832",
     amount: 900,
     vat: 90,
