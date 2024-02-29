@@ -12,8 +12,8 @@ function SupplierList() {
   const componentRef = useRef();
   const [selectedDateRange, setSelectedDateRange] = useState([]);
   const [data, SetData] = useState([]);
-  const exportToExcel = useExcelExport(componentRef, 'Return_List', []);
-  const generatePDF = usePDFGenerator(componentRef, 'Return_List', []);
+  const exportToExcel = useExcelExport(componentRef, 'Outstanding_List', []);
+  const generatePDF = usePDFGenerator(componentRef, 'Outstanding_List', []);
 
   useEffect(() => {
     SetData(fetchvendorData());
