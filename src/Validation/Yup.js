@@ -1,14 +1,12 @@
 import * as Yup from "yup";
 
 export const Suppliervalidation = Yup.object().shape({
-  supplierCode: Yup.string().required("Supplier Code is required"),
+  supplierCode: Yup.number().required("Supplier Code is required"),
   supplierName: Yup.string().required("Supplier Name is required"),
   supplierType: Yup.string().required("Supplier Type is required"),
   country: Yup.string().required("Country is required"),
   state: Yup.string().required("State is required"),
-  address: Yup.string()
-    .required("Address is required")
-    .max(100, "Address too long!"),
+  address: Yup.string() .required("Address is required").max(100, "Address too long!"),
   postalCode: Yup.number()
     .typeError("Postal Code must be a number")
     .positive("Postal Code must be positive")
@@ -32,12 +30,12 @@ export const Suppliervalidation = Yup.object().shape({
   landPhone: Yup.string()
     .required("Land Phone is required")
     .matches(/^\d+$/, "Invalid Land Phone Number"),
-  mobileNo: Yup.string()
+    mobileNo: Yup.string()
     .required("Mobile Number is required")
-    .matches(/^\d+$/, "Invalid Mobile Number"),
+    .matches(/^\d{10}$/, "Mobile Number must be 10 digits"),
   whatsappNo: Yup.string()
     .required("WhatsApp Number is required")
-    .matches(/^\d+$/, "Invalid WhatsApp Number"),
+    .matches(/^\d{10}$/, "WhatsApp Number must be 10 digits"),
   email: Yup.string()
     .email("Invalid Email Address")
     .required("Email is required"),
@@ -53,9 +51,7 @@ export const Suppliervalidation = Yup.object().shape({
   .positive("Must be positive")
   .integer("Must be an integer")
   .required("Opening balance is required"),
-  balanceType: Yup.mixed()
-  .oneOf(["Credit", "Debit"], "Must select either Credit or Debit")
-  .nullable(),
+  balanceType: Yup.string().required("Payment Type is required"),
   creditedDate: Yup.string() // added this line
   .required("Credited Date is required")
   .matches(

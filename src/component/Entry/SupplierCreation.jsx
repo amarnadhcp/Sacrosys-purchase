@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { motion } from "framer-motion";
+import { Select } from "antd";
 import { useFormik } from "formik";
 import { Suppliervalidation } from "../../Validation/Yup";
 
@@ -25,6 +26,7 @@ function SupplierCreation({ closeModal }) {
     handleBlur,
     handleSubmit,
     handleChange,
+    setFieldValue,
     isValid,
   } = useFormik({
     initialValues: initialValues,
@@ -37,8 +39,14 @@ function SupplierCreation({ closeModal }) {
   });
 
   return (
-    <motion.div className="fixed inset-0 bg-default bg-opacity-80 flex justify-center items-center px-4 z-50 overflow-auto"{...modalBackgroundAnimation}>
-      <motion.div className="bg-custom-cream w-full max-w-4xl rounded-lg shadow-lg p-4 md:p-6 overflow-y-auto max-h-screen mt-10 md:mt-24 mb-10 md:mb-20"{...modalContentAnimation}>
+    <motion.div
+      className="fixed inset-0 bg-default bg-opacity-80 flex justify-center items-center px-4 z-50 overflow-auto"
+      {...modalBackgroundAnimation}
+    >
+      <motion.div
+        className="bg-custom-cream w-full max-w-4xl rounded-lg shadow-lg p-4 md:p-6 overflow-y-auto max-h-screen mt-10 md:mt-24 mb-10 md:mb-20"
+        {...modalContentAnimation}
+      >
         <div className="flex flex-col md:flex-row justify-between gap-3 overflow-y-auto">
           {/* LEFT */}
           <div className="w-full md:w-1/2 md:pr-4 ">
@@ -48,7 +56,7 @@ function SupplierCreation({ closeModal }) {
                 <label className="w-1/3 text-right pr-4">Vendor Code</label>
                 <div className="w-2/3 flex flex-col">
                   <input
-                    type="text"
+                    type="number"
                     name="supplierCode"
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -161,7 +169,7 @@ function SupplierCreation({ closeModal }) {
                 <label className="w-1/3 text-right pr-4">Postal code</label>
                 <div className="w-2/3 flex flex-col">
                   <input
-                    type="text"
+                    type="number"
                     name="postalCode"
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -180,7 +188,7 @@ function SupplierCreation({ closeModal }) {
                 <label className="w-1/3 text-right pr-4">TAX reg No</label>
                 <div className="w-2/3 flex flex-col">
                   <input
-                    type="text"
+                    type="number"
                     name="taxRegNo"
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -199,7 +207,7 @@ function SupplierCreation({ closeModal }) {
                 <label className="w-1/3 text-right pr-4">FSSAI No</label>
                 <div className="w-2/3 flex flex-col">
                   <input
-                    type="text"
+                    type="number"
                     name="fssaiNo"
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -243,7 +251,7 @@ function SupplierCreation({ closeModal }) {
                 <label className="w-1/3 text-right pr-4">Land phone</label>
                 <div className="w-2/3 flex flex-col">
                   <input
-                    type="text"
+                    type="number"
                     name="landPhone"
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -257,12 +265,12 @@ function SupplierCreation({ closeModal }) {
                   )}
                 </div>
               </div>
-               {/* inputs */}
-               <div className="flex items-center mb-2 ">
+              {/* inputs */}
+              <div className="flex items-center mb-2 ">
                 <label className="w-1/3 text-right pr-4">Mobile No</label>
                 <div className="w-2/3 flex flex-col">
                   <input
-                    type="text"
+                    type="number"
                     name="mobileNo"
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -276,12 +284,12 @@ function SupplierCreation({ closeModal }) {
                   )}
                 </div>
               </div>
-               {/* inputs */}
-               <div className="flex items-center mb-2 ">
+              {/* inputs */}
+              <div className="flex items-center mb-2 ">
                 <label className="w-1/3 text-right pr-4">Whatsapp No</label>
                 <div className="w-2/3 flex flex-col">
                   <input
-                    type="text"
+                    type="number"
                     name="whatsappNo"
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -295,8 +303,8 @@ function SupplierCreation({ closeModal }) {
                   )}
                 </div>
               </div>
-                {/* inputs */}
-                <div className="flex items-center mb-2 ">
+              {/* inputs */}
+              <div className="flex items-center mb-2 ">
                 <label className="w-1/3 text-right pr-4">Email</label>
                 <div className="w-2/3 flex flex-col">
                   <input
@@ -314,8 +322,8 @@ function SupplierCreation({ closeModal }) {
                   )}
                 </div>
               </div>
-                {/* inputs */}
-                <div className="flex items-center mb-2 ">
+              {/* inputs */}
+              <div className="flex items-center mb-2 ">
                 <label className="w-1/3 text-right pr-4">Bank name</label>
                 <div className="w-2/3 flex flex-col">
                   <input
@@ -333,12 +341,12 @@ function SupplierCreation({ closeModal }) {
                   )}
                 </div>
               </div>
-                {/* inputs */}
-                <div className="flex items-center mb-2 ">
+              {/* inputs */}
+              <div className="flex items-center mb-2 ">
                 <label className="w-1/3 text-right pr-4">Account No</label>
                 <div className="w-2/3 flex flex-col">
                   <input
-                    type="text"
+                    type="number"
                     name="accountNo"
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -352,8 +360,8 @@ function SupplierCreation({ closeModal }) {
                   )}
                 </div>
               </div>
-                {/* inputs */}
-                <div className="flex items-center mb-2 ">
+              {/* inputs */}
+              <div className="flex items-center mb-2 ">
                 <label className="w-1/3 text-right pr-4">UPI</label>
                 <div className="w-2/3 flex flex-col">
                   <input
@@ -371,12 +379,12 @@ function SupplierCreation({ closeModal }) {
                   )}
                 </div>
               </div>
-                {/* inputs */}
-                <div className="flex items-center mb-2 ">
+              {/* inputs */}
+              <div className="flex items-center mb-2 ">
                 <label className="w-1/3 text-right pr-4">IBAN</label>
                 <div className="w-2/3 flex flex-col">
                   <input
-                    type="text"
+                    type="number"
                     name="iban"
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -390,8 +398,8 @@ function SupplierCreation({ closeModal }) {
                   )}
                 </div>
               </div>
-                 {/* inputs */}
-                 <div className="flex items-center mb-2 ">
+              {/* inputs */}
+              <div className="flex items-center mb-2 ">
                 <label className="w-1/3 text-right pr-4">Opening balance</label>
                 <div className="w-2/3 flex flex-col">
                   <input
@@ -409,17 +417,24 @@ function SupplierCreation({ closeModal }) {
                   )}
                 </div>
               </div>
-                 {/* inputs */}
-                 <div className="flex items-center mb-2 ">
+              {/* inputs */}
+              <div className="flex items-center mb-2 ">
                 <label className="w-1/3 text-right pr-4">Balance type</label>
                 <div className="w-2/3 flex flex-col">
-                  <input
-                    type="text"
+                  <Select
                     name="balanceType"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
+                    variant="filled"
                     value={values.balanceType}
-                    className="p-1.5 flex-grow bg-inputColor rounded-lg text-sm focus:outline-none ml-2"
+                    className="ml-2"
+                    style={{ flex: 1, height: 35 }}
+                    options={[
+                      { value: "cash", label: "CASH" },
+                      { value: "check", label: "CHECK" },
+                    ]}
+                    alignContent="start"
+                    onChange={(value) => {
+                      setFieldValue("balanceType", value);
+                    }}
                   />
                   {touched.balanceType && errors.balanceType && (
                     <span className="text-red-500 text-[10px] mt-0 text-end mr-1">
@@ -428,8 +443,8 @@ function SupplierCreation({ closeModal }) {
                   )}
                 </div>
               </div>
-                 {/* inputs */}
-                 <div className="flex items-center mb-2 ">
+              {/* inputs */}
+              <div className="flex items-center mb-2 ">
                 <label className="w-1/3 text-right pr-4">Credit date</label>
                 <div className="w-2/3 flex flex-col">
                   <input
@@ -447,7 +462,6 @@ function SupplierCreation({ closeModal }) {
                   )}
                 </div>
               </div>
-              
             </div>
           </div>
         </div>
@@ -494,11 +508,11 @@ const initialValues = {
   iban: "",
   openingBalance: "",
   balanceType: "",
-  creditedDate: new Date().toISOString().split("T")[0], // added this line
+  creditedDate: new Date().toISOString().split("T")[0], 
 };
 
-
-const modalBackgroundAnimation = { //animation design
+const modalBackgroundAnimation = {
+  //animation design
   initial: { opacity: 0 },
   animate: { opacity: 1 },
   transition: { duration: 0.1 },
