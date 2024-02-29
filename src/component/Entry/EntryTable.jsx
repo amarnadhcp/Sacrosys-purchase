@@ -1,18 +1,24 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import editIcon from "../../assests/images/Edit.svg";
 import EmptyIcon from "../../assests/images/Empty.svg";
 import screenshotIcon from "../../assests/images/screenShot.png";
 import SearchBar from "../Navbar/SearchBar";
 import ReturnModal from "./ReturnModal";
 import EditModal from "./EditModal";
+import { MdPictureAsPdf, MdInsertDriveFile } from 'react-icons/md';
 import { DatePicker } from 'antd';
+import useExcelExport from "../../utils/Excel";
+import usePDFGenerator from "../../utils/Pdf";
 const { RangePicker } = DatePicker;
 
 function EntryTable() {
+  const componentRef = useRef();
   const [isModalOpen, setIsModalOpen] = useState(false);//modale opening
   const [EditModalOpen, setModalOpen] = useState(false);//modale opening
   const [modalData, setModalData] = useState(null);
   const [selectedDateRange, setSelectedDateRange] = useState([]);
+  const exportToExcel = useExcelExport(componentRef, 'Return_List', [7,8,9]);
+  const generatePDF = usePDFGenerator(componentRef, 'Return_List', [7,8,9]);
   
   const handleDateRangeChange = (dates) => {
     !dates ? setSelectedDateRange([]) : setSelectedDateRange(dates);
@@ -31,11 +37,19 @@ function EntryTable() {
       <div className="mx-auto px-2 overflow-auto my-1">
         <SearchBar />
         <div className="overflow-x-auto min-w-full">
-          <div className="mb-3 mt-0 mx-1 ">
-            <RangePicker onChange={handleDateRangeChange} />
-          </div>
+        <div className="mb-3 mt-0 mx-1 flex justify-between items-center">
+      <RangePicker onChange={handleDateRangeChange} />
+      <div className="align-end flex items-center">
+        <button onClick={generatePDF} className="flex items-center bg-white text-black border-md border border-gray-300 rounded-lg p-1 px-3 py-2 cursor-pointer text-xs mx-1">
+          PDF <MdPictureAsPdf className="ml-1 text-lg" />
+        </button>
+        <button onClick={exportToExcel} className="flex items-center bg-white text-black border-md border border-gray-300 rounded-lg p-1 px-3 py-2 cursor-pointer text-xs mx-1">
+          Excel  <MdInsertDriveFile className="ml-1 text-lg" />
+        </button>
+      </div>
+     </div>
           <div className="overflow-y-auto h-[435px]">
-          <table className="w-full text-xs text-left rtl:text-right text-gray-500 dark:text-gray-400 z-0 border-collapse">
+          <table className="w-full text-xs text-left rtl:text-right text-gray-500 dark:text-gray-400 z-0 border-collapse"  ref={componentRef}>
             <thead className="sticky  top-0 text-xs text-white font-inter bg-custom-black text-center ">
               <tr>
                 <th className="px-2 py-2 md:px-4 md:py-4 ">Date</th>

@@ -15,12 +15,13 @@ const usePDFGenerator = (tableRef, fileName, columnsToRemove = []) => {
     const table = input.cloneNode(true);    // Clone the table node
 
     // Remove specified columns
-    columnsToRemove.forEach(columnToRemove => {
+    columnsToRemove.reverse().forEach(columnToRemove => {
       const thToRemove = table.querySelector(`th:nth-child(${columnToRemove})`);
       const tdToRemove = table.querySelectorAll(`td:nth-child(${columnToRemove})`);
       thToRemove?.remove();
       tdToRemove.forEach(td => td.remove());
     });
+    
 
     pdf.autoTable({ html: table, styles: { halign: 'center', valign: 'middle' } });
   

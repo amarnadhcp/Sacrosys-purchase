@@ -3,7 +3,7 @@ import SearchBar from "../../component/Navbar/SearchBar";
 import NavigationBar from "../../component/Navbar/NavigationBar";
 import { DatePicker } from "antd";
 import { fetchvendorData } from "../../services/Api";
-import { Button, Popover } from 'antd';
+import { MdPictureAsPdf, MdInsertDriveFile } from 'react-icons/md';
 import useExcelExport from "../../utils/Excel";
 import usePDFGenerator from "../../utils/Pdf";
 const { RangePicker } = DatePicker;
@@ -40,13 +40,6 @@ function SupplierList() {
           );
         });
 
-   const content = (
-      <div>
-        <Button onClick={generatePDF} className="bg-[#AE45C6] text-white border-md rounded-lg p-1 px-3 py-1.5 cursor-pointer text-xs mx-1">Pdf</Button>
-        <Button onClick={exportToExcel} className="bg-[#AE45C6] text-white border-md rounded-lg p-1 px-3 py-1.5 cursor-pointer text-xs mx-1">Excel</Button>
-      </div>
-    );      
-
   return (
     <div className="mx-auto px-2 overflow-auto my-1 ">
       <div className="flex flex-col md:flex-row-reverse justify-between items-center bg-default">
@@ -54,14 +47,17 @@ function SupplierList() {
         <SearchBar show="Vendor" />
       </div>
       <div className="overflow-x-auto min-w-full">
-        <div className="mb-3 mt-0 mx-1 flex justify-between">
-          <RangePicker onChange={handleDateRangeChange} />
-          <div className="align-end">
-          <Popover content={content}trigger="hover">
-              <Button>Print out</Button>
-          </Popover>
-          </div>
-        </div>
+      <div className="mb-3 mt-0 mx-1 flex justify-between items-center">
+      <RangePicker onChange={handleDateRangeChange} />
+      <div className="align-end flex items-center">
+        <button onClick={generatePDF} className="flex items-center bg-white text-black border-md border border-gray-300 rounded-lg p-1 px-3 py-2 cursor-pointer text-xs mx-1">
+          PDF <MdPictureAsPdf className="ml-1 text-lg" />
+        </button>
+        <button onClick={exportToExcel} className="flex items-center bg-white text-black border-md border border-gray-300 rounded-lg p-1 px-3 py-2 cursor-pointer text-xs mx-1">
+          Excel  <MdInsertDriveFile className="ml-1 text-lg" />
+        </button>
+      </div>
+     </div>
         <div className="overflow-y-auto h-[464px]">
           <table className="w-full text-xs text-left rtl:text-right text-gray-500 dark:text-gray-400 z-0 border-collapse"  ref={componentRef}>
             <thead className="sticky  top-0 text-xs text-white font-inter bg-custom-black text-center z-10">
