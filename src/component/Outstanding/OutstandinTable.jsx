@@ -1,6 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import SearchBar from "../Navbar/SearchBar";
-import NavigationBar from "../Navbar/NavigationBar";
 import OutStandModal from "./OutStandModal";
 import { DatePicker } from "antd";
 import { MdPictureAsPdf, MdInsertDriveFile } from 'react-icons/md';
@@ -38,11 +36,7 @@ function OutstandinTable() {
         });
 
   return (
-    <div className="mx-auto  px-2 overflow-auto my-0">
-      <div className="flex flex-col md:flex-row-reverse justify-between items-center bg-default mb-0 mt-1">
-        <NavigationBar show="out" />
-        <SearchBar />
-      </div>
+    <>
       <div className="overflow-x-auto min-w-full">
       <div className="mb-3 mt-0 mx-1 flex justify-between items-center">
       <RangePicker onChange={handleDateRangeChange} />
@@ -97,7 +91,7 @@ function OutstandinTable() {
         </div>
       </div>
       <DetailsCount filteredData={filteredData} />
-    </div>
+      </>
   );
 }
 
