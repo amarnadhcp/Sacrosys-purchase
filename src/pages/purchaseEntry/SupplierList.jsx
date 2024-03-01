@@ -1,19 +1,22 @@
 import React, { useEffect, useRef, useState } from "react";
 import SearchBar from "../../component/Navbar/SearchBar";
+import EditVendor from "../../component/Entry/EditVendor";
 import NavigationBar from "../../component/Navbar/NavigationBar";
 import { DatePicker } from "antd";
 import { fetchvendorData } from "../../services/Api";
-import { Button, Popover } from 'antd';
+import { MdPictureAsPdf, MdInsertDriveFile } from 'react-icons/md';
 import useExcelExport from "../../utils/Excel";
 import usePDFGenerator from "../../utils/Pdf";
 const { RangePicker } = DatePicker;
 
 function SupplierList() {
   const componentRef = useRef();
+  const [isModalOpen, setIsModalOpen] = useState(false);//modale opening
+  const [modalData, setModalData] = useState(null);
   const [selectedDateRange, setSelectedDateRange] = useState([]);
   const [data, SetData] = useState([]);
-  const exportToExcel = useExcelExport(componentRef, 'Return_List', []);
-  const generatePDF = usePDFGenerator(componentRef, 'Return_List', []);
+  const exportToExcel = useExcelExport(componentRef, 'Outstanding_List', [10]);
+  const generatePDF = usePDFGenerator(componentRef, 'Outstanding_List', [10]);
 
   useEffect(() => {
     SetData(fetchvendorData());
@@ -40,13 +43,6 @@ function SupplierList() {
           );
         });
 
-   const content = (
-      <div>
-        <Button onClick={generatePDF} className="bg-[#AE45C6] text-white border-md rounded-lg p-1 px-3 py-1.5 cursor-pointer text-xs mx-1">Pdf</Button>
-        <Button onClick={exportToExcel} className="bg-[#AE45C6] text-white border-md rounded-lg p-1 px-3 py-1.5 cursor-pointer text-xs mx-1">Excel</Button>
-      </div>
-    );      
-
   return (
     <div className="mx-auto px-2 overflow-auto my-1 ">
       <div className="flex flex-col md:flex-row-reverse justify-between items-center bg-default">
@@ -54,15 +50,18 @@ function SupplierList() {
         <SearchBar show="Vendor" />
       </div>
       <div className="overflow-x-auto min-w-full">
-        <div className="mb-3 mt-0 mx-1 flex justify-between">
-          <RangePicker onChange={handleDateRangeChange} />
-          <div className="align-end">
-          <Popover content={content}trigger="hover">
-              <Button>Print out</Button>
-          </Popover>
-          </div>
-        </div>
-        <div className="overflow-y-auto h-[464px]">
+      <div className="mb-3 mt-0 mx-1 flex justify-between items-center">
+      <RangePicker onChange={handleDateRangeChange} />
+      <div className="align-end flex items-center">
+        <button onClick={generatePDF} className="flex items-center bg-white text-black border-md border border-gray-300 rounded-lg p-1 px-3 py-2 cursor-pointer text-xs mx-1">
+          PDF <MdPictureAsPdf className="ml-1 text-lg" />
+        </button>
+        <button onClick={exportToExcel} className="flex items-center bg-white text-black border-md border border-gray-300 rounded-lg p-1 px-3 py-2 cursor-pointer text-xs mx-1">
+          Excel  <MdInsertDriveFile className="ml-1 text-lg" />
+        </button>
+      </div>
+     </div>
+        <div className="overflow-y-auto h-[440px]">
           <table className="w-full text-xs text-left rtl:text-right text-gray-500 dark:text-gray-400 z-0 border-collapse"  ref={componentRef}>
             <thead className="sticky  top-0 text-xs text-white font-inter bg-custom-black text-center z-10">
               <tr>
@@ -75,6 +74,7 @@ function SupplierList() {
                 <th className="px-2 py-2 md:px-4 md:py-4">Account No</th>
                 <th className="px-2 py-2 md:px-4 md:py-4">Balance type</th>
                 <th className="px-2 py-2 md:px-4 md:py-4">Credit date</th>
+                <th className="px-2 py-2 md:px-4 md:py-4 flex items-center justify-center">Edit</th>
                 <th className="px-2 py-2 md:px-4 md:py-4">Status</th>
               </tr>
             </thead>
@@ -93,6 +93,14 @@ function SupplierList() {
                   <td className="px-4 py-3 text-black">{item.accountNo}</td>
                   <td className="px-4 py-3 text-black">{item.balanceType}</td>
                   <td className="px-4 py-3 text-black">{item.creditDate}</td>
+                  <td className="px-4 py-4">
+                    <button className="bg-pink-500 text-white border-md rounded-lg p-1 px-4 cursor-pointer"
+                    onClick={()=>{setIsModalOpen(true);
+                     setModalData(item)}}>
+                      edit
+                    </button>
+                    {isModalOpen && modalData === item && <EditVendor closeModal={() => setIsModalOpen(false)} rowData={modalData} />}
+                  </td>
                   <td className="px-4 md:py-4 text-black py-7 flex items-center justify-center">
                     <span className="mr-2 text-center">Active</span>
                     <label className="relative inline-flex items-center">

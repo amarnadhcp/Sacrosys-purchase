@@ -32,16 +32,7 @@ function EntryForm() {
   const [paymentType, setPayment] = useState(10);
 
   //form submition function and validation
-  const {
-    values,
-    errors,
-    touched,
-    handleBlur,
-    handleSubmit,
-    handleChange,
-    setFieldValue,
-    isValid,
-  } = useFormik({
+  const {values,errors,touched,handleBlur,handleSubmit,handleChange,setFieldValue,isValid,} = useFormik({
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: async (values) => {

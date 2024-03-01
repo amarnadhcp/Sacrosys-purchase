@@ -4,7 +4,8 @@ import { Select } from "antd";
 import { useFormik } from "formik";
 import { Suppliervalidation } from "../../Validation/Yup";
 
-function SupplierCreation({ closeModal }) {
+function EditVendor({ closeModal,rowData }) {
+  console.log(rowData);
   useEffect(() => {
     //stoping baground scrolling
     const body = document.querySelector("body");
@@ -19,16 +20,31 @@ function SupplierCreation({ closeModal }) {
     return () => document.removeEventListener("mousedown", handleOutsideClick);
   }, [closeModal]);
 
-  const {
-    values,
-    errors,
-    touched,
-    handleBlur,
-    handleSubmit,
-    handleChange,
-    setFieldValue,
-    isValid,
-  } = useFormik({
+  const initialValues = {
+    supplierCode: rowData.supplierCode,
+    supplierName: rowData.supplierName,
+    supplierType: rowData.supplierType,
+    country: rowData.country,
+    state: rowData.state,
+    address: rowData.address,
+    postalCode: rowData.postalCode,
+    taxRegNo: rowData.taxRegNo,
+    fssaiNo: rowData.fssaiNo,
+    panCardNo: rowData.panCardNo,
+    landPhone: rowData.landPhone,
+    mobileNo: rowData.mobileNo,
+    whatsappNo: rowData.whatsappNo,
+    email: rowData.email,
+    bankName: rowData.bankName,
+    accountNo: rowData.accountNo,
+    upi: rowData.upi,
+    iban: rowData.iban,
+    openingBalance: rowData.openingBalance,
+    balanceType:rowData.balanceType,
+    creditedDate:rowData.creditedDate, 
+  };
+
+  const {values,errors,touched,handleBlur,handleSubmit,handleChange,setFieldValue,isValid,} = useFormik({
     initialValues: initialValues,
     validationSchema: Suppliervalidation,
     onSubmit: async (values) => {
@@ -39,14 +55,8 @@ function SupplierCreation({ closeModal }) {
   });
 
   return (
-    <motion.div
-      className="fixed inset-0 bg-default bg-opacity-80 flex justify-center items-center px-4 z-50 overflow-auto"
-      {...modalBackgroundAnimation}
-    >
-      <motion.div
-        className="bg-custom-cream w-full max-w-4xl rounded-lg shadow-lg p-4 md:p-6 overflow-y-auto max-h-screen mt-10 md:mt-24 mb-10 md:mb-20"
-        {...modalContentAnimation}
-      >
+    <motion.div className="fixed inset-0 bg-default bg-opacity-80 flex justify-center items-center px-4 z-50 overflow-auto"{...modalBackgroundAnimation} >
+      <motion.div className="bg-custom-cream w-full max-w-4xl rounded-lg shadow-lg p-4 md:p-6 overflow-y-auto max-h-screen mt-10 md:mt-24 mb-10 md:mb-20"{...modalContentAnimation}>
         <div className="flex flex-col md:flex-row justify-between gap-3 overflow-y-auto">
           {/* LEFT */}
           <div className="w-full md:w-1/2 md:pr-4 ">
@@ -485,31 +495,9 @@ function SupplierCreation({ closeModal }) {
   );
 }
 
-export default SupplierCreation;
+export default EditVendor;
 
-const initialValues = {
-  supplierCode: "",
-  supplierName: "",
-  supplierType: "",
-  country: "",
-  state: "",
-  address: "",
-  postalCode: "",
-  taxRegNo: "",
-  fssaiNo: "",
-  panCardNo: "",
-  landPhone: "",
-  mobileNo: "",
-  whatsappNo: "",
-  email: "",
-  bankName: "",
-  accountNo: "",
-  upi: "",
-  iban: "",
-  openingBalance: "",
-  balanceType: "",
-  creditedDate: new Date().toISOString().split("T")[0], 
-};
+
 
 const modalBackgroundAnimation = {
   //animation design

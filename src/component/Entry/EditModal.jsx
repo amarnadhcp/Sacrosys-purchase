@@ -35,7 +35,10 @@ console.log(rowData);
     date: rowData.date,
     invoiceNum: rowData.invoiceNumber,
     amount: rowData.amount,
+    amountPaid:rowData.amountPaid,
+    balance:rowData.balance,
     vat: rowData.vat,
+
   };
 
   //form submition function and validation
@@ -137,6 +140,44 @@ console.log(rowData);
           {/* inputs */}
           <div className="flex flex-col mt-2">
             <div className="flex items-center">
+              <label className="w-1/4 text-right pr-4 text-xs  ">Amount paid</label>
+              <input
+                type="number"
+                name="amountPaid"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.amountPaid}
+                className="p-2 flex-grow bg-inputColor  rounded-lg text-sm focus:outline-none ml-2"
+              />
+            </div>
+            {touched.amountPaid && errors.amountPaid && (
+              <span className="text-red-500 text-[10px] mt-0 text-end mr-1">
+                {errors.amountPaid}
+              </span>
+            )}
+          </div>
+          {/* inputs */}
+          <div className="flex flex-col mt-2">
+            <div className="flex items-center">
+              <label className="w-1/4 text-right pr-4 text-xs  ">balance</label>
+              <input
+                type="number"
+                name="balance"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.balance}
+                className="p-2 flex-grow bg-inputColor  rounded-lg text-sm focus:outline-none ml-2"
+              />
+            </div>
+            {touched.balance && errors.balance && (
+              <span className="text-red-500 text-[10px] mt-0 text-end mr-1">
+                {errors.balance}
+              </span>
+            )}
+          </div>
+          {/* inputs */}
+          <div className="flex flex-col mt-2">
+            <div className="flex items-center">
               <label className="w-1/4 text-right pr-4 text-xs  ">Vat</label>
               <input
                 type="number"
@@ -230,6 +271,12 @@ const validationSchema = Yup.object().shape({
   amount: Yup.number()
     .required("Amount is required")
     .positive("Amount must be a positive number"),
+  amountPaid: Yup.number()
+    .required("amountPaid is required")
+    .positive("amountPaid must be a positive number"),
+  balance: Yup.number()
+    .required("balance is required")
+    .positive("balance must be a positive number"),
   vat: Yup.number()
     .required("VAT is required")
     .positive("VAT must be a positive number"),

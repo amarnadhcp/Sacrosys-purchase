@@ -1,4 +1,105 @@
 
+export const fetchEntryData =()=>{
+  return [
+    {
+      id: 1,
+      date: "2023-08-09",
+      vendor: "3486348378",
+      invoiceNumber: "3486348378",
+      amount: 1000,
+      amountPaid:700,
+      balance:800,
+      vat: 100,
+      paymentType: "cash",
+      image:"https://asset.cloudinary.com/dvprhxg7x/db8776dd88b08b791a4841a2d30f7b23"
+    },
+    {
+      id: 2,
+      date: "2023-08-10",
+      vendor: "4527834523",
+      invoiceNumber: "4527834523",
+      amount: 1500,
+      amountPaid:700,
+      balance:800,
+      vat: 150,
+      paymentType: "credit",
+      image:"https://asset.cloudinary.com/dvprhxg7x/db8776dd88b08b791a4841a2d30f7b23"
+    },
+    {
+      id: 3,
+      date: "2023-08-11",
+      vendor: "5728394723",
+      invoiceNumber: "5728394723",
+      amount: 750,
+      amountPaid:700,
+      balance:800,
+      vat: 75,
+      paymentType: "cash",
+      image:"https://asset.cloudinary.com/dvprhxg7x/db8776dd88b08b791a4841a2d30f7b23"
+    },
+    {
+      id: 4,
+      date: "2023-08-12",
+      vendor: "4829304832",
+      invoiceNumber: "4829304832",
+      amount: 1200,
+      amountPaid:700,
+      balance:800,
+      vat: 120,
+      paymentType: "credit",
+      image:"https://asset.cloudinary.com/dvprhxg7x/db8776dd88b08b791a4841a2d30f7b23"
+    },
+    {
+      id: 5,
+      date: "2023-08-13",
+      vendor: "5839205832",
+      invoiceNumber: "5839205832",
+      amount: 900,
+      amountPaid:700,
+      balance:800,
+      vat: 90,
+      paymentType: "cash",
+      image:"https://asset.cloudinary.com/dvprhxg7x/db8776dd88b08b791a4841a2d30f7b23"
+    },
+    {
+      id: 6,
+      date: "2023-08-13",
+      vendor: "5839276832",
+      invoiceNumber: "5839205532",
+      amount: 900,
+      amountPaid:700,
+      balance:800,
+      vat: 90,
+      paymentType: "cash",
+      image:"https://asset.cloudinary.com/dvprhxg7x/db8776dd88b08b791a4841a2d30f7b23"
+    },
+    {
+      id: 7,
+      date: "2023-08-13",
+      vendor: "5834405832",
+      invoiceNumber: "5839275832",
+      amount: 900,
+      amountPaid:700,
+      balance:800,
+      vat: 90,
+      paymentType: "cash",
+      image:"https://asset.cloudinary.com/dvprhxg7x/db8776dd88b08b791a4841a2d30f7b23"
+    },
+    {
+      id: 8,
+      date: "2023-08-13",
+      vendor: "5839205833",
+      invoiceNumber: "5899205832",
+      amount: 900,
+      amountPaid:700,
+      balance:800,
+      vat: 90,
+      paymentType: "cash",
+      image:"https://asset.cloudinary.com/dvprhxg7x/db8776dd88b08b791a4841a2d30f7b23"
+    },
+  ]
+}
+
   export const fetchvendorData = () => {
     return [
       {
@@ -211,4 +312,436 @@
       },
     ];
   }
+
+  export const fetchReturnData = ()=>{
+    return [
+      {
+        id: 1,
+        date: "02/01/29",
+        supplier: "343434234",
+        invoiceNumber: "3432343342",
+        returnAmount: "1000.000",
+        vat: "100.000",
+        remarks: "Main kitchen",
+        image:"https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=600"
+      },
+      {
+        id: 2,
+        date: "02/01/24",
+        supplier: "342323442",
+        invoiceNumber: "3423234424",
+        returnAmount: "1000.000",
+        vat: "100.000",
+        remarks: "Main kitchen",
+        image:"https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=600"
+      },
+      {
+        id: 2,
+        date: "02/01/24",
+        supplier: "342323442",
+        invoiceNumber: "3423234424",
+        returnAmount: "1000.000",
+        vat: "100.000",
+        remarks: "Main kitchen",
+        image:"https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=600"
+      },
+      {
+        id: 2,
+        date: "02/01/24",
+        supplier: "342323442",
+        invoiceNumber: "3423234424",
+        returnAmount: "1000.000",
+        vat: "100.000",
+        remarks: "Main kitchen",
+        image:"https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=600"
+      },
+      {
+        id: 2,
+        date: "02/01/24",
+        supplier: "342323442",
+        invoiceNumber: "3423234424",
+        returnAmount: "1000.000",
+        vat: "100.000",
+        remarks: "Main kitchen",
+        image:"https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=600"
+      },
+      {
+        id: 2,
+        date: "10/01/24",
+        supplier: "342323442",
+        invoiceNumber: "3423234424",
+        returnAmount: "1000.000",
+        vat: "100.000",
+        remarks: "Main kitchen",
+        image:"https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=600"
+      },
+      {
+        id: 2,
+        date: "12/01/24",
+        supplier: "342323442",
+        invoiceNumber: "3423234424",
+        returnAmount: "1000.000",
+        vat: "100.000",
+        remarks: "Main kitchen",
+        image:"https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=600"
+      },
+      {
+        id: 2,
+        date: "01/01/24",
+        supplier: "342323442",
+        invoiceNumber: "3423234424",
+        returnAmount: "1000.000",
+        vat: "100.000",
+        remarks: "Main kitchen",
+        image:"https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=600"
+      },
+      {
+        id: 2,
+        date: "02/01/24",
+        supplier: "342323442",
+        invoiceNumber: "3423234424",
+        returnAmount: "1000.000",
+        vat: "100.000",
+        remarks: "Main kitchen",
+        image:"https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=600"
+      },
+      {
+        id: 2,
+        date: "04/01/24",
+        supplier: "342323442",
+        invoiceNumber: "3423234424",
+        returnAmount: "1000.000",
+        vat: "100.000",
+        remarks: "Main kitchen",
+        image:"https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=600"
+      },
+      {
+        id: 2,
+        date: "06/01/24",
+        supplier: "342323442",
+        invoiceNumber: "3423234424",
+        returnAmount: "1000.000",
+        vat: "100.000",
+        remarks: "Main kitchen",
+        image:"https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=600"
+      },
+      {
+        id: 2,
+        date: "06/01/24",
+        supplier: "342323442",
+        invoiceNumber: "3423234424",
+        returnAmount: "1000.000",
+        vat: "100.000",
+        remarks: "Main kitchen",
+        image:"https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=600"
+      },
+      {
+        id: 2,
+        date: "06/01/24",
+        supplier: "342323442",
+        invoiceNumber: "3423234424",
+        returnAmount: "1000.000",
+        vat: "100.000",
+        remarks: "Main kitchen",
+        image:"https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=600"
+      },
+      {
+        id: 2,
+        date: "06/01/24",
+        supplier: "342323442",
+        invoiceNumber: "3423234424",
+        returnAmount: "1000.000",
+        vat: "100.000",
+        remarks: "Main kitchen",
+        image:"https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=600"
+      },
+      {
+        id: 2,
+        date: "06/01/24",
+        supplier: "342323442",
+        invoiceNumber: "3423234424",
+        returnAmount: "1000.000",
+        vat: "100.000",
+        remarks: "Main kitchen",
+        image:"https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=600"
+      },
+      {
+        id: 2,
+        date: "06/01/24",
+        supplier: "342323442",
+        invoiceNumber: "3423234424",
+        returnAmount: "1000.000",
+        vat: "100.000",
+        remarks: "Main kitchen",
+        image:"https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=600"
+      },
+      {
+        id: 2,
+        date: "06/01/24",
+        supplier: "342323442",
+        invoiceNumber: "3423234424",
+        returnAmount: "1000.000",
+        vat: "100.000",
+        remarks: "Main kitchen",
+        image:"https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=600"
+      },
+      {
+        id: 2,
+        date: "06/01/24",
+        supplier: "342323442",
+        invoiceNumber: "3423234424",
+        returnAmount: "1000.000",
+        vat: "100.000",
+        remarks: "Main kitchen",
+        image:"https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=600"
+      },
+      {
+        id: 2,
+        date: "06/01/24",
+        supplier: "342323442",
+        invoiceNumber: "3423234424",
+        returnAmount: "1000.000",
+        vat: "100.000",
+        remarks: "Main kitchen",
+        image:"https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=600"
+      },
+      {
+        id: 2,
+        date: "06/01/24",
+        supplier: "342323442",
+        invoiceNumber: "3423234424",
+        returnAmount: "1000.000",
+        vat: "100.000",
+        remarks: "Main kitchen",
+        image:"https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=600"
+      },
+      {
+        id: 2,
+        date: "06/01/24",
+        supplier: "342323442",
+        invoiceNumber: "3423234424",
+        returnAmount: "1000.000",
+        vat: "100.000",
+        remarks: "Main kitchen",
+        image:"https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=600"
+      },
+      {
+        id: 2,
+        date: "06/01/24",
+        supplier: "342323442",
+        invoiceNumber: "3423234424",
+        returnAmount: "1000.000",
+        vat: "100.000",
+        remarks: "Main kitchen",
+        image:"https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=600"
+      },
+      {
+        id: 2,
+        date: "06/01/24",
+        supplier: "342323442",
+        invoiceNumber: "3423234424",
+        returnAmount: "1000.000",
+        vat: "100.000",
+        remarks: "Main kitchen",
+        image:"https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=600"
+      },
+      {
+        id: 2,
+        date: "06/01/24",
+        supplier: "342323442",
+        invoiceNumber: "3423234424",
+        returnAmount: "1000.000",
+        vat: "100.000",
+        remarks: "Main kitchen",
+        image:"https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=600"
+      },
+      {
+        id: 2,
+        date: "06/01/24",
+        supplier: "342323442",
+        invoiceNumber: "3423234424",
+        returnAmount: "1000.000",
+        vat: "100.000",
+        remarks: "Main kitchen",
+        image:"https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=600"
+      },
+      {
+        id: 2,
+        date: "06/01/24",
+        supplier: "342323442",
+        invoiceNumber: "3423234424",
+        returnAmount: "1000.000",
+        vat: "100.000",
+        remarks: "Main kitchen",
+        image:"https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=600"
+      },
+      {
+        id: 2,
+        date: "06/01/24",
+        supplier: "342323442",
+        invoiceNumber: "3423234424",
+        returnAmount: "1000.000",
+        vat: "100.000",
+        remarks: "Main kitchen",
+        image:"https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=600"
+      },
+      {
+        id: 2,
+        date: "06/01/24",
+        supplier: "342323442",
+        invoiceNumber: "3423234424",
+        returnAmount: "1000.000",
+        vat: "100.000",
+        remarks: "Main kitchen",
+        image:"https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=600"
+      },
+      {
+        id: 2,
+        date: "06/01/24",
+        supplier: "342323442",
+        invoiceNumber: "3423234424",
+        returnAmount: "1000.000",
+        vat: "100.000",
+        remarks: "Main kitchen",
+        image:"https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=600"
+      },
+    ]
+  }
   
+
+  export const fetchOutstandingData =()=>{
+    return [
+      {
+        id: 1,
+        date: "09/08/23",
+        creditDate: "09/08/23",
+        supplier: "3468346378",
+        purchaseNumber: "3468346378",
+        invoiceNumber: "3468346378",
+        amount: 1000,
+        amountPaid: 1000,
+        balance: 1000,
+        status: "Payment in progress",
+      },
+      {
+        id: 2,
+        date: "09/08/23",
+        creditDate: "09/08/23",
+        supplier: "3468346378",
+        purchaseNumber: "3468346378",
+        invoiceNumber: "3468346378",
+        amount: 1000,
+        amountPaid: 1000,
+        balance: 1000,
+        status: false,
+      },
+      {
+        id: 3,
+        date: "09/08/23",
+        creditDate: "09/08/23",
+        supplier: "3468346378",
+        purchaseNumber: "3468346378",
+        invoiceNumber: "3468346378",
+        amount: 1000,
+        amountPaid: 1000,
+        balance: 1000,
+        status: false,
+      },
+      {
+        id: 4,
+        date: "09/08/23",
+        creditDate: "09/08/23",
+        supplier: "3468346378",
+        purchaseNumber: "3468346378",
+        invoiceNumber: "3468346378",
+        amount: 1000,
+        amountPaid: 1000,
+        balance: 1000,
+        status: false,
+      },
+      {
+        id: 5,
+        date: "09/08/23",
+        creditDate: "09/08/23",
+        supplier: "3468346378",
+        purchaseNumber: "3468346378",
+        invoiceNumber: "3468346378",
+        amount: 1000,
+        amountPaid: 1000,
+        balance: 1000,
+        status: false,
+      },
+      {
+        id: 6,
+        date: "09/08/23",
+        creditDate: "09/08/23",
+        supplier: "3468346378",
+        purchaseNumber: "3468346378",
+        invoiceNumber: "3468346378",
+        amount: 1000,
+        amountPaid: 1000,
+        balance: 1000,
+        status: true,
+      },
+      {
+        id: 7,
+        date: "09/08/23",
+        creditDate: "09/08/23",
+        supplier: "3468346378",
+        purchaseNumber: "3468346378",
+        invoiceNumber: "3468346378",
+        amount: 1000,
+        amountPaid: 1000,
+        balance: 1000,
+        status: true,
+      },
+      {
+        id: 8,
+        date: "09/08/23",
+        creditDate: "09/08/23",
+        supplier: "3468346378",
+        purchaseNumber: "3468346378",
+        invoiceNumber: "3468346378",
+        amount: 1000,
+        amountPaid: 1000,
+        balance: 1000,
+        status: true,
+      },
+      {
+        id: 9,
+        date: "09/08/23",
+        creditDate: "09/08/23",
+        supplier: "3468346378",
+        purchaseNumber: "3468346378",
+        invoiceNumber: "3468346378",
+        amount: 1000,
+        amountPaid: 1000,
+        balance: 1000,
+        status: true,
+      },
+      {
+        id: 10,
+        date: "09/08/23",
+        creditDate: "09/08/23",
+        supplier: "3468346378",
+        purchaseNumber: "3468346378",
+        invoiceNumber: "3468346378",
+        amount: 1000,
+        amountPaid: 1000,
+        balance: 1000,
+        status: true,
+      },
+      {
+        id: 11,
+        date: "09/08/23",
+        creditDate: "09/08/23",
+        supplier: "3468346378",
+        purchaseNumber: "3468346378",
+        invoiceNumber: "3468346378",
+        amount: 1000,
+        amountPaid: 1000,
+        balance: 1000,
+        status: true,
+      },
+    ]
+  }
