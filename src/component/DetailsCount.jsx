@@ -27,7 +27,7 @@ const detailsCountData = filteredData.reduce((acc, item) => {
       {/* Input 2 */}
       <div className="flex flex-col md:w-1/2 items-center md:pr-4 md:mt-0">
         <label className="w-full md:w-auto text-xs xs:text-sm text-center md:text-left mb-2 md:mb-0 mr-3">
-          No of Purchase
+          Total Amount
         </label>
         <input
           readOnly
@@ -40,7 +40,7 @@ const detailsCountData = filteredData.reduce((acc, item) => {
       {/* Input 3 */}
       <div className="flex flex-col md:w-1/2 items-center md:pr-4 md:mt-0">
         <label className="w-full md:w-auto text-xs xs:text-sm text-center md:text-left mb-2 md:mb-0 mr-3">
-          No of Purchase
+          Paid Amount
         </label>
         <input
           readOnly
@@ -53,7 +53,7 @@ const detailsCountData = filteredData.reduce((acc, item) => {
       {/* Input 4 */}
       <div className="flex flex-col md:w-1/2 items-center md:pr-4 md:mt-0">
         <label className="w-full md:w-auto text-xs xs:text-sm text-center md:text-left mb-2 md:mb-0 mr-3">
-          No of Purchase
+          Balance
         </label>
         <input
           readOnly

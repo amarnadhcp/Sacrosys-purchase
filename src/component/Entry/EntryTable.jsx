@@ -20,8 +20,8 @@ function EntryTable() {
   const [EditModalOpen, setModalOpen] = useState(false);//modale opening
   const [modalData, setModalData] = useState(null);
   const [selectedDateRange, setSelectedDateRange] = useState([]);
-  const exportToExcel = useExcelExport(componentRef, 'Return_List', [7,8,9]);
-  const generatePDF = usePDFGenerator(componentRef, 'Return_List', [7,8,9]);
+  const exportToExcel = useExcelExport(componentRef, 'purchase_List', [9,10,11]);
+  const generatePDF = usePDFGenerator(componentRef, 'purchase_List', [9,10,11]);
 
   useEffect(() => {
        SetData(fetchEntryData());
@@ -63,13 +63,13 @@ function EntryTable() {
                 <th className="px-2 py-2 md:px-4 md:py-4 ">Vendor</th>
                 <th className="px-2 py-2 md:px-4 md:py-4 ">Invoice </th>
                 <th className="px-2 py-2 md:px-4 md:py-4 ">Amount</th>
-                <th className="px-2 py-2 md:px-4 md:py-4 "> paid</th>
+                <th className="px-2 py-2 md:px-4 md:py-4 ">Paid</th>
                 <th className="px-2 py-2 md:px-4 md:py-4 ">Ballance</th>
                 <th className="px-2 py-2 md:px-4 md:py-4 ">VAT</th>
                 <th className="px-2 py-2 md:px-4 md:py-4 ">Payment mode</th>
                 <th className="px-2 py-2 md:px-4 md:py-4 ">Image</th>
                 <th className="px-2 py-2 md:px-4 md:py-4 ">Action</th>
-                <th className="px-2 py-2 md:px-4 md:py-4 ">button</th>
+                <th className="px-2 py-2 md:px-4 md:py-4 ">Button</th>
               </tr>
             </thead>
             <tbody>

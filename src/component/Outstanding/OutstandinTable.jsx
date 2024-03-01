@@ -16,8 +16,8 @@ function OutstandinTable() {
   const [isModalOpen, setIsModalOpen] = useState(false); //modale opening
   const [modalData, setModalData] = useState(null);
   const [selectedDateRange, setSelectedDateRange] = useState([]);
-  const exportToExcel = useExcelExport(componentRef, 'Return_List', [7]);
-  const generatePDF = usePDFGenerator(componentRef, 'Return_List', [7]);
+  const exportToExcel = useExcelExport(componentRef, 'Return_List', []);
+  const generatePDF = usePDFGenerator(componentRef, 'Return_List', []);
 
   useEffect(() => {
     SetData(fetchOutstandingData());
@@ -61,7 +61,7 @@ function OutstandinTable() {
               <tr>
                 <th className="px-2 py-2 md:px-4 md:py-4">Date</th>
                 <th className="px-2 py-2 md:px-4 md:py-4">Credit date</th>
-                <th className="px-2 py-2 md:px-4 md:py-4">vendor</th>
+                <th className="px-2 py-2 md:px-4 md:py-4">Vendor</th>
                 <th className="px-2 py-2 md:px-4 md:py-4">Purchase Number</th>
                 <th className="px-2 py-2 md:px-4 md:py-4">Invoice number</th>
                 <th className="px-2 py-2 md:px-4 md:py-4">Amount</th>
