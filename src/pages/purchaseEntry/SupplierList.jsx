@@ -61,7 +61,7 @@ function SupplierList() {
         </button>
       </div>
      </div>
-        <div className="overflow-y-auto h-[464px]">
+        <div className="overflow-y-auto h-[440px]">
           <table className="w-full text-xs text-left rtl:text-right text-gray-500 dark:text-gray-400 z-0 border-collapse"  ref={componentRef}>
             <thead className="sticky  top-0 text-xs text-white font-inter bg-custom-black text-center z-10">
               <tr>
