@@ -12,7 +12,7 @@ const useExcelExport = (tableRef, fileName, columnsToRemove = []) => {
     const tableClone = tableRef.current.cloneNode(true);
 
     // Remove the specified columns
-    columnsToRemove.forEach(columnToRemove => {
+    columnsToRemove.reverse().forEach(columnToRemove => {
       const thToRemove = tableClone.querySelector(`th:nth-child(${columnToRemove})`);
       const tdToRemove = tableClone.querySelectorAll(`td:nth-child(${columnToRemove})`);
 

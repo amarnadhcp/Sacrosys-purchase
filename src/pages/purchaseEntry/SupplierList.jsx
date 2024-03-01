@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import SearchBar from "../../component/Navbar/SearchBar";
 import EditVendor from "../../component/Entry/EditVendor";
 import NavigationBar from "../../component/Navbar/NavigationBar";
+import editIcon from "../../assests/images/Edit.svg"
 import { DatePicker } from "antd";
 import { fetchvendorData } from "../../services/Api";
 import { MdPictureAsPdf, MdInsertDriveFile } from 'react-icons/md';
@@ -15,8 +16,8 @@ function SupplierList() {
   const [modalData, setModalData] = useState(null);
   const [selectedDateRange, setSelectedDateRange] = useState([]);
   const [data, SetData] = useState([]);
-  const exportToExcel = useExcelExport(componentRef, 'Outstanding_List', [10]);
-  const generatePDF = usePDFGenerator(componentRef, 'Outstanding_List', [10]);
+  const exportToExcel = useExcelExport(componentRef, 'Outstanding_List', [10,11]);
+  const generatePDF = usePDFGenerator(componentRef, 'Outstanding_List', [10,11]);
 
   useEffect(() => {
     SetData(fetchvendorData());
@@ -74,7 +75,7 @@ function SupplierList() {
                 <th className="px-2 py-2 md:px-4 md:py-4">Account No</th>
                 <th className="px-2 py-2 md:px-4 md:py-4">Balance type</th>
                 <th className="px-2 py-2 md:px-4 md:py-4">Credit date</th>
-                <th className="px-2 py-2 md:px-4 md:py-4 flex items-center justify-center">Edit</th>
+                <th className="px-2 py-2 md:px-4 md:py-4 ">Action</th>
                 <th className="px-2 py-2 md:px-4 md:py-4">Status</th>
               </tr>
             </thead>
@@ -93,16 +94,18 @@ function SupplierList() {
                   <td className="px-4 py-3 text-black">{item.accountNo}</td>
                   <td className="px-4 py-3 text-black">{item.balanceType}</td>
                   <td className="px-4 py-3 text-black">{item.creditDate}</td>
-                  <td className="px-4 py-4">
-                    <button className="bg-pink-500 text-white border-md rounded-lg p-1 px-4 cursor-pointer"
-                    onClick={()=>{setIsModalOpen(true);
-                     setModalData(item)}}>
-                      edit
-                    </button>
+                  <td className="px-4 py-2 ">
+                  <img
+                      src={editIcon}
+                      alt="Delete"
+                      className="w-7 h-5 md:ml-8 cursor-pointer"
+                      onClick={()=>{setIsModalOpen(true);
+                        setModalData(item)}}
+                    />
                     {isModalOpen && modalData === item && <EditVendor closeModal={() => setIsModalOpen(false)} rowData={modalData} />}
                   </td>
                   <td className="px-4 md:py-4 text-black py-7 flex items-center justify-center">
-                    <span className="mr-2 text-center">Active</span>
+                    <span className="mr-2 text-center">{item.state ? "\u00A0\u00A0Active" : "Inactive"}</span>
                     <label className="relative inline-flex items-center">
                       <input
                         type="checkbox"
