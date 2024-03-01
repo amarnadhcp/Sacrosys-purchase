@@ -44,16 +44,7 @@ function EditVendor({ closeModal,rowData }) {
     creditedDate:rowData.creditedDate, 
   };
 
-  const {
-    values,
-    errors,
-    touched,
-    handleBlur,
-    handleSubmit,
-    handleChange,
-    setFieldValue,
-    isValid,
-  } = useFormik({
+  const {values,errors,touched,handleBlur,handleSubmit,handleChange,setFieldValue,isValid,} = useFormik({
     initialValues: initialValues,
     validationSchema: Suppliervalidation,
     onSubmit: async (values) => {
@@ -64,14 +55,8 @@ function EditVendor({ closeModal,rowData }) {
   });
 
   return (
-    <motion.div
-      className="fixed inset-0 bg-default bg-opacity-80 flex justify-center items-center px-4 z-50 overflow-auto"
-      {...modalBackgroundAnimation}
-    >
-      <motion.div
-        className="bg-custom-cream w-full max-w-4xl rounded-lg shadow-lg p-4 md:p-6 overflow-y-auto max-h-screen mt-10 md:mt-24 mb-10 md:mb-20"
-        {...modalContentAnimation}
-      >
+    <motion.div className="fixed inset-0 bg-default bg-opacity-80 flex justify-center items-center px-4 z-50 overflow-auto"{...modalBackgroundAnimation} >
+      <motion.div className="bg-custom-cream w-full max-w-4xl rounded-lg shadow-lg p-4 md:p-6 overflow-y-auto max-h-screen mt-10 md:mt-24 mb-10 md:mb-20"{...modalContentAnimation}>
         <div className="flex flex-col md:flex-row justify-between gap-3 overflow-y-auto">
           {/* LEFT */}
           <div className="w-full md:w-1/2 md:pr-4 ">

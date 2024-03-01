@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import editIcon from "../../assests/images/Edit.svg";
 import EmptyIcon from "../../assests/images/Empty.svg";
 import screenshotIcon from "../../assests/images/screenShot.png";
@@ -10,16 +10,22 @@ import { DatePicker } from 'antd';
 import useExcelExport from "../../utils/Excel";
 import usePDFGenerator from "../../utils/Pdf";
 import DetailsCount from "../DetailsCount";
+import { fetchEntryData } from "../../services/Api";
 const { RangePicker } = DatePicker;
 
 function EntryTable() {
   const componentRef = useRef();
+  const [data, SetData] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);//modale opening
   const [EditModalOpen, setModalOpen] = useState(false);//modale opening
   const [modalData, setModalData] = useState(null);
   const [selectedDateRange, setSelectedDateRange] = useState([]);
   const exportToExcel = useExcelExport(componentRef, 'Return_List', [7,8,9]);
   const generatePDF = usePDFGenerator(componentRef, 'Return_List', [7,8,9]);
+
+  useEffect(() => {
+       SetData(fetchEntryData());
+  }, []);
   
   const handleDateRangeChange = (dates) => {
     !dates ? setSelectedDateRange([]) : setSelectedDateRange(dates);
@@ -126,101 +132,3 @@ function EntryTable() {
 
 export default EntryTable;
 
-const data = [
-  {
-    id: 1,
-    date: "2023-08-09",
-    vendor: "3486348378",
-    invoiceNumber: "3486348378",
-    amount: 1000,
-    amountPaid:700,
-    balance:800,
-    vat: 100,
-    paymentType: "cash",
-    image:"https://asset.cloudinary.com/dvprhxg7x/db8776dd88b08b791a4841a2d30f7b23"
-  },
-  {
-    id: 2,
-    date: "2023-08-10",
-    vendor: "4527834523",
-    invoiceNumber: "4527834523",
-    amount: 1500,
-    amountPaid:700,
-    balance:800,
-    vat: 150,
-    paymentType: "credit",
-    image:"https://asset.cloudinary.com/dvprhxg7x/db8776dd88b08b791a4841a2d30f7b23"
-  },
-  {
-    id: 3,
-    date: "2023-08-11",
-    vendor: "5728394723",
-    invoiceNumber: "5728394723",
-    amount: 750,
-    amountPaid:700,
-    balance:800,
-    vat: 75,
-    paymentType: "cash",
-    image:"https://asset.cloudinary.com/dvprhxg7x/db8776dd88b08b791a4841a2d30f7b23"
-  },
-  {
-    id: 4,
-    date: "2023-08-12",
-    vendor: "4829304832",
-    invoiceNumber: "4829304832",
-    amount: 1200,
-    amountPaid:700,
-    balance:800,
-    vat: 120,
-    paymentType: "credit",
-    image:"https://asset.cloudinary.com/dvprhxg7x/db8776dd88b08b791a4841a2d30f7b23"
-  },
-  {
-    id: 5,
-    date: "2023-08-13",
-    vendor: "5839205832",
-    invoiceNumber: "5839205832",
-    amount: 900,
-    amountPaid:700,
-    balance:800,
-    vat: 90,
-    paymentType: "cash",
-    image:"https://asset.cloudinary.com/dvprhxg7x/db8776dd88b08b791a4841a2d30f7b23"
-  },
-  {
-    id: 6,
-    date: "2023-08-13",
-    vendor: "5839276832",
-    invoiceNumber: "5839205532",
-    amount: 900,
-    amountPaid:700,
-    balance:800,
-    vat: 90,
-    paymentType: "cash",
-    image:"https://asset.cloudinary.com/dvprhxg7x/db8776dd88b08b791a4841a2d30f7b23"
-  },
-  {
-    id: 7,
-    date: "2023-08-13",
-    vendor: "5834405832",
-    invoiceNumber: "5839275832",
-    amount: 900,
-    amountPaid:700,
-    balance:800,
-    vat: 90,
-    paymentType: "cash",
-    image:"https://asset.cloudinary.com/dvprhxg7x/db8776dd88b08b791a4841a2d30f7b23"
-  },
-  {
-    id: 8,
-    date: "2023-08-13",
-    vendor: "5839205833",
-    invoiceNumber: "5899205832",
-    amount: 900,
-    amountPaid:700,
-    balance:800,
-    vat: 90,
-    paymentType: "cash",
-    image:"https://asset.cloudinary.com/dvprhxg7x/db8776dd88b08b791a4841a2d30f7b23"
-  },
-];
