@@ -28,7 +28,7 @@ function SearchBar({ show,data,onSelect }) {
             <img
               src={SearchIcon}
               alt="Search Icon"
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 pointer-events-none w-4 h-auto hidden sm:block"
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 pointer-events-none w-4  "
             />
           </div>
           <div className="flex items-center flex-wrap gap-2 md:p-3 justify-center w-full md:w-auto">

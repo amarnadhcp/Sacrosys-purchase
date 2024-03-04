@@ -118,7 +118,7 @@ export const fetchEntryData =()=>{
       {
         id: 2,
         code: "28",
-        supplierName: " Cooper",
+        supplierName: "Cooper",
         country: "Qatar",
         fbsmNo: "2000",
         ribCardNo: "ex9876543210b",
@@ -131,7 +131,7 @@ export const fetchEntryData =()=>{
       {
         id: 3,
         code: "29",
-        supplierName: " Vincent",
+        supplierName: "Vincent",
         country: "Qatar",
         fbsmNo: "3000",
         ribCardNo: "ex1234987650c",
@@ -144,7 +144,7 @@ export const fetchEntryData =()=>{
       {
         id: 4,
         code: "30",
-        supplierName: " Warner",
+        supplierName: "Warner",
         country: "Qatar",
         fbsmNo: "4000",
         ribCardNo: "ex8765432109d",
@@ -157,7 +157,7 @@ export const fetchEntryData =()=>{
       {
         id: 5,
         code: "30",
-        supplierName: " Liam",
+        supplierName: "Liam",
         country: "Qatar",
         fbsmNo: "4000",
         ribCardNo: "ex8765432109d",
@@ -170,7 +170,7 @@ export const fetchEntryData =()=>{
       {
         id: 6,
         code: "30",
-        supplierName: " Olivia",
+        supplierName: "Olivia",
         country: "Qatar",
         fbsmNo: "4000",
         ribCardNo: "ex8765432109d",
@@ -183,7 +183,7 @@ export const fetchEntryData =()=>{
       {
         id: 7,
         code: "30",
-        supplierName: " Noah",
+        supplierName: "Noah",
         country: "Qatar",
         fbsmNo: "4000",
         ribCardNo: "ex8765432109d",
@@ -196,7 +196,7 @@ export const fetchEntryData =()=>{
       {
         id: 8,
         code: "30",
-        supplierName: " Emma",
+        supplierName: "Emma",
         country: "Qatar",
         fbsmNo: "4000",
         ribCardNo: "ex8765432109d",
@@ -287,7 +287,7 @@ export const fetchEntryData =()=>{
       {
         id: 15,
         code: "30",
-        supplierName: " Warner",
+        supplierName: "Warner",
         country: "Qatar",
         fbsmNo: "4000",
         ribCardNo: "ex8765432109d",
@@ -300,7 +300,7 @@ export const fetchEntryData =()=>{
       {
         id: 16,
         code: "30",
-        supplierName: " Warner",
+        supplierName: "Warner",
         country: "Qatar",
         fbsmNo: "4000",
         ribCardNo: "ex8765432109d",
