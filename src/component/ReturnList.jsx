@@ -1,11 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
-import SearchBar from "../Navbar/SearchBar";
-import NavigationBar from "../Navbar/NavigationBar";
-import useExcelExport from "../../utils/Excel";
-import usePDFGenerator from "../../utils/Pdf";
+import useExcelExport from "../utils/Excel";
+import usePDFGenerator from "../utils/Pdf"
 import { MdPictureAsPdf, MdInsertDriveFile } from 'react-icons/md';
 import { DatePicker } from 'antd';
-import { fetchReturnData } from "../../services/Api";
+import { fetchReturnData } from "../services/Api";
 const { RangePicker } = DatePicker;
 
 function ReturnList() {
@@ -31,12 +29,6 @@ function ReturnList() {
     });
 
   return (
-    <div className="mx-auto px-2 overflow-auto my-0">
-      <div className="flex flex-col md:flex-row-reverse justify-between items-center bg-default mb-0 mt-1">
-        <NavigationBar/>
-        <SearchBar show="Return" />
-      </div>
-
       <div className="overflow-x-auto min-w-full">
      <div className="mb-3 mt-0 mx-1 flex justify-between items-center">
       <RangePicker onChange={handleDateRangeChange} />
@@ -87,7 +79,6 @@ function ReturnList() {
           </table>
         </div>
       </div>
-    </div>
   );
 }
 

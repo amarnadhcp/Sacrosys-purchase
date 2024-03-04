@@ -16,6 +16,8 @@ const { RangePicker } = DatePicker;
 function EntryTable() {
   const componentRef = useRef();
   const [data, SetData] = useState([]);
+  const [autocompleteInput, setAutocompleteInput] = useState("");
+  console.log(autocompleteInput);
   const [isModalOpen, setIsModalOpen] = useState(false);//modale opening
   const [EditModalOpen, setModalOpen] = useState(false);//modale opening
   const [modalData, setModalData] = useState(null);
@@ -32,17 +34,24 @@ function EntryTable() {
   };
   
   // Filter data based on selected date range
-  const filteredData = selectedDateRange.length === 0 ?
-    data :
-    data.filter(item => {
-      const itemDate = new Date(item.date);
-      return itemDate >= selectedDateRange[0] && itemDate <= selectedDateRange[1];
-    });
+  const filteredData = data.filter(item => {
+    const itemDate = new Date(item.date);
+    const isDateInRange = selectedDateRange.length === 0 ||
+      (itemDate >= selectedDateRange[0] && itemDate <= selectedDateRange[1]);
+    const isInvoiceMatched = autocompleteInput === "" ||
+      item.invoiceNumber.includes(autocompleteInput);
+    return isDateInRange && isInvoiceMatched;
+  });
+  
 
   return (
     <>
       <div className="mx-auto px-2 overflow-auto my-1">
-        <SearchBar />
+        <SearchBar 
+          onInputChange={(value)=>setAutocompleteInput(value)}
+          onSelect={(value) => setAutocompleteInput(value)}
+          data={suggetiondata}
+        />
         <div className="overflow-x-auto min-w-full">
         <div className="mb-3 mt-0 mx-1 flex justify-between items-center">
       <RangePicker onChange={handleDateRangeChange} />
@@ -131,4 +140,19 @@ function EntryTable() {
 }
 
 export default EntryTable;
+
+
+
+
+let suggetiondata = [
+  "3486348378",
+  "4527834523",
+  "5728394723",
+  "4829304832",
+  "5839205832",
+  "5839276832",
+  "5834405832",
+  "5839205833"
+];
+
 

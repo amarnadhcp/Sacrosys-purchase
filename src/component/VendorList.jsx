@@ -1,16 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
-import SearchBar from "../../component/Navbar/SearchBar";
-import EditVendor from "../../component/Entry/EditVendor";
-import NavigationBar from "../../component/Navbar/NavigationBar";
-import editIcon from "../../assests/images/Edit.svg"
+import EditVendor from "./Entry/EditVendor";
+import editIcon from "../assests/images/Edit.svg"
 import { DatePicker } from "antd";
-import { fetchvendorData } from "../../services/Api";
+import { fetchvendorData } from "../services/Api";
 import { MdPictureAsPdf, MdInsertDriveFile } from 'react-icons/md';
-import useExcelExport from "../../utils/Excel";
-import usePDFGenerator from "../../utils/Pdf";
+import useExcelExport from "../utils/Excel";
+import usePDFGenerator from "../utils/Pdf";
 const { RangePicker } = DatePicker;
 
-function SupplierList() {
+function VendorList() {
   const componentRef = useRef();
   const [isModalOpen, setIsModalOpen] = useState(false);//modale opening
   const [modalData, setModalData] = useState(null);
@@ -45,11 +43,6 @@ function SupplierList() {
         });
 
   return (
-    <div className="mx-auto px-2 overflow-auto my-1 ">
-      <div className="flex flex-col md:flex-row-reverse justify-between items-center bg-default">
-        <NavigationBar />
-        <SearchBar show="Vendor" />
-      </div>
       <div className="overflow-x-auto min-w-full">
       <div className="mb-3 mt-0 mx-1 flex justify-between items-center">
       <RangePicker onChange={handleDateRangeChange} />
@@ -137,8 +130,7 @@ function SupplierList() {
           </table>
         </div>
       </div>
-    </div>
   );
 }
 
-export default SupplierList;
+export default VendorList;

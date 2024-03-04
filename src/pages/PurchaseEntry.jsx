@@ -1,6 +1,6 @@
 import React from "react";
-import EntryTable from "../../component/Entry/EntryTable";
-import EntryForm from "../../component/Entry/EntryForm";
+import EntryTable from "../component/Entry/EntryTable";
+import EntryForm from "../component/Entry/EntryForm";
 
 function PurchaseEntry() {
   return (

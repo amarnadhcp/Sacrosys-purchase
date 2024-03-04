@@ -1,19 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import SearchIcon from "../../assests/images/search.svg";
 import { Link } from "react-router-dom";
 import Autocomplete from "../AutoComplete/Autocomplete";
 
-function SearchBar({ show }) {
+function SearchBar({ show,data,onInputChange,onSelect }) {
   const VendorButtonClass = show === "Vendor" ? "bg-purple-600 text-white" : "text-purple-600";
   const ReturnButtonClass = show === "Return" ? "bg-purple-600 text-white" : "text-purple-600";
-  const [autocompleteInput, setAutocompleteInput] = useState("");
 
-  const handleAutocompleteInput = (input) => {
-    setAutocompleteInput(input);
-    console.log(autocompleteInput);
-  };
-
-  return (
+  return (  
     <div className="flex flex-wrap justify-between items-center bg-default  mb-2">
       <div className="flex">
       <label
@@ -29,7 +23,8 @@ function SearchBar({ show }) {
               width="64"
               MinWidth="80"
               height="10"
-              onInputChange={handleAutocompleteInput}
+              onInputChange={onInputChange} 
+              onSelect={onSelect} 
             />
             <img
               src={SearchIcon}
@@ -59,65 +54,3 @@ function SearchBar({ show }) {
 
 export default SearchBar;
 
-
-let data = [
-  "Alabama",
-  "Alaska",
-  "American Samoa",
-  "Arizona",
-  "Arkansas",
-  "California",
-  "Colorado",
-  "Connecticut",
-  "Delaware",
-  "District Of Columbia",
-  "Federated States Of Micronesia",
-  "Florida",
-  "Georgia",
-  "Guam",
-  "Hawaii",
-  "Idaho",
-  "Illinois",
-  "Indiana",
-  "Iowa",
-  "Kansas",
-  "Kentucky",
-  "Louisiana",
-  "Maine",
-  "Marshall Islands",
-  "Maryland",
-  "Massachusetts",
-  "Michigan",
-  "Minnesota",
-  "Mississippi",
-  "Missouri",
-  "Montana",
-  "Nebraska",
-  "Nevada",
-  "New Hampshire",
-  "New Jersey",
-  "New Mexico",
-  "New York",
-  "North Carolina",
-  "North Dakota",
-  "Northern Mariana Islands",
-  "Ohio",
-  "Oklahoma",
-  "Oregon",
-  "Palau",
-  "Pennsylvania",
-  "Puerto Rico",
-  "Rhode Island",
-  "South Carolina",
-  "South Dakota",
-  "Tennessee",
-  "Texas",
-  "Utah",
-  "Vermont",
-  "Virgin Islands",
-  "Virginia",
-  "Washington",
-  "West Virginia",
-  "Wisconsin",
-  "Wyoming",
-];
