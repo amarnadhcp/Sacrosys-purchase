@@ -6,7 +6,7 @@ import { DatePicker } from 'antd';
 import { fetchReturnData } from "../services/Api";
 const { RangePicker } = DatePicker;
 
-function ReturnList() {
+function ReturnList({selectedvalue}) {
   const componentRef = useRef();
   const [data, SetData] = useState([]);
   const [selectedDateRange, setSelectedDateRange] = useState([]);
@@ -22,11 +22,14 @@ function ReturnList() {
   };
 
   // Filter data based on selected date range
-  const filteredData = selectedDateRange.length === 0 ?
-    data : data.filter(item => {
-      const itemDate = new Date(item.date);
-      return itemDate >= selectedDateRange[0] && itemDate <= selectedDateRange[1];
-    });
+const filteredData = data.filter(item => {
+  const itemDate = new Date(item.date);
+  const isInDateRange = selectedDateRange.length === 0 ||
+    (itemDate >= selectedDateRange[0] && itemDate <= selectedDateRange[1]);
+  const isSelectedSupplier = !selectedvalue || item.supplier === selectedvalue;
+  return isInDateRange && isSelectedSupplier;
+});
+
 
   return (
       <div className="overflow-x-auto min-w-full">
