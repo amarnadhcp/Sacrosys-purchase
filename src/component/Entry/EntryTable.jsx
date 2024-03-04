@@ -48,7 +48,6 @@ function EntryTable() {
     <>
       <div className="mx-auto px-2 overflow-auto my-1">
         <SearchBar 
-          onInputChange={(value)=>setAutocompleteInput(value)}
           onSelect={(value) => setAutocompleteInput(value)}
           data={suggetiondata}
         />

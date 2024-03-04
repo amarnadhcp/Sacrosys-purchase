@@ -3,7 +3,7 @@ import SearchIcon from "../../assests/images/search.svg";
 import { Link } from "react-router-dom";
 import Autocomplete from "../AutoComplete/Autocomplete";
 
-function SearchBar({ show,data,onInputChange,onSelect }) {
+function SearchBar({ show,data,onSelect }) {
   const VendorButtonClass = show === "Vendor" ? "bg-purple-600 text-white" : "text-purple-600";
   const ReturnButtonClass = show === "Return" ? "bg-purple-600 text-white" : "text-purple-600";
 
@@ -23,7 +23,6 @@ function SearchBar({ show,data,onInputChange,onSelect }) {
               width="64"
               MinWidth="80"
               height="10"
-              onInputChange={onInputChange} 
               onSelect={onSelect} 
             />
             <img

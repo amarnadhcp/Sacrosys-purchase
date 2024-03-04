@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const Autocomplete = ({ suggestions, width, height,MinWidth, onInputChange,onSelect  }) => {
+const Autocomplete = ({ suggestions, width, height,MinWidth,onSelect  }) => {
   const [active, setActive] = useState(0);
   const [filtered, setFiltered] = useState([]);
   const [isShow, setIsShow] = useState(false);
@@ -35,7 +35,6 @@ const Autocomplete = ({ suggestions, width, height,MinWidth, onInputChange,onSel
     setActive(0);
     setInput(inputValue);
     setIsShow(true);
-    onInputChange(inputValue);
   };
 
   const onClick = (suggestion) => {
@@ -49,7 +48,9 @@ const Autocomplete = ({ suggestions, width, height,MinWidth, onInputChange,onSel
   const onKeyDown = (e) => {
     if (e.keyCode === 13) {
       setIsShow(false);
-      setInput(filtered[active] || input);
+      const selectedValue = filtered[active] || input;
+      setInput(selectedValue);
+      onSelect(selectedValue); // Pass the selected value to onSelect
     } else if (e.keyCode === 38) {
       setActive((prev) => (prev === 0 ? prev : prev - 1));
     } else if (e.keyCode === 40) {
@@ -101,7 +102,7 @@ const Autocomplete = ({ suggestions, width, height,MinWidth, onInputChange,onSel
               variants={listItemVariants}
               className="px-3 py-2 cursor-pointer transition duration-300 flex justify-between items-center hover:bg-gray-200 font-inter text-xs "
             >
-              <em>user not found</em>
+              <span>vendor not found</span>
             </motion.li>
           )}
         </motion.ul>

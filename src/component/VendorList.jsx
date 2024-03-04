@@ -8,7 +8,7 @@ import useExcelExport from "../utils/Excel";
 import usePDFGenerator from "../utils/Pdf";
 const { RangePicker } = DatePicker;
 
-function VendorList() {
+function VendorList({selectedvalue}) {
   const componentRef = useRef();
   const [isModalOpen, setIsModalOpen] = useState(false);//modale opening
   const [modalData, setModalData] = useState(null);
@@ -18,7 +18,12 @@ function VendorList() {
   const generatePDF = usePDFGenerator(componentRef, 'Outstanding_List', [10,11]);
 
   useEffect(() => {
-    SetData(fetchvendorData());
+    const fetchData = async () => {
+      const vendorData = await fetchvendorData();
+      SetData(vendorData);
+    };
+  
+    fetchData();
   }, []);
 
   const handleDateRangeChange = (dates) => {
@@ -34,13 +39,16 @@ function VendorList() {
   };
 
   // Filter data based on selected date range
-  const filteredData = selectedDateRange.length === 0
-      ? data : data.filter((item) => {
-          const itemDate = new Date(item.date);
-          return (
-            itemDate >= selectedDateRange[0] && itemDate <= selectedDateRange[1]
-          );
-        });
+  const filteredData = data.filter(item => {
+    const itemDate = new Date(item.date);
+    const isDateInRange = selectedDateRange.length === 0 ||
+      (itemDate >= selectedDateRange[0] && itemDate <= selectedDateRange[1]);
+    const isSupplierMatched = !selectedvalue || item.supplierName === selectedvalue;
+    return isDateInRange && isSupplierMatched;
+  });
+  
+
+
 
   return (
       <div className="overflow-x-auto min-w-full">

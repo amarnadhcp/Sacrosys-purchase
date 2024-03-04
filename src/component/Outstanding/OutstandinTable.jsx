@@ -8,7 +8,7 @@ import usePDFGenerator from "../../utils/Pdf";
 import { fetchOutstandingData } from "../../services/Api";
 const { RangePicker } = DatePicker;
 
-function OutstandinTable() {
+function OutstandinTable({selectedvalue}) {
   const componentRef = useRef();
   const [data, SetData] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false); //modale opening
@@ -25,15 +25,15 @@ function OutstandinTable() {
     !dates ? setSelectedDateRange([]) : setSelectedDateRange(dates);
   };
 
-  // Filter data based on selected date range
-  const filteredData =
-    selectedDateRange.length === 0
-      ? data  : data.filter((item) => {
-          const itemDate = new Date(item.date);
-          return (
-            itemDate >= selectedDateRange[0] && itemDate <= selectedDateRange[1]
-          );
-        });
+// Filter data based on selected date range and supplier
+const filteredData = data.filter(item => {
+  const itemDate = new Date(item.date);
+  const isInDateRange = selectedDateRange.length === 0 ||
+    (itemDate >= selectedDateRange[0] && itemDate <= selectedDateRange[1]);
+  const isSelectedSupplier = !selectedvalue || item.supplier === selectedvalue;
+  return isInDateRange && isSelectedSupplier;
+});
+
 
   return (
     <>
