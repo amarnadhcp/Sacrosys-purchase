@@ -32,15 +32,16 @@ function EntryTable({ selectedVendor }) {
   };
 
   // Filter data based on selected date range
-  const filteredData = data.filter((item) => {
-    const itemDate = new Date(item.date);
-    const isDateInRange =
-      selectedDateRange.length === 0 ||
-      (itemDate >= selectedDateRange[0] && itemDate <= selectedDateRange[1]);
-    const isInvoiceMatched =
-    selectedVendor === "" || item.invoiceNumber.includes(selectedVendor);
-    return isDateInRange && isInvoiceMatched;
-  });
+const filteredData = data.filter((item) => {
+  const itemDate = new Date(item.date);
+  const isDateInRange =
+    selectedDateRange.length === 0 ||
+    (itemDate >= selectedDateRange[0] && itemDate <= selectedDateRange[1]);
+  const isInvoiceMatched =
+    !selectedVendor || item.vendor.includes(selectedVendor); // Check if selectedVendor is falsy
+  return isDateInRange && isInvoiceMatched;
+});
+
 
   return (
     <>
@@ -82,7 +83,7 @@ function EntryTable({ selectedVendor }) {
                   <td className="px-4 py-2 text-black">{item.amount}</td>
                   <td className="px-4 py-2 text-black">{item.amountPaid}</td>
                   <td className="px-4 py-2 text-black">{item.balance}</td>
-                  <td className="px-4 py-2 text-black">{item.vat.toFixed(2)}</td>
+                  <td className="px-4 py-2 text-black">{item.vat}</td>
                   <td className="px-4 py-2 text-black">{item.paymentType}</td>
                   <td className="px-4 py-2">
                     <img

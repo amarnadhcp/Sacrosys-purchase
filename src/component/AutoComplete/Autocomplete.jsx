@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const Autocomplete = ({ suggestions, width, height,MinWidth,onSelect  }) => {
+const Autocomplete = ({ suggestions, width, height, MinWidth, onSelect, value }) => {
   const [active, setActive] = useState(0);
   const [filtered, setFiltered] = useState([]);
   const [isShow, setIsShow] = useState(false);
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState(value || ""); // Initialize input state with the provided value
+
   const autocompleteRef = useRef(null);
 
   useEffect(() => {
@@ -19,7 +20,10 @@ const Autocomplete = ({ suggestions, width, height,MinWidth,onSelect  }) => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (autocompleteRef.current && !autocompleteRef.current.contains(event.target)) {
+      if (
+        autocompleteRef.current &&
+        !autocompleteRef.current.contains(event.target)
+      ) {
         setIsShow(false);
       }
     };
@@ -29,6 +33,10 @@ const Autocomplete = ({ suggestions, width, height,MinWidth,onSelect  }) => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  useEffect(() => {
+    setInput(value || ""); // Update input state with the provided value
+  }, [value]);
 
   const onChange = (e) => {
     const inputValue = e.currentTarget.value;
@@ -119,7 +127,7 @@ const Autocomplete = ({ suggestions, width, height,MinWidth,onSelect  }) => {
         value={input}
         ref={autocompleteRef}
         placeholder="Search for a vendor"
-        className={`bg-inputColor rounded-lg p-2  w-${MinWidth||40}  md:w-${width||56}
+        className={`bg-inputColor rounded-lg p-2  w-${MinWidth || 40}  md:w-${width || 56}
         text-sm mb-1 outline-none h-9 md:h-${height || "10"}`}
       />
       {renderAutocomplete()}
@@ -128,6 +136,7 @@ const Autocomplete = ({ suggestions, width, height,MinWidth,onSelect  }) => {
 };
 
 export default Autocomplete;
+
 
 
 // w-80  md:w-64 seacrch bar auto
