@@ -1,75 +1,69 @@
 import React, { useEffect, useRef, useState } from "react";
+import { DatePicker } from "antd";
+import { MdInsertDriveFile, MdPictureAsPdf } from "react-icons/md";
 import editIcon from "../../assests/images/Edit.svg";
 import EmptyIcon from "../../assests/images/Empty.svg";
 import screenshotIcon from "../../assests/images/screenShot.png";
-import SearchBar from "../Navbar/SearchBar";
-import ReturnModal from "./ReturnModal";
+import DetailsCount from "../DetailsCount";
 import EditModal from "./EditModal";
-import { MdPictureAsPdf, MdInsertDriveFile } from 'react-icons/md';
-import { DatePicker } from 'antd';
+import ReturnModal from "./ReturnModal";
 import useExcelExport from "../../utils/Excel";
 import usePDFGenerator from "../../utils/Pdf";
-import DetailsCount from "../DetailsCount";
 import { fetchEntryData } from "../../services/Api";
 const { RangePicker } = DatePicker;
 
-function EntryTable() {
+
+function EntryTable({ selectedVendor }) {
   const componentRef = useRef();
   const [data, SetData] = useState([]);
-  const [autocompleteInput, setAutocompleteInput] = useState("");
-  console.log(autocompleteInput);
-  const [isModalOpen, setIsModalOpen] = useState(false);//modale opening
-  const [EditModalOpen, setModalOpen] = useState(false);//modale opening
+  const [ReturnModalOpen, setReturnModalOpen] = useState(false); 
+  const [EditModalOpen, setModalOpen] = useState(false);
   const [modalData, setModalData] = useState(null);
   const [selectedDateRange, setSelectedDateRange] = useState([]);
-  const exportToExcel = useExcelExport(componentRef, 'purchase_List', [9,10,11]);
-  const generatePDF = usePDFGenerator(componentRef, 'purchase_List', [9,10,11]);
+  const exportToExcel = useExcelExport(componentRef, "purchase_List",[9, 10, 11]);
+  const generatePDF = usePDFGenerator(componentRef, "purchase_List", [9, 10, 11]);
 
   useEffect(() => {
-       SetData(fetchEntryData());
+    SetData(fetchEntryData());
   }, []);
-  
+
   const handleDateRangeChange = (dates) => {
     !dates ? setSelectedDateRange([]) : setSelectedDateRange(dates);
   };
-  
+
   // Filter data based on selected date range
-  const filteredData = data.filter(item => {
-    const itemDate = new Date(item.date);
-    const isDateInRange = selectedDateRange.length === 0 ||
-      (itemDate >= selectedDateRange[0] && itemDate <= selectedDateRange[1]);
-    const isInvoiceMatched = autocompleteInput === "" ||
-      item.invoiceNumber.includes(autocompleteInput);
-    return isDateInRange && isInvoiceMatched;
-  });
-  
+const filteredData = data.filter((item) => {
+  const itemDate = new Date(item.date);
+  const isDateInRange =
+    selectedDateRange.length === 0 ||
+    (itemDate >= selectedDateRange[0] && itemDate <= selectedDateRange[1]);
+  const isInvoiceMatched =
+    !selectedVendor || item.vendor.includes(selectedVendor); // Check if selectedVendor is falsy
+  return isDateInRange && isInvoiceMatched;
+});
+
 
   return (
     <>
-      <div className="mx-auto px-2 overflow-auto my-1">
-        <SearchBar 
-          onSelect={(value) => setAutocompleteInput(value)}
-          data={suggetiondata}
-        />
-        <div className="overflow-x-auto min-w-full">
+      <div className="overflow-x-auto min-w-full">
         <div className="mb-3 mt-0 mx-1 flex justify-between items-center">
-      <RangePicker onChange={handleDateRangeChange} />
-      <div className="align-end flex items-center">
-        <button onClick={generatePDF} className="flex items-center bg-white text-black border-md border border-gray-300 rounded-lg p-1 px-3 py-2 cursor-pointer text-xs mx-1">
-          PDF <MdPictureAsPdf className="ml-1 text-lg" />
-        </button>
-        <button onClick={exportToExcel} className="flex items-center bg-white text-black border-md border border-gray-300 rounded-lg p-1 px-3 py-2 cursor-pointer text-xs mx-1">
-          Excel  <MdInsertDriveFile className="ml-1 text-lg" />
-        </button>
-      </div>
-     </div>
-          <div className="overflow-y-auto h-[384px]">
-          <table className="w-full text-xs text-left rtl:text-right text-gray-500 dark:text-gray-400 z-0 border-collapse"  ref={componentRef}>
+          <RangePicker onChange={handleDateRangeChange} />
+          <div className="align-end flex items-center">
+            <button onClick={generatePDF} className="flex items-center bg-white text-black border-md border border-gray-300 rounded-lg p-1 px-3 py-2 cursor-pointer text-xs mx-1">
+              PDF <MdPictureAsPdf className="ml-1 text-lg" />
+            </button>
+            <button onClick={exportToExcel} className="flex items-center bg-white text-black border-md border border-gray-300 rounded-lg p-1 px-3 py-2 cursor-pointer text-xs mx-1">
+              Excel <MdInsertDriveFile className="ml-1 text-lg" />
+            </button>
+          </div>
+        </div>
+        <div className="overflow-y-auto h-[384px]">
+          <table className="w-full text-xs text-left rtl:text-right text-gray-500 dark:text-gray-400 z-0 border-collapse"ref={componentRef}>
             <thead className="sticky  top-0 text-xs text-white font-inter bg-custom-black text-center ">
               <tr>
                 <th className="px-2 py-2 md:px-4 md:py-4 ">Date</th>
                 <th className="px-2 py-2 md:px-4 md:py-4 ">Vendor</th>
-                <th className="px-2 py-2 md:px-4 md:py-4 ">Invoice </th>
+                <th className="px-2 py-2 md:px-4 md:py-4 ">Invoice</th>
                 <th className="px-2 py-2 md:px-4 md:py-4 ">Amount</th>
                 <th className="px-2 py-2 md:px-4 md:py-4 ">Paid</th>
                 <th className="px-2 py-2 md:px-4 md:py-4 ">Ballance</th>
@@ -82,19 +76,14 @@ function EntryTable() {
             </thead>
             <tbody>
               {filteredData.map((item) => (
-                <tr
-                  key={item.id}
-                  className="even:bg-default odd:bg-[#E9E9E9]  text-center font-inter"
-                >
-                  <td className="px-4 py-4 whitespace-nowrap text-black">
-                    {item.date}
-                  </td>
+                <tr key={item.id}  className="even:bg-default odd:bg-[#E9E9E9]  text-center font-inter">
+                  <td className="px-4 py-4 whitespace-nowrap text-black">{item.date}</td>
                   <td className="px-4 py-2 text-black">{item.vendor}</td>
                   <td className="px-4 py-2 text-black">{item.invoiceNumber}</td>
                   <td className="px-4 py-2 text-black">{item.amount}</td>
                   <td className="px-4 py-2 text-black">{item.amountPaid}</td>
                   <td className="px-4 py-2 text-black">{item.balance}</td>
-                  <td className="px-4 py-2 text-black">{item.vat.toFixed(2)}</td>
+                  <td className="px-4 py-2 text-black">{item.vat}</td>
                   <td className="px-4 py-2 text-black">{item.paymentType}</td>
                   <td className="px-4 py-2">
                     <img
@@ -108,10 +97,9 @@ function EntryTable() {
                       src={editIcon}
                       alt="Edit"
                       className="w-7 h-5 mt-3 cursor-pointer"
-                      onClick={()=>{setModalOpen(true);
-                        setModalData(item)}}
+                      onClick={() => { setModalOpen(true);setModalData(item); }}
                     />
-                      {EditModalOpen && modalData === item && <EditModal closeModal={() => setModalOpen(false)} rowData={modalData} />}
+                    {EditModalOpen && modalData === item && (<EditModal closeModal={() => setModalOpen(false)} rowData={modalData}/> )}
                     <img
                       src={EmptyIcon}
                       alt="Delete"
@@ -119,39 +107,22 @@ function EntryTable() {
                     />
                   </td>
                   <td className="px-4 py-4">
-                    <button className="bg-pink-500 text-white border-md rounded-lg p-1 px-4 cursor-pointer"
-                    onClick={()=>{setIsModalOpen(true);
-                     setModalData(item)}}>
+                    <button
+                      className="bg-pink-500 text-white border-md rounded-lg p-1 px-4 cursor-pointer"
+                      onClick={() => {setReturnModalOpen(true);setModalData(item); }}>
                       Return
                     </button>
-                    {isModalOpen && modalData === item && <ReturnModal closeModal={() => setIsModalOpen(false)} rowData={modalData} />}
+                    {ReturnModalOpen && modalData === item && (<ReturnModal closeModal={() => setReturnModalOpen(false)} rowData={modalData} />)}
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
-          </div>
         </div>
-        <DetailsCount filteredData={filteredData} />
       </div>
+      <DetailsCount filteredData={filteredData} />
     </>
   );
 }
 
 export default EntryTable;
-
-
-
-
-let suggetiondata = [
-  "3486348378",
-  "4527834523",
-  "5728394723",
-  "4829304832",
-  "5839205832",
-  "5839276832",
-  "5834405832",
-  "5839205833"
-];
-
-
